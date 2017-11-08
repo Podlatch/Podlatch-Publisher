@@ -17,7 +17,7 @@ namespace Podlatch\PublisherBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastShowRepository")
  * @ORM\Table(name="podcast_show")
  */
 class PodcastShow
