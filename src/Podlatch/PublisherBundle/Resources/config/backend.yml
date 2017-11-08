@@ -1,4 +1,22 @@
+vich_uploader:
+    db_driver: orm
+    mappings:
+        audio_assets:
+            uri_prefix:         '%app.path.audio_assets%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/audio/'
+
 easy_admin:
     entities:
-        - Podlatch\PublisherBundle\Entity\PodcastShow
-        - Podlatch\PublisherBundle\Entity\PodcastEpisode
+        Podcast:
+            class: Podlatch\PublisherBundle\Entity\PodcastShow
+        PodcastEpisode:
+            class: Podlatch\PublisherBundle\Entity\PodcastEpisode
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
+                    - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherBundle\Entity\PodcastShow' } }
+                    - title
+                    - { property: 'description', type: 'textarea' }
+                    - summary
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Media', help: 'Only for administrators' }
+                    - { property: 'audioFile', type: 'vich_file' }

@@ -41,11 +41,35 @@ class PodcastShow
      */
     private $picture;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $author;
 
     /**
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
      */
     private $episodes;
+
+    /**
+     * @return mixed
+     */
+    public function getAuthor()
+    {
+
+        return $this->author;
+    }
+
+    /**
+     * @param mixed $author
+     */
+    public function setAuthor($author)
+    {
+
+        $this->author = $author;
+    }
+
+
 
     /**
      * @return mixed

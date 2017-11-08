@@ -3,12 +3,14 @@
 namespace Podlatch\PublisherBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * PodcastEpisode
  *
  * @ORM\Table(name="podcast_episode")
  * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastEpisodeRepository")
+ * @Vich\Uploadable
  */
 class PodcastEpisode
 {
@@ -59,12 +61,35 @@ class PodcastEpisode
      */
     private $picture;
 
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $summary;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $audio;
+
+    /**
+     * @Vich\UploadableField(mapping="audio_assets", fileNameProperty="audio")
+     * @var File
+     */
+    private $audioFile;
+
 
     /**
      * @ORM\ManyToOne(targetEntity="Podlatch\PublisherBundle\Entity\PodcastShow", inversedBy="episodes")
      * @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id")
      */
     private $podcastShow;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
 
     /**
@@ -154,5 +179,84 @@ class PodcastEpisode
     {
         return $this -> title;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSummary()
+    {
+
+        return $this->summary;
+    }
+
+    /**
+     * @param mixed $summary
+     */
+    public function setSummary($summary)
+    {
+
+        $this->summary = $summary;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getAudioFile()
+    {
+
+        return $this->audioFile;
+    }
+
+    /**
+     * @param mixed $audioFile
+     */
+    public function setAudioFile($audioFile)
+    {
+        if ($audioFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        $this->audioFile = $audioFile;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+
+        $this->updatedAt = $updatedAt;
+    }
+
+    /**
+     * @return string
+     */
+    public function getAudio()
+    {
+
+        return $this->audio;
+    }
+
+    /**
+     * @param string $audio
+     */
+    public function setAudio($audio)
+    {
+
+        $this->audio = $audio;
+    }
+
+
+
 }
 
