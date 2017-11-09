@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
             new Podlatch\PublisherBundle\PublisherBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
+            new FOS\UserBundle\FOSUserBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

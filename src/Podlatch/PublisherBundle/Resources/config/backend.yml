@@ -20,3 +20,14 @@ easy_admin:
                     - summary
                     - { type: 'group', css_class: 'col-sm-6', label: 'Media', help: 'Only for administrators' }
                     - { property: 'audioFile', type: 'vich_file' }
+        User:
+            class: Podlatch\PublisherBundle\Entity\User
+            form:
+                fields:
+                    - username
+                    - email
+                    - enabled
+                    - lastLogin
+                    # if administrators are allowed to edit users' passwords and roles, add this:
+                    - { property: 'plainPassword', type: 'text', type_options: { required: false } }
+                    - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
