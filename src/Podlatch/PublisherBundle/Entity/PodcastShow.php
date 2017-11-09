@@ -19,6 +19,7 @@ use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastShowRepository")
  * @ORM\Table(name="podcast_show")
  */
@@ -50,7 +51,7 @@ class PodcastShow
     private $episodes;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;
@@ -62,7 +63,7 @@ class PodcastShow
     private $imageFile;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      * @var \DateTime
      */
     private $updatedAt;

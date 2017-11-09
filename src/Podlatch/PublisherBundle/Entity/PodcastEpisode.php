@@ -51,12 +51,12 @@ class PodcastEpisode
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255,nullable=true)
+     * @ORM\Column(name="description", type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", nullable=true)
      */
     private $summary;
 
@@ -73,7 +73,7 @@ class PodcastEpisode
     private $audioFile;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $image;

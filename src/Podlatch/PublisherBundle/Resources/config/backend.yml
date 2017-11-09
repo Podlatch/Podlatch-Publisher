@@ -37,11 +37,19 @@ easy_admin:
             class: Podlatch\PublisherBundle\Entity\PodcastShow
             list:
                 fields:
-                - id
-                - { property: 'image', type: 'image', base_path: '%app.path.podcast_images%' }
-                - title
-                - author
-                - episodes
+                    - id
+                    - { property: 'image', type: 'image', base_path: '%app.path.podcast_images%' }
+                    - title
+                    - author
+                    - episodes
+            form:
+                fields:
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
+                    - title
+                    - author
+                    - { type: 'group', css_class: 'col-sm-6', label: 'Meta' }
+                    - { property: 'description', type: 'textarea' }
+                    - { property: 'imageFile', type: 'vich_image' }
 
         PodcastEpisode:
             class: Podlatch\PublisherBundle\Entity\PodcastEpisode
@@ -53,14 +61,14 @@ easy_admin:
                     - podcastShow
             form:
                 fields:
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
+                    - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherBundle\Entity\PodcastShow' } }
                     - title
                     - summary
                     - { property: 'description', type: 'textarea' }
-                    - { type: 'group', css_class: 'col-sm-6', label: 'Media', help: 'Only for administrators' }
-                    - { property: 'audioFile', type: 'vich_file' }
-                    - { property: 'imageFile', type: 'vich_image' }
+                    - { type: 'group', css_class: 'col-sm-4', label: 'Media' }
+                    - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }
+                    - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
         User:
             class: Podlatch\PublisherBundle\Entity\User
             list:
