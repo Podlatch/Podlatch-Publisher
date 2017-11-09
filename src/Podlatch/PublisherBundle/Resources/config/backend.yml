@@ -12,18 +12,45 @@ vich_uploader:
             upload_destination: '%kernel.root_dir%/../web/uploads/images/episodes'
 
 easy_admin:
+    site_name: Podlatch Publisher
+    design:
+        menu:
+            - label: 'Podcast'
+              icon: 'podcast'
+              children:
+                  - entity: 'Podcast'
+                    label: 'Shows'
+                    icon: 'podcast'
+                  - { entity: 'PodcastEpisode', label: 'Episodes', icon: 'play', default: true }
+            - label: 'Config'
+              icon: cogs
+              children:
+                  - { entity: 'User', icon: 'user'}
+            - label: 'About'
+              icon: info-circle
+              children:
+                  #- { label: 'Help', route: 'help_index' }
+                  - { label: 'Docs', icon: book, url: 'http://example.com/external-docs' }
+                  - { label: '%app.version%' }
     entities:
         Podcast:
             class: Podlatch\PublisherBundle\Entity\PodcastShow
+            list:
+                fields:
+                - id
+                - { property: 'image', type: 'image', base_path: '%app.path.podcast_images%' }
+                - title
+                - author
+                - episodes
+
         PodcastEpisode:
             class: Podlatch\PublisherBundle\Entity\PodcastEpisode
             list:
                 fields:
-                - id
-                - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
-                - title
-                - summary
-                - podcastShow
+                    - id
+                    - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
+                    - title
+                    - podcastShow
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
@@ -36,6 +63,14 @@ easy_admin:
                     - { property: 'imageFile', type: 'vich_image' }
         User:
             class: Podlatch\PublisherBundle\Entity\User
+            list:
+                fields:
+                    - id
+                    - enabled
+                    - username
+                    - email
+                    - lastLogin
+                    - roles
             form:
                 fields:
                     - username
