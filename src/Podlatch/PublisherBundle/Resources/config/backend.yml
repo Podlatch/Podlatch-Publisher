@@ -4,6 +4,12 @@ vich_uploader:
         audio_assets:
             uri_prefix:         '%app.path.audio_assets%'
             upload_destination: '%kernel.root_dir%/../web/uploads/audio/'
+        episode_images:
+            uri_prefix:         '%app.path.episode_images%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/podcasts/'
+        podcast_images:
+            uri_prefix:         '%app.path.podcast_images%'
+            upload_destination: '%kernel.root_dir%/../web/uploads/images/episodes'
 
 easy_admin:
     entities:
@@ -11,15 +17,23 @@ easy_admin:
             class: Podlatch\PublisherBundle\Entity\PodcastShow
         PodcastEpisode:
             class: Podlatch\PublisherBundle\Entity\PodcastEpisode
+            list:
+                fields:
+                - id
+                - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
+                - title
+                - summary
+                - podcastShow
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherBundle\Entity\PodcastShow' } }
                     - title
-                    - { property: 'description', type: 'textarea' }
                     - summary
+                    - { property: 'description', type: 'textarea' }
                     - { type: 'group', css_class: 'col-sm-6', label: 'Media', help: 'Only for administrators' }
                     - { property: 'audioFile', type: 'vich_file' }
+                    - { property: 'imageFile', type: 'vich_image' }
         User:
             class: Podlatch\PublisherBundle\Entity\User
             form:

@@ -10,6 +10,10 @@ imports:
 # https://symfony.com/doc/current/best_practices/configuration.html#application-related-configuration
 parameters:
     locale: en
+    # will be used for uploaderbundle
+    app.path.audio_assets: /uploads/audio/
+    app.path.episode_images: /uploads/images/podcasts/
+    app.path.podcast_images: /uploads/images/episodes/
 
 framework:
     #esi: ~

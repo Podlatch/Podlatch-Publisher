@@ -15,6 +15,8 @@ namespace Podlatch\PublisherBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastShowRepository")
@@ -36,10 +38,6 @@ class PodcastShow
      * @ORM\Column(type="string")
      */
     private $description;
-    /**
-     * @ORM\Column(type="string", length=255,nullable=true)
-     */
-    private $picture;
 
     /**
      * @ORM\Column(type="string")
@@ -50,6 +48,24 @@ class PodcastShow
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
      */
     private $episodes;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="podcast_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
+
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
+    private $updatedAt;
 
     /**
      * @return mixed
@@ -146,20 +162,60 @@ class PodcastShow
     /**
      * @return mixed
      */
-    public function getPicture()
+    public function getImage()
     {
 
-        return $this->picture;
+        return $this->image;
     }
 
     /**
-     * @param mixed $picture
+     * @param mixed $image
      */
-    public function setPicture($picture)
+    public function setImage($image)
     {
 
-        $this->picture = $picture;
+        $this->image = $image;
     }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        if ($imageFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        $this->imageFile = $imageFile;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getUpdatedAt()
+    {
+
+        return $this->updatedAt;
+    }
+
+    /**
+     * @param \DateTime $updatedAt
+     */
+    public function setUpdatedAt($updatedAt)
+    {
+
+        $this->updatedAt = $updatedAt;
+    }
+
 
     public function __toString()
     {

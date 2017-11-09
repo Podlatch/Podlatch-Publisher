@@ -3,6 +3,7 @@
 namespace Podlatch\PublisherBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -55,13 +56,6 @@ class PodcastEpisode
     private $description;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="picture", type="string", length=255, nullable=true)
-     */
-    private $picture;
-
-    /**
      * @ORM\Column(type="string")
      */
     private $summary;
@@ -77,6 +71,18 @@ class PodcastEpisode
      * @var File
      */
     private $audioFile;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @var string
+     */
+    private $image;
+
+    /**
+     * @Vich\UploadableField(mapping="episode_images", fileNameProperty="image")
+     * @var File
+     */
+    private $imageFile;
 
 
     /**
@@ -219,6 +225,47 @@ class PodcastEpisode
 
         $this->audioFile = $audioFile;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getImage()
+    {
+
+        return $this->image;
+    }
+
+    /**
+     * @param mixed $image
+     */
+    public function setImage($image)
+    {
+
+        $this->image = $image;
+    }
+
+    /**
+     * @return File
+     */
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    /**
+     * @param File $imageFile
+     */
+    public function setImageFile($imageFile)
+    {
+        if ($imageFile) {
+            // if 'updatedAt' is not defined in your entity, use another property
+            $this->updatedAt = new \DateTime('now');
+        }
+
+        $this->imageFile = $imageFile;
+    }
+
+
 
     /**
      * @return \DateTime
