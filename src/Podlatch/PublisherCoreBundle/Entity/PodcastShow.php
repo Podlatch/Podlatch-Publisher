@@ -11,7 +11,7 @@
  * @deprecated File deprecated in Release
  */
 
-namespace Podlatch\PublisherBundle\Entity;
+namespace Podlatch\PublisherCoreBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
@@ -20,7 +20,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * @Vich\Uploadable
- * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastShowRepository")
+ * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastShowRepository")
  * @ORM\Table(name="podcast_show")
  */
 class PodcastShow
@@ -46,7 +46,7 @@ class PodcastShow
     private $author;
 
     /**
-     * @ORM\OneToMany(targetEntity="Podlatch\PublisherBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
+     * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
      */
     private $episodes;
 

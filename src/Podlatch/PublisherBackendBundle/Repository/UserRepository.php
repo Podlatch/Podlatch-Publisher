@@ -1,6 +1,6 @@
 <?php
 
-namespace Podlatch\PublisherBundle\Repository;
+namespace Podlatch\PublisherBackendBundle\Repository;
 
 /**
  * UserRepository

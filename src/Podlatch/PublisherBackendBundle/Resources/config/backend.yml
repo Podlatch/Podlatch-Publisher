@@ -34,7 +34,7 @@ easy_admin:
                   - { label: '%app.version%' }
     entities:
         Podcast:
-            class: Podlatch\PublisherBundle\Entity\PodcastShow
+            class: Podlatch\PublisherCoreBundle\Entity\PodcastShow
             list:
                 fields:
                     - id
@@ -52,7 +52,7 @@ easy_admin:
                     - { property: 'imageFile', type: 'vich_image' }
 
         PodcastEpisode:
-            class: Podlatch\PublisherBundle\Entity\PodcastEpisode
+            class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
             list:
                 fields:
                     - id
@@ -62,7 +62,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
-                    - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherBundle\Entity\PodcastShow' } }
+                    - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow' } }
                     - title
                     - summary
                     - { property: 'description', type: 'textarea' }
@@ -70,7 +70,7 @@ easy_admin:
                     - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
         User:
-            class: Podlatch\PublisherBundle\Entity\User
+            class: Podlatch\PublisherBackendBundle\Entity\User
             list:
                 fields:
                     - id

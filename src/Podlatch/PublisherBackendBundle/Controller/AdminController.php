@@ -11,7 +11,7 @@
  * @deprecated File deprecated in Release
  */
 
-namespace Podlatch\PublisherBundle\Controller;
+namespace Podlatch\PublisherBackendBundle\Controller;
 use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
 
 

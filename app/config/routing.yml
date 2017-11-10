@@ -1,11 +1,17 @@
-publisher:
-    resource: "@PublisherBundle/Resources/config/routing.yml"
+publisher_frontend:
+    resource: "@PublisherFrontendBundle/Resources/config/routing.yml"
     prefix:   /
+
+podlatch_core:
+    resource: "@PublisherCoreBundle/Resources/config/routing.yml"
+
+publisher_backend:
+    resource: "@PublisherBackendBundle/Resources/config/routing.yml"
+    prefix:   /backend
 
 app:
     resource: '@AppBundle/Controller/'
     type: annotation
-    prefix:   /app
 
 easy_admin_bundle:
     resource: "@EasyAdminBundle/Controller/AdminController.php"

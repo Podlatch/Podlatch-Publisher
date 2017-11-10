@@ -17,9 +17,11 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new AppBundle\AppBundle(),
             new EasyCorp\Bundle\EasyAdminBundle\EasyAdminBundle(),
-            new Podlatch\PublisherBundle\PublisherBundle(),
+            new Podlatch\PublisherBackendBundle\PublisherBackendBundle(),
             new Vich\UploaderBundle\VichUploaderBundle(),
             new FOS\UserBundle\FOSUserBundle(),
+            new Podlatch\PublisherCoreBundle\PublisherCoreBundle(),
+            new Podlatch\PublisherFrontendBundle\PublisherFrontendBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

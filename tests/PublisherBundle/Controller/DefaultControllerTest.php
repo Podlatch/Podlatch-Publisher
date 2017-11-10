@@ -1,6 +1,6 @@
 <?php
 
-namespace Podlatch\PublisherBundle\Tests\Controller;
+namespace Podlatch\PublisherBackendBundle\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 

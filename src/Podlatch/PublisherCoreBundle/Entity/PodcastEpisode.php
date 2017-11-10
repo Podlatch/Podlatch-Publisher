@@ -1,6 +1,6 @@
 <?php
 
-namespace Podlatch\PublisherBundle\Entity;
+namespace Podlatch\PublisherCoreBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Entity\File;
@@ -10,28 +10,12 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * PodcastEpisode
  *
  * @ORM\Table(name="podcast_episode")
- * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\PodcastEpisodeRepository")
+ * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository")
  * @Vich\Uploadable
  */
 class PodcastEpisode
 {
-    /**
-     * @return mixed
-     */
-    public function getPodcastShow()
-    {
 
-        return $this->podcastShow;
-    }
-
-    /**
-     * @param mixed $podcastShow
-     */
-    public function setPodcastShow($podcastShow)
-    {
-
-        $this->podcastShow = $podcastShow;
-    }
     /**
      * @var int
      *
@@ -61,7 +45,7 @@ class PodcastEpisode
     private $summary;
 
     /**
-     * @ORM\Column(type="string", length=255)
+     * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
     private $audio;
@@ -86,7 +70,7 @@ class PodcastEpisode
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Podlatch\PublisherBundle\Entity\PodcastShow", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="episodes")
      * @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id")
      */
     private $podcastShow;
@@ -301,6 +285,24 @@ class PodcastEpisode
     {
 
         $this->audio = $audio;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getPodcastShow()
+    {
+
+        return $this->podcastShow;
+    }
+
+    /**
+     * @param mixed $podcastShow
+     */
+    public function setPodcastShow($podcastShow)
+    {
+
+        $this->podcastShow = $podcastShow;
     }
 
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Podlatch\PublisherBundle\Entity;
+namespace Podlatch\PublisherBackendBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * User
  *
  * @ORM\Table(name="fos_user")
- * @ORM\Entity(repositoryClass="Podlatch\PublisherBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="Podlatch\PublisherBackendBundle\Repository\UserRepository")
  */
 class User  extends BaseUser
 {

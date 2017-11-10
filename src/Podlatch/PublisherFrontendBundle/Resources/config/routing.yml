@@ -1,0 +1,3 @@
+publisher_frontend_homepage:
+    path:     /
+    defaults: { _controller: PublisherFrontendBundle:Default:index }
