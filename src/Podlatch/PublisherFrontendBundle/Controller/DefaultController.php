@@ -5,6 +5,7 @@ namespace Podlatch\PublisherFrontendBundle\Controller;
 use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Tests\Controller\ContainerAwareController;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -72,6 +73,10 @@ class DefaultController extends Controller
              * @TODO get duration from file here
              */
             $item->appendChild($xml->createElement('itunes:duration', '00:00'));
+
+            $response = new Response($xml);
+            $response->headers->set('Content-Type', 'xml');
+            return $response;
 
         }
 
