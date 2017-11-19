@@ -20,7 +20,7 @@ class DefaultController extends Controller
          */
         $podCast = $this -> getDoctrine() -> getRepository(
             PodcastShow::class
-        ) -> findBy(['id' => $id]);
+        ) -> findOneBy(['id' => $id]);
 
         $xml = new \DOMDocument();
         $root = $xml->appendChild($xml->createElement('rss'));
@@ -36,7 +36,8 @@ class DefaultController extends Controller
         foreach ($podCast -> getEpisodes() as $episode){
 
             $audioPath = sprintf(
-                '%s%s',
+                '%s%s%s',
+                $this -> getParameter('kernel.root_dir'),
                 $this -> getParameter('app.path.audio_assets'),
                 $episode -> getAudioFile()
             );
@@ -44,10 +45,11 @@ class DefaultController extends Controller
              * @TODO get url here
              */
             $audioUrl = sprintf(
-                '%s://%s%s',
+                '%s://%s%s%s',
                 'https',
                 'url',
-                $audioPath
+                $this -> getParameter('app.path.audio_assets'),
+                $episode -> getAudioFile()
             );
 
             $item = $channel->appendChild($xml->createElement('item'));
