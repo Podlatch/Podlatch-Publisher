@@ -2,6 +2,6 @@ publisher_frontend_homepage:
     path:     /
     defaults: { _controller: PublisherFrontendBundle:Default:index }
 
-publisher_frontend_itunes_feed
-    path:     /feed/mp3/{slug}
+publisher_frontend_itunes_feed:
+    path:     /feed/mp3/{id}
     defaults: { _controller: PublisherFrontendBundle:Default:feed }

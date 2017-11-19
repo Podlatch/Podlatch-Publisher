@@ -14,7 +14,7 @@ class DefaultController extends Controller
         return $this->render('PublisherFrontendBundle:Default:index.html.twig');
     }
 
-    public function feedAction($id)
+    public function feedAction($id=null)
     {
         /**
          * @var $podCast PodcastShow
@@ -29,18 +29,24 @@ class DefaultController extends Controller
 
         $channel = $root->appendChild($xml->createElement('channel'));
 
-        $channel->appendChild($xml->createElement('title', $podcast -> getTitle()));
-        $channel->appendChild($xml->createElement('link', $podCast -> getUrl()));
+        $channel->appendChild($xml->createElement('title', $podCast -> getTitle()));
+        /**
+         * @TODO implement url
+         */
+        //$channel->appendChild($xml->createElement('link', $podCast -> getUrl()));
         $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher'));
-        $channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
+        /**
+         * @TODO implement language
+         */
+        //$channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
         foreach ($podCast -> getEpisodes() as $episode){
 
             $audioPath = sprintf(
                 '%s%s%s',
-                $this -> getParameter('kernel.root_dir'),
+                $this -> getParameter('kernel.root_dir').'/../web/',
                 $this -> getParameter('app.path.audio_assets'),
-                $episode -> getAudioFile()
+                $episode -> getAudio()
             );
             /**
              * @TODO get url here
@@ -60,21 +66,21 @@ class DefaultController extends Controller
             $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
             $item->appendChild($xml->createElement('guid', $audioUrl));
             $item->appendChild($xml->createElement('pubDate',
-                date('D, d M Y H:i:s O', $episode ->getUpdatedAt())
+                date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
             ));
 
             $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
 
             $enclosure = $item->appendChild($xml->createElement('enclosure'));
             $enclosure->setAttribute('url', $audioPath);
-            $enclosure->setAttribute('length', filesize($audioPath));
-            $enclosure->setAttribute('type', finfo_file($fileInfo, $audioPath));
+            //$enclosure->setAttribute('length', filesize($audioPath));
+ //           $enclosure->setAttribute('type', finfo_file($fileInfo, $audioPath));
             /**
              * @TODO get duration from file here
              */
             $item->appendChild($xml->createElement('itunes:duration', '00:00'));
 
-            $response = new Response($xml);
+            $response = new Response($xml -> saveXML());
             $response->headers->set('Content-Type', 'xml');
             return $response;
 
