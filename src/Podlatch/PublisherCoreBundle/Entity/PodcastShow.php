@@ -15,6 +15,7 @@ namespace Podlatch\PublisherCoreBundle\Entity;
 
 
 use Doctrine\ORM\Mapping as ORM;
+use Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository;
 use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
@@ -89,7 +90,7 @@ class PodcastShow
 
 
     /**
-     * @return mixed
+     * @return PodcastEpisode[]
      */
     public function getEpisodes()
     {
