@@ -2,9 +2,9 @@
 
 namespace Podlatch\PublisherFrontendBundle\Controller;
 
+use GetId3\GetId3Core;
 use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Bundle\FrameworkBundle\Tests\Controller\ContainerAwareController;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
@@ -44,7 +44,7 @@ class DefaultController extends Controller
 
             $audioPath = sprintf(
                 '%s%s%s',
-                $this -> getParameter('kernel.root_dir').'/../web/',
+                $this -> getParameter('kernel.root_dir').'/../web',
                 $this -> getParameter('app.path.audio_assets'),
                 $episode -> getAudio()
             );
@@ -56,7 +56,7 @@ class DefaultController extends Controller
                 'https',
                 'url',
                 $this -> getParameter('app.path.audio_assets'),
-                $episode -> getAudioFile()
+                $episode -> getAudio()
             );
 
             $item = $channel->appendChild($xml->createElement('item'));
@@ -69,17 +69,20 @@ class DefaultController extends Controller
                 date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
             ));
 
-            $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
+            if($episode -> getAudio()){
+                $fileInfo = finfo_open(FILEINFO_MIME_TYPE);
 
-            $enclosure = $item->appendChild($xml->createElement('enclosure'));
-            $enclosure->setAttribute('url', $audioPath);
-            //$enclosure->setAttribute('length', filesize($audioPath));
- //           $enclosure->setAttribute('type', finfo_file($fileInfo, $audioPath));
-            /**
-             * @TODO get duration from file here
-             */
-            $item->appendChild($xml->createElement('itunes:duration', '00:00'));
+                $enclosure = $item->appendChild($xml->createElement('enclosure'));
+                $enclosure->setAttribute('url', $audioUrl);
+                $enclosure->setAttribute('length', filesize($audioPath));
+                $enclosure->setAttribute('type', finfo_file($fileInfo, $audioPath));
+                $getID3 = new GetId3Core();
+                $fileInfo = $getID3->analyze($audioPath);
+                $item->appendChild($xml->createElement('itunes:duration', $fileInfo['playtime_string']));
+            }
 
+
+            $xml->formatOutput = true;
             $response = new Response($xml -> saveXML());
             $response->headers->set('Content-Type', 'xml');
             return $response;

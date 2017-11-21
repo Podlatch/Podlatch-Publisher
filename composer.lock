@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "15eb3f1fc558930e66468c61b9fb11bb",
+    "content-hash": "9469a02eab76923a14a58f575beb7e3a",
     "packages": [
         {
             "name": "behat/transliterator",
@@ -1335,53 +1335,6 @@
             "time": "2017-06-19T01:22:40+00:00"
         },
         {
-            "name": "nass600/get-id3",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/nass600/getID3.git",
-                "reference": "2a90ea7e27c7bbdf4b0c29e19dfeebfff02fc571"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/nass600/getID3/zipball/2a90ea7e27c7bbdf4b0c29e19dfeebfff02fc571",
-                "reference": "2a90ea7e27c7bbdf4b0c29e19dfeebfff02fc571",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.2"
-            },
-            "type": "php-library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "1.0.x-dev"
-                }
-            },
-            "autoload": {
-                "files": [
-                    "getid3/getid3.php",
-                    "getid3/write.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "GNU"
-            ],
-            "authors": [
-                {
-                    "name": "James Heinrich"
-                }
-            ],
-            "description": "PHP library for handling audio/video files metadata",
-            "homepage": "https://github.com/nass600/getID3",
-            "keywords": [
-                "id3",
-                "metadata",
-                "mp3"
-            ],
-            "time": "2017-10-13T22:29:57+00:00"
-        },
-        {
             "name": "pagerfanta/pagerfanta",
             "version": "v1.0.5",
             "source": {
@@ -1497,6 +1450,68 @@
                 "random"
             ],
             "time": "2017-09-27T21:40:39+00:00"
+        },
+        {
+            "name": "phansys/getid3",
+            "version": "2.1.x-dev",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/phansys/GetId3.git",
+                "reference": "25fb540dd9bf5cc3d1501f4bc3d4c759e13ead89"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/phansys/GetId3/zipball/25fb540dd9bf5cc3d1501f4bc3d4c759e13ead89",
+                "reference": "25fb540dd9bf5cc3d1501f4bc3d4c759e13ead89",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "conflict": {
+                "james-heinrich/getid3": "*"
+            },
+            "require-dev": {
+                "phpunit/phpunit": ">=4.8,<5.4.3"
+            },
+            "suggest": {
+                "ext-dba": "DBA extension is required in order to use DBA database as cache storage.",
+                "ext-exif": "EXIF extension is required for graphic modules.",
+                "ext-mysqli": "MySQLi extension is required in order to use MySQL database as cache storage.",
+                "ext-rar": "RAR extension is required for RAR archive module.",
+                "ext-sqlite": "SQLite extension is required in order to use SQLite database as cache storage."
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "GetId3\\": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "GPL"
+            ],
+            "authors": [
+                {
+                    "name": "James Heinrich",
+                    "email": "info@getid3.org",
+                    "homepage": "http://www.getid3.org"
+                }
+            ],
+            "description": "This fork of GetId3 library updates to PSR-2 / PSR-4 CS, adds namespaces and makes it installable by composer.",
+            "homepage": "http://www.getid3.org",
+            "keywords": [
+                "getid3",
+                "metadata",
+                "tags"
+            ],
+            "abandoned": "james-heinrich/getid3",
+            "time": "2017-05-26T00:05:10+00:00"
         },
         {
             "name": "psr/cache",
@@ -2903,7 +2918,7 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "nass600/get-id3": 20
+        "phansys/getid3": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
