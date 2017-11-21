@@ -34,7 +34,7 @@ class DefaultController extends Controller
          * @TODO implement url
          */
         //$channel->appendChild($xml->createElement('link', $podCast -> getUrl()));
-        $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher'));
+        $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher - https://podlat.ch'));
         /**
          * @TODO implement language
          */
@@ -81,14 +81,11 @@ class DefaultController extends Controller
                 $item->appendChild($xml->createElement('itunes:duration', $fileInfo['playtime_string']));
             }
 
-
-            $xml->formatOutput = true;
-            $response = new Response($xml -> saveXML());
-            $response->headers->set('Content-Type', 'xml');
-            return $response;
-
         }
-
+        $xml->formatOutput = true;
+        $response = new Response($xml -> saveXML());
+        $response->headers->set('Content-Type', 'xml');
+        return $response;
     }
 
 }
