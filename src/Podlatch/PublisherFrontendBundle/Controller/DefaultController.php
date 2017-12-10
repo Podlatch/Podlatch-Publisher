@@ -9,9 +9,20 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction()
+    public function indexAction($id=null)
     {
-        return $this->render('PublisherFrontendBundle:Default:index.html.twig');
+        $id = $id?:1;
+
+        $podcast = $this -> getDoctrine() -> getRepository(
+            PodcastShow::class
+        ) -> findOneBy(['id' => $id]);
+
+        return $this->render(
+            'PublisherFrontendBundle:Default:index.html.twig',
+            [
+                'podcast' => $podcast
+            ]
+        );
     }
 
     public function feedAction($id=null)
@@ -88,8 +99,6 @@ class DefaultController extends Controller
         return $response;
     }
 
-    public function EpisodeListAction($id=null){
 
-    }
 
 }

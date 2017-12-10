@@ -65,6 +65,7 @@ easy_admin:
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow' } }
                     - title
                     - summary
+                    - releasedAt
                     - { property: 'description', type: 'textarea' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Media' }
                     - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }

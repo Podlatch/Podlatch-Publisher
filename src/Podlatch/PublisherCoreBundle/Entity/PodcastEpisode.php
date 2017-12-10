@@ -79,6 +79,11 @@ class PodcastEpisode
      * @ORM\Column(type="datetime")
      * @var \DateTime
      */
+    private $releasedAt;
+    /**
+     * @ORM\Column(type="datetime")
+     * @var \DateTime
+     */
     private $updatedAt;
 
 
@@ -304,6 +309,26 @@ class PodcastEpisode
 
         $this->podcastShow = $podcastShow;
     }
+
+    /**
+     * @return \DateTime
+     */
+    public function getReleasedAt()
+    {
+
+        return $this->releasedAt;
+    }
+
+    /**
+     * @param \DateTime $releasedAt
+     */
+    public function setReleasedAt($releasedAt)
+    {
+
+        $this->releasedAt = $releasedAt;
+    }
+
+
 
 
 
