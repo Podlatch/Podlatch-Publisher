@@ -1,0 +1,55 @@
+$subnav-hero-bg: $primary-color;
+$subnav-hero-link-padding: 0.9rem 1rem;
+$subnav-hero-font-size: 0.75rem;
+$subnav-hero-link-opacity: 0.15;
+$subnav-hero-height: 300px;
+$subnav-hero-transition: all 0.35s ease-in-out;
+
+.subnav-hero-section {
+  text-align: center;
+  background: $subnav-hero-bg;
+  background-size: cover;
+  position: relative;
+  overflow: visible;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: $subnav-hero-height;
+
+  .subnav-hero-headline {
+    color: $white;
+  }
+}
+
+.subnav-hero-subnav {
+  float: none;
+  position: absolute;
+  text-align: center;
+  margin: 0 auto;
+  bottom: 0;
+  width: 100%;
+
+  li {
+    float: none;
+    display: inline-block;
+
+    a {
+      padding: $subnav-hero-link-padding;
+      font-size: $subnav-hero-font-size;
+      color: $white;
+      text-transform: uppercase;
+      display: block;
+      font-weight: bold;
+      letter-spacing: 1px;
+      transition: $subnav-hero-transition;
+
+      &.is-active {
+        background: rgba($white, $subnav-hero-link-opacity);
+      }
+
+      &:hover {
+        background: rgba($white, $subnav-hero-link-opacity);
+      }
+    }
+  }
+}

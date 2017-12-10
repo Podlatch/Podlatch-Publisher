@@ -32,3 +32,38 @@ gulp.task('js', function() {
         .pipe(uglify())
         .pipe(gulp.dest('./web/js'));
 });
+
+gulp.task('podlove', function() {
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/style.css'
+    ])
+        .pipe(cssnano())
+        .pipe(gulp.dest('./web/'));
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/embed.js'
+    ])
+        .pipe(concat('podlove-embed.js'))
+        .pipe(gulp.dest('./web/js'));
+
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/vendor.js'
+    ])
+        .pipe(gulp.dest('./web/'));
+
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/fonts/*'
+    ])
+        .pipe(gulp.dest('./web/fonts'));
+
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/window.js'
+    ])
+        .pipe(gulp.dest('./web/'));
+
+    gulp.src([
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/subscribe_button/*',
+        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/subscribe_button/**/*'
+    ])
+        .pipe(gulp.dest('./web/subscribe-button'));
+
+});
