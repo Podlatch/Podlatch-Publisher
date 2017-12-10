@@ -1,0 +1,87 @@
+$white: #fff;
+$pagination-primary-color: #2c3840;
+$pagination-current-color: dodgerblue;
+$pagination-radius: 4px;
+
+.pagination-pointed {
+  .pagination-pointed-button {
+    position: relative;
+    display: inline-block;
+    padding: 6px 12px;
+    margin-bottom: 0;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: $pagination-radius;
+    background-color: $pagination-primary-color;
+    color: $white;
+    outline: 0;
+    text-decoration: none;
+    transition: all 0.2s linear;
+
+    &:hover {
+      background-color: lighten($pagination-primary-color, 10%);
+    }
+  }
+
+  .current {
+    @extend .pagination-pointed-button;
+    background: $pagination-current-color;
+
+    &:hover {
+      background-color: darken($pagination-current-color, 10%);
+    }
+  }
+
+  .pagination-next a {
+    border-radius: $pagination-radius 0 0 $pagination-radius;
+    margin-right: 18px;
+
+    &:hover::after {
+      border-left: 17px solid lighten($pagination-primary-color, 10%);
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -18px;
+      width: 0;
+      height: 0;
+      border-top: 17px solid transparent;
+      border-bottom: 17px solid transparent;
+      border-left: 17px solid $pagination-primary-color;
+      transition: all 0.2s linear;
+    }
+  }
+
+  .pagination-previous {
+    @extend .pagination-pointed-button;
+    border-radius: 0 $pagination-radius $pagination-radius 0;
+    margin-left: 18px;
+
+    &:hover::after {
+      border-right: 17px solid lighten($pagination-primary-color, 10%);
+    }
+
+    &::before {
+      content: ""; //removes the arrow
+    }
+
+    &::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: -18px;
+      width: 0;
+      height: 0;
+      border-bottom: 17px solid transparent;
+      border-top: 17px solid transparent;
+      border-right: 17px solid $pagination-primary-color;
+      transition: all 0.2s linear;
+    }
+  }
+}

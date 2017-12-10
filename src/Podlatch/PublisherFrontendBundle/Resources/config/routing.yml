@@ -5,3 +5,7 @@ publisher_frontend_homepage:
 publisher_frontend_itunes_feed:
     path:     /feed/mp3/{id}
     defaults: { _controller: PublisherFrontendBundle:Default:feed }
+
+publisher_frontend_itunes_feed:
+    path:     /feed/mp3/{id}
+    defaults: { _controller: PublisherFrontendBundle:Default:feed }

@@ -1,0 +1,17 @@
+$page-number-width: 80px;
+
+@media screen and (max-width: 39.9375em) {
+  .pagination:after {
+    display: inline-block;
+    content: attr(data-page) ' of ' attr(data-total);
+    position: relative;
+    text-align: center;
+    width: $page-number-width;
+    right: $page-number-width;
+  }
+
+  .pagination-next {
+    position: relative;
+    left: $page-number-width;
+  }
+}

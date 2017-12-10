@@ -1,0 +1,145 @@
+$social-button-size: 3.125rem;
+$social-button-border-width: 0.125rem;
+$social-button-font-size: 1.5625rem;
+$social-button-line-height: 2em;
+$social-button-border-radius: 1.6875rem;
+$social-button-transition: all 0.5s ease;
+$social-button-margin: 0.75rem;
+
+// Source: https://designpieces.com/2012/12/social-media-colours-hex-and-rgb/
+$social-brand-facebook: #3b5998;
+$social-brand-twitter: #55acee;
+$social-brand-google-plus: #dd4b39;
+
+@mixin social-button($brand-color, $brand-icon) {
+  background: $brand-color;
+
+  &:before {
+    font-family: "FontAwesome";
+    content: $brand-icon;
+  }
+
+  &:hover,
+  &:focus {
+    color: $brand-color;
+    background: $white;
+    border-color: $brand-color;
+  }
+}
+
+
+.neat-article-container {
+  margin-top: 1.5rem;
+
+  .neat-article-header {
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+
+    .article-header-avatar {
+      padding-right: 0.5rem;
+      padding-left: 0.5rem;
+
+      .header-avatar {
+        width: rem-calc(60);
+        height: rem-calc(60);
+        border-radius: 50%;
+      }
+    }
+
+    .article-header-author {
+      flex: 1 0 0;
+
+      .author-name {
+        color: $black;
+        margin-bottom: 0;
+      }
+
+      .author-description,
+      .article-date-read {
+        color: $dark-gray;
+        margin-bottom: 0;
+        font-size: 0.85em;
+      }
+    }
+  }
+
+  .neat-article-title {
+    margin-top: 1rem;
+
+    .article-title {
+      color: $black;
+      font-weight: 600;
+    }
+  }
+
+  .neat-article-image {
+    margin-top: 1.5rem;
+
+    .article-image {
+      width: 100%;
+      height: 100vh;
+
+      @include breakpoint(medium only) {
+        height: 65vh;
+      }
+
+      @include breakpoint(small only) {
+        height: 45vh;
+      }
+    }
+  }
+
+  .neat-article-content {
+    margin-top: 2rem;
+
+    .article-social {
+      .rounded-social-buttons {
+        text-align: center;
+
+        .social-button {
+          display: block;
+          position: relative;
+          cursor: pointer;
+          width: $social-button-size;
+          height: $social-button-size;
+          border: $social-button-border-width solid transparent;
+          padding: 0;
+          text-decoration: none;
+          text-align: center;
+          color: $white;
+          font-size: $social-button-font-size;
+          font-weight: normal;
+          line-height: $social-button-line-height;
+          border-radius: $social-button-border-radius;
+          transition: $social-button-transition;
+          margin-right: $social-button-margin;
+          margin-bottom: $social-button-margin;
+
+          &:hover,
+          &:focus {
+            transform: rotate(360deg);
+          }
+
+          &.facebook {
+            @include social-button($social-brand-facebook, "\f09a")
+          }
+
+          &.twitter {
+            @include social-button($social-brand-twitter, "\f099")
+          }
+
+          &.google-plus {
+            @include social-button($social-brand-google-plus, "\f0d5")
+          }
+        }
+      }
+    }
+
+    .article-content {
+      color: $black;
+    }
+  }
+}
+
+

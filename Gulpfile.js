@@ -7,20 +7,24 @@ var sass = require('gulp-sass');
 
 gulp.task('sass', function () {
     gulp.src([
+        './node_modules/foundation-sites/scss/**/*.scss',
         './app/Resources/public/sass/*.scss',
         './src/Podlatch/**/Resources/public/sass/*.scss'
     ])
         .pipe(sass({sourceComments: 'map'}).on('error', sass.logError))
         .pipe(cssnano())
+        .pipe(rename('master.css'))
         .pipe(gulp.dest('./web/css/'));
 });
 
 gulp.task('js', function() {
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
-        './src/Podlatch/**/Resources/public/js/*.js',
-        './node_modules/bootstrap-sass/javascripts/assets/*.js',
-        './web/components/requirejs/require.js'
+        './web/components/requirejs/require.js',
+        './node_modules/foundation-sites/dist/js/foundation.min.js',
+        './node_modules/foundation-sites/dist/js/plugins/*.min.js',
+
+        './src/Podlatch/**/Resources/public/js/*.js'
     ])
         .pipe(concat('app.js'))
         .pipe(gulp.dest('./web/js'))
