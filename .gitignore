@@ -16,3 +16,13 @@
 /vendor/
 /web/bundles/
 .idea/*
+
+/node_modules/
+web/style.css
+web/vendor.js
+web/window.js
+web/fonts
+web/subscribe-button
+web/uploads
+web/js
+web/css
