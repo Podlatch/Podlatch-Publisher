@@ -14,7 +14,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
  * PodcastEpisode
- *
+ * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="podcast_episode")
  * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository")
  * @Vich\Uploadable
@@ -276,7 +276,6 @@ class PodcastEpisode
      */
     public function setUpdatedAt($updatedAt)
     {
-
         $this->updatedAt = $updatedAt;
     }
 
@@ -333,6 +332,18 @@ class PodcastEpisode
 
         $this->releasedAt = $releasedAt;
     }
+
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        $this->updatedAt = new \DateTime('now');
+    }
+
+
 
 
 

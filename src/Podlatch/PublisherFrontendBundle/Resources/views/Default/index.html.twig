@@ -11,6 +11,7 @@
                 </ul>
         </div>
 
+
         <div class="holy-grail-left">
             <h3> Shows</h3>
             <p>
@@ -45,16 +46,15 @@
                 });
             </script>
 
+            <div class="row align-center">
+                <div class="columns large-10">
 
-            <h3>Episodes</h3>
+                    <h2 class="text-center">Episodes</h2>
 
-            {% for podcastEpisode in podcast.getEpisodes() %}
-                <div class="responsive-blog-post">
-                    <div class="individual-post">
-                        <h4>{{ podcastEpisode.getTitle() }}</h4>
-                        <p class="date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y H:i') }}</p>
-                        <p>{{ podcastEpisode.getSummary() }}</p>
-                        <a class="button" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
+                    <div class="timeline">
+                        {% for podcastEpisode in podcast.getEpisodes() %}
+                            <div class="timeline-item">
+                                <a class="timeline-icon" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
                             title: 'FS171 Invadsion!',
                             subtitle: 'LAN Planung - Kalender - Bingo - Wikipedia - Akkukalibration - Alte iPads und iPods - Find My Friends - iPhone Music Player - Apple Watch - Kommandozeile - Star Wars - Dante - Internet of Things Security - VPN',
                             summary: 'Wir haben eine wie wir finden abwechslungsreiche Sendung produziert, die wir Euch wie immer mit Freude bereitstellen. Während die Live-Hörer Freak-Show-Bingo spielen, greifen wir das Wikipedia-Thema der letzten Sendung auf und liefern auch noch weitere Aspekte des optimalen Star-Wars-Medienkonsums frei Haus. Dazu viel Nerderei rund um die Kommandozeile, eine Einschätzung der Perspektive der Apple Watch, ein Rant über die mangelhafte Security  im Internet of Things (and Buildings) und allerlei anderer Kram.  Roddi setzt dieses Mal aus, sonst Vollbesetzung.',
@@ -71,10 +71,23 @@
                                 config: '//podlove-player.surge.sh/fixtures/example.json',
                                 share: '//podlove-player.surge.sh/share'
                             }
-                        }); $(this).foundation('scrollToLoc', '#podlatch-player',{threshold: 50, offset: 100, duration: 1000})">play</a>
+                        }); $(this).foundation('scrollToLoc', '#podlatch-player',{threshold: 50, offset: 100, duration: 1000})">
+                                    <svg width="24" height="24" viewBox="0 0 21 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="reset"><g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g transform="translate(-17.000000, -13.000000)" fill="#2B8AC6"><polygon points="17.2886 13.0896 37.4846 24.7496 17.2886 36.4096"></polygon></g></g></svg>
+                                </a>
+                                <div class="timeline-content">
+                                    <h4 class="white">{{ podcastEpisode.getTitle() }}</h4>
+                                    <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y H:i') }}</h2>
+                                    <p>{{ podcastEpisode.getSummary() }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
                     </div>
+
                 </div>
-            {% endfor %}
+            </div>
+
+
+
         </div>
 
         <div class="holy-grail-right">
@@ -102,13 +115,7 @@
             <p>
                 {{ podcast.getDescription() }}
             </p>
-
         </div>
-
-        <div class="holy-grail-footer">
-            <h3>Footer</h3>
-        </div>
-
     </div>
 
 

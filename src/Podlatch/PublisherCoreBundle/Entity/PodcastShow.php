@@ -27,6 +27,7 @@ use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
+ * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
  * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastShowRepository")
  * @ORM\Table(name="podcast_show")
@@ -225,6 +226,15 @@ class PodcastShow
         $this->updatedAt = $updatedAt;
     }
 
+    /**
+     *
+     * @ORM\PrePersist
+     * @ORM\PreUpdate
+     */
+    public function updateTimestamps()
+    {
+        $this->updatedAt = new \DateTime('now');
+    }
 
     public function __toString()
     {

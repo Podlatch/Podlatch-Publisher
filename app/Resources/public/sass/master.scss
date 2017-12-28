@@ -6,14 +6,23 @@
 @import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/holy-grail/holy-grail';
 // artice layout
 @import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/blog/neat-article-container/neat-article-container';
+
 // responsive menu
-@import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/blog/responsive-nav-social/layout';
-@import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/blog/responsive-nav-social/responsive-nav-social';
+//@import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/blog/responsive-nav-social/layout';
+//@import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/blog/responsive-nav-social/responsive-nav-social';
 
 // header
 @import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/subnav-hero/subnav-hero';
+
+//timeline
+@import '../../../../src/Podlatch/PublisherFrontendBundle/Resources/public/sass/responsive-timeline/responsive-timeline';
+
 
 @import './components/login';
 
 
 @import url(http://fonts.googleapis.com/css?family=Roboto);
+
+.holy-grail-middle{
+  background: $primary-color;
+}
