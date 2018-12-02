@@ -15,16 +15,18 @@
   "author": "Benjamin Issleib",
   "license": "GPL-3.0",
   "dependencies": {
-    "foundation-sites": "^6.4.4-rc1",
-    "jquery": "^3.2.1",
-    "requirejs": "^2.3.5"
+    "@podlove/podlove-web-player": "^4.2.3",
+    "bulma": "^0.7.2",
+    "bulma-timeline": "^3.0.0",
+    "jquery": "^3.3.1",
+    "requirejs": "^2.3.6"
   },
   "devDependencies": {
     "gulp": "^3.9.1",
     "gulp-concat": "^2.6.1",
-    "gulp-cssnano": "^2.1.2",
-    "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
-    "gulp-uglify": "^3.0.0"
+    "gulp-cssnano": "^2.1.3",
+    "gulp-rename": "^1.4.0",
+    "gulp-sass": "^3.2.1",
+    "gulp-uglify": "^3.0.1"
   }
 }

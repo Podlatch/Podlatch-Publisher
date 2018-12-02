@@ -7,7 +7,7 @@ var sass = require('gulp-sass');
 
 gulp.task('sass', function () {
     gulp.src([
-        './node_modules/foundation-sites/scss/**/*.scss',
+        './node_modules/bulma/scss/*.sass',
         './app/Resources/public/sass/*.scss',
         './src/Podlatch/**/Resources/public/sass/*.scss'
     ])
@@ -21,8 +21,6 @@ gulp.task('js', function() {
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './web/components/requirejs/require.js',
-        './node_modules/foundation-sites/dist/js/foundation.min.js',
-        './node_modules/foundation-sites/dist/js/plugins/*.min.js',
 
         './src/Podlatch/**/Resources/public/js/*.js'
     ])
@@ -35,28 +33,28 @@ gulp.task('js', function() {
 
 gulp.task('podlove', function() {
     gulp.src([
-        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/style.css'
+        './node_modules/@podlove/podlove-web-player/dist/podlove/style.css'
     ])
         .pipe(cssnano())
         .pipe(gulp.dest('./web/'));
     gulp.src([
-        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/embed.js'
+        './node_modules/@podlove/podlove-web-player/dist/podlove/embed.js'
     ])
         .pipe(concat('podlove-embed.js'))
         .pipe(gulp.dest('./web/js'));
 
     gulp.src([
-        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/vendor.js'
+        './node_modules/@podlove/podlove-web-player/dist/podlove/vendor.js'
     ])
         .pipe(gulp.dest('./web/'));
 
     gulp.src([
-        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/fonts/*'
+        './node_modules/@podlove/podlove-web-player/dist/podlove/fonts/*'
     ])
         .pipe(gulp.dest('./web/fonts'));
 
     gulp.src([
-        './src/Podlatch/PublisherFrontendBundle/Resources/public/vendor/podlove/window.js'
+        './node_modules/@podlove/podlove-web-player/dist/podlove//window.js'
     ])
         .pipe(gulp.dest('./web/'));
 
