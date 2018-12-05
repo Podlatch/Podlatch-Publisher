@@ -9,7 +9,7 @@ gulp.task('sass', function () {
     gulp.src([
         './node_modules/bulma/scss/*.sass',
         './app/Resources/public/sass/*.scss',
-        './src/Podlatch/**/Resources/public/sass/*.scss'
+        './src/Podlatch/**/Resources/public/sass/*.scss',
     ])
         .pipe(sass({sourceComments: 'map'}).on('error', sass.logError))
         .pipe(cssnano())
@@ -21,7 +21,7 @@ gulp.task('js', function() {
     gulp.src([
         './node_modules/jquery/dist/jquery.js',
         './web/components/requirejs/require.js',
-
+        './node_modules/perfect-scrollbar/dist/perfect-scrollbar.js',
         './src/Podlatch/**/Resources/public/js/*.js'
     ])
         .pipe(concat('app.js'))
@@ -37,6 +37,14 @@ gulp.task('podlove', function() {
     ])
         .pipe(cssnano())
         .pipe(gulp.dest('./web/'));
+
+    gulp.src([
+        './node_modules/perfect-scrollbar/css/perfect-scrollbar.css',
+    ])
+        .pipe(cssnano())
+        .pipe(gulp.dest('./web/css'));
+
+
     gulp.src([
         './node_modules/@podlove/podlove-web-player/dist/podlove/embed.js'
     ])

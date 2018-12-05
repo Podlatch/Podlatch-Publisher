@@ -9,7 +9,7 @@
                     {{ podcast.getTitle() }}
                 </h1>
                 <h2 class="subtitle">
-                    Hero subtitle
+                    {{ podcast.getAuthor() }}
                 </h2>
             </div>
         </div>
@@ -18,11 +18,11 @@
     <main class="section">
 
         <div class="columns">
-            <div class="column is-one-quarter">
+            <div class="column is-one-quarter card">
                 <div id="podlatch-player"></div>
                 <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
             </div> <!-- end narrow column-->
-            <div class="column is-two-quarter level">
+            <div class="column is-two-quarter level card" id="scrollable-container">
 
                 <h2 class="subtitle is-2 level-item">About</h2>
                 <p class="level-item">
@@ -40,11 +40,11 @@
                                     title: '{{ podcastEpisode.getTitle() }}',
                                     subtitle: '{{ podcastEpisode.getDescription() }}',
                                     summary: '{{ podcastEpisode.getSummary() }}',
-                                    publicationDate: '2016-02-11T03:13:55+00:00',
-                                    poster: '{{ podcastEpisode.getImageFile() }}',
+                                    publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
+                                    poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile') |url_encode}}',
                                     duration: '04:15:32',
                                     audio: [{
-                                    url: 'http://freakshow.fm/podlove/file/4467/s/download/c/select-show/fs171-invasion.mp3',
+                                    url: '{{ vich_uploader_asset(podcastEpisode, 'audioFile') |url_encode}}',
                                     mimeType: 'audio/mp3',
                                     size: 14665000,
                                     title: 'Audio MP3'
@@ -61,7 +61,7 @@
                             </a>
                             <div class="timeline-content">
                                 <p class="heading">{{ podcastEpisode.getTitle() }}</p>
-                                <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y H:i') }}</p>
+                                <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</p>
                                 <p>{{ podcastEpisode.getDescription() }}</p>
                             </div>
                         </div>
@@ -107,10 +107,10 @@
 
     <script>
         window.podcastData = {
-            "title": "Newz of the World",
+            "title": "{{ podcast.getTitle() }}",
             "subtitle": "Tim and Mark talk about the Newz™",
-            "description": "Newz of the World is a weekly show about world news. Mark Fonseca Rendeiro and Tim Pritlove come together to present interesting reports and discuss their aspects and possible consequences. Newz of the world wants to be an alternative window to the common media flow and cherry picks interesting developments for you.",
-            "cover": "http://meta.metaebene.me/media/newz/newz-logo-600x600.jpg",
+            "description": "{{ podcast.getDescription() }}",
+            "cover": "{{ vich_uploader_asset(podcast, 'imageFile') |url_encode}}",
             "feeds": [
                 {
                     "type": "audio",
@@ -122,6 +122,13 @@
                 }
             ]
         }
+    </script>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const ps = new PerfectScrollbar('#scrollable-container');
+            }, false);
+
     </script>
 
 
