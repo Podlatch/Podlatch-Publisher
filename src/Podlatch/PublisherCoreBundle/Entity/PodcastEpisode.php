@@ -344,6 +344,20 @@ class PodcastEpisode
         $this->updatedAt = new \DateTime('now');
     }
 
+    public function getDuration($basePath)
+    {
+        $audioPath = $basePath . $this->getAudio();
+        $getID3 = new \getID3();
+        $fileInfo = $getID3->analyze($audioPath);
+        return $fileInfo['playtime_string'];
+    }
+
+    public function getFileSize($basePath)
+    {
+        $audioPath = $basePath . $this->getAudio();
+        return filesize($audioPath);
+    }
+
 
 
 

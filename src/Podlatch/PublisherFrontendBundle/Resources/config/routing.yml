@@ -11,5 +11,5 @@ publisher_frontend_podcast_episode_detail:
     defaults: { _controller: PublisherFrontendBundle:Default:index }
 
 publisher_frontend_itunes_feed:
-    path:     /feed/mp3/{id}
+    path:     /feed/mp3/{podcastId}
     defaults: { _controller: PublisherFrontendBundle:Default:feed }

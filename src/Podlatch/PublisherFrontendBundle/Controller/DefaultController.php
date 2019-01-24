@@ -16,9 +16,16 @@ class DefaultController extends Controller
             PodcastShow::class
         ) -> findOneBy(['id' => $podcastId]);
 
+        $audioBasePath = sprintf(
+            '%s%s',
+            $this -> getParameter('kernel.root_dir').'/../web',
+            $this -> getParameter('app.path.audio_assets')
+        );
+
         return $this->render(
             'PublisherFrontendBundle:Default:index.html.twig',
             [
+                'audioBasePath' => $audioBasePath,
                 'podcast' => $podcast
             ]
         );
@@ -37,14 +44,14 @@ class DefaultController extends Controller
         );
     }
 
-    public function feedAction($id=null)
+    public function feedAction($podcastId=null)
     {
         /**
          * @var $podCast PodcastShow
          */
         $podCast = $this -> getDoctrine() -> getRepository(
             PodcastShow::class
-        ) -> findOneBy(['id' => $id]);
+        ) -> findOneBy(['id' => $podcastId]);
 
         $xml = new \DOMDocument();
         $root = $xml->appendChild($xml->createElement('rss'));

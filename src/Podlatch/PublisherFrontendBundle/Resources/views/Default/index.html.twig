@@ -42,17 +42,13 @@
                                     summary: '{{ podcastEpisode.getSummary() }}',
                                     publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
                                     poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile') |url_encode}}',
-                                    duration: '04:15:32',
+                                    duration: '{{ podcastEpisode.getDuration(audioBasePath) }}',
                                     audio: [{
                                     url: '{{ vich_uploader_asset(podcastEpisode, 'audioFile') |url_encode}}',
                                     mimeType: 'audio/mp3',
-                                    size: 14665000,
+                                    size: {{ podcastEpisode.getFileSize(audioBasePath) }},
                                     title: 'Audio MP3'
                                     }],
-                                    reference: {
-                                    config: '//podlove-player.surge.sh/fixtures/example.json',
-                                    share: '//podlove-player.surge.sh/share'
-                                    },
                                     theme: {
                                     main: '#00D7B5'
                                     }
@@ -78,25 +74,22 @@
 
 
 
-    <script type="text/javascript" src="{{ asset('../js/podlove-embed.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('/js/podlove-embed.js') }}"></script>
+    {% set latestEpisode = podcast.getEpisodes()|first %}
     <script>
         podlovePlayer('#podlatch-player', {
-            title: 'FS171 Invasion!',
-            subtitle: 'LAN Planung - Kalender - Bingo - Wikipedia - Akkukalibration - Alte iPads und iPods - Find My Friends - iPhone Music Player - Apple Watch - Kommandozeile - Star Wars - Dante - Internet of Things Security - VPN',
-            summary: 'Wir haben eine wie wir finden abwechslungsreiche Sendung produziert, die wir Euch wie immer mit Freude bereitstellen. Während die Live-Hörer Freak-Show-Bingo spielen, greifen wir das Wikipedia-Thema der letzten Sendung auf und liefern auch noch weitere Aspekte des optimalen Star-Wars-Medienkonsums frei Haus. Dazu viel Nerderei rund um die Kommandozeile, eine Einschätzung der Perspektive der Apple Watch, ein Rant über die mangelhafte Security  im Internet of Things (and Buildings) und allerlei anderer Kram.  Roddi setzt dieses Mal aus, sonst Vollbesetzung.',
-            publicationDate: '2016-02-11T03:13:55+00:00',
-            poster: 'https://freakshow.fm/wp-content/cache/podlove/04/662a9d4edcf77ea2abe3c74681f509/freak-show_200x200.jpg',
-            duration: '04:15:32',
+            title: '{{ latestEpisode.getTitle() }}',
+            subtitle: 'TODO',
+            summary: '{{ latestEpisode.getDescription() }}',
+            publicationDate: '{{ latestEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
+            poster: '{{ vich_uploader_asset(latestEpisode, 'imageFile') |url_encode}}',
+            duration: '{{ latestEpisode.getDuration(audioBasePath) }}',
             audio: [{
-                url: 'http://freakshow.fm/podlove/file/4467/s/download/c/select-show/fs171-invasion.mp3',
+                url: '{{ vich_uploader_asset(latestEpisode, 'audioFile') |url_encode}}',
                 mimeType: 'audio/mp3',
-                size: 14665000,
+                size: {{ latestEpisode.getFileSize(audioBasePath) }},
                 title: 'Audio MP3'
             }],
-            reference: {
-                config: '//podlove-player.surge.sh/fixtures/example.json',
-                share: '//podlove-player.surge.sh/share'
-            },
             theme: {
                 main: '#00D7B5'
             }
@@ -108,16 +101,16 @@
     <script>
         window.podcastData = {
             "title": "{{ podcast.getTitle() }}",
-            "subtitle": "Tim and Mark talk about the Newz™",
+            "subtitle": "TODO",
             "description": "{{ podcast.getDescription() }}",
             "cover": "{{ vich_uploader_asset(podcast, 'imageFile') |url_encode}}",
             "feeds": [
                 {
                     "type": "audio",
                     "format": "mp3",
-                    "url": "http://newz-of-the-world.com/feed/mp3",
+                    "url": "{{ path('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}",
                     "variant": "high",
-                    "directory-url-itunes": "https://itunes.apple.com/de/podcast/newz-of-the-world/id492588543"
+                    "directory-url-itunes": "TODO"
 
                 }
             ]
