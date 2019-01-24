@@ -1,10 +1,14 @@
 publisher_frontend_homepage:
     path:     /
+    defaults: { _controller: PublisherFrontendBundle:Default:dashboard }
+
+publisher_frontend_podcast_overview:
+    path:     /{podcastId}
     defaults: { _controller: PublisherFrontendBundle:Default:index }
 
-publisher_frontend_itunes_feed:
-    path:     /feed/mp3/{id}
-    defaults: { _controller: PublisherFrontendBundle:Default:feed }
+publisher_frontend_podcast_episode_detail:
+    path:     /{podcastId}/{episodeId}
+    defaults: { _controller: PublisherFrontendBundle:Default:index }
 
 publisher_frontend_itunes_feed:
     path:     /feed/mp3/{id}

@@ -37,7 +37,6 @@ easy_admin:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastShow
             list:
                 fields:
-                    - id
                     - { property: 'image', type: 'image', base_path: '%app.path.podcast_images%' }
                     - title
                     - author
@@ -55,7 +54,6 @@ easy_admin:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
             list:
                 fields:
-                    - id
                     - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
                     - title
                     - podcastShow

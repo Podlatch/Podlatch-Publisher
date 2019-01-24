@@ -2,25 +2,37 @@
 
 namespace Podlatch\PublisherFrontendBundle\Controller;
 
-use GetId3\GetId3Core;
 use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
-    public function indexAction($id=null)
+    public function indexAction($podcastId)
     {
-        $id = $id?:1;
+        $podcastId;
 
         $podcast = $this -> getDoctrine() -> getRepository(
             PodcastShow::class
-        ) -> findOneBy(['id' => $id]);
+        ) -> findOneBy(['id' => $podcastId]);
 
         return $this->render(
             'PublisherFrontendBundle:Default:index.html.twig',
             [
                 'podcast' => $podcast
+            ]
+        );
+    }
+
+    public function dashboardAction()
+    {
+        $podcasts = $this -> getDoctrine() -> getRepository(
+            PodcastShow::class
+        ) -> findAll();
+        return $this->render(
+            'PublisherFrontendBundle:Default:dashboard.html.twig',
+            [
+                'podcasts' => $podcasts
             ]
         );
     }
@@ -87,7 +99,7 @@ class DefaultController extends Controller
                 $enclosure->setAttribute('url', $audioUrl);
                 $enclosure->setAttribute('length', filesize($audioPath));
                 $enclosure->setAttribute('type', finfo_file($fileInfo, $audioPath));
-                $getID3 = new GetId3Core();
+                $getID3 = new \getID3();
                 $fileInfo = $getID3->analyze($audioPath);
                 $item->appendChild($xml->createElement('itunes:duration', $fileInfo['playtime_string']));
             }

@@ -18,11 +18,11 @@
     <main class="section">
 
         <div class="columns">
-            <div class="column is-one-quarter card">
+            <div class="column is-one-quarter ">
                 <div id="podlatch-player"></div>
                 <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
             </div> <!-- end narrow column-->
-            <div class="column is-two-quarter level card" id="scrollable-container">
+            <div class="column is-two-quarter level" id="scrollable-container">
 
                 <h2 class="subtitle is-2 level-item">About</h2>
                 <p class="level-item">
@@ -78,7 +78,7 @@
 
 
 
-    <script type="text/javascript" src="{{ asset('/js/podlove-embed.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('../js/podlove-embed.js') }}"></script>
     <script>
         podlovePlayer('#podlatch-player', {
             title: 'FS171 Invasion!',

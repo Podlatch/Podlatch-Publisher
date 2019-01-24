@@ -1,0 +1,39 @@
+{% extends "::base.html.twig" %}
+
+{% block content %}
+
+    <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+                <h1 class="title">
+                    Podlatch
+                </h1>
+            </div>
+        </div>
+    </section>
+
+    <main class="section">
+
+            <div class="columns">
+                {% for podcast in podcasts %}
+                <div class="column is-4">
+                    <div class="card">
+                        <div class="card-content">
+                            <p class="title">
+                                {{ podcast.getTitle() }}
+                            </p>
+                            <div class="content">
+                                {{ podcast.getDescription() }}
+                            </div>
+                        </div>
+                        <footer class="card-footer">
+                            <a href="{{ path('publisher_frontend_podcast_overview',{'podcastId': podcast.getId}) }}" class="card-footer-item">Details</a>
+                        </footer>
+                    </div>
+                </div>
+                {% endfor %}
+            </div> <!-- end columns-->
+
+    </main>
+
+{% endblock content%}
