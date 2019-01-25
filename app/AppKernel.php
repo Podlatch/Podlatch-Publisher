@@ -23,6 +23,7 @@ class AppKernel extends Kernel
             new Podlatch\PublisherCoreBundle\PublisherCoreBundle(),
             new Podlatch\PublisherFrontendBundle\PublisherFrontendBundle(),
             new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
+            new AlterPHP\EasyAdminExtensionBundle\EasyAdminExtensionBundle()
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {
