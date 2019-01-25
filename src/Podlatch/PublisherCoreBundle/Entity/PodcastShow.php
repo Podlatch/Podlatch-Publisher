@@ -23,6 +23,7 @@ namespace Podlatch\PublisherCoreBundle\Entity;
 
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
+use Podlatch\PublisherBackendBundle\Entity\User;
 use Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository;
 use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -110,6 +111,16 @@ class PodcastShow
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * Many Groups have Many Users.
+     * @ORM\ManyToMany(targetEntity="Podlatch\PublisherBackendBundle\Entity\User", mappedBy="podcasts")
+     */
+    private $users;
+
+    public function __construct() {
+        $this->users = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     /**
      * @return mixed
@@ -383,6 +394,36 @@ class PodcastShow
 
         $this->copyright = $copyright;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getUsers()
+    {
+
+        return $this->users;
+    }
+
+
+    public function addUser(User $users)
+    {
+
+        $this->users[] = $users;
+        if (!$users->getPodcasts()->contains($this)) {
+            $users->addPodcast($this);
+        }
+
+        return $this;
+    }
+
+    public function removeUser(User $users)
+    {
+        $this->users->removeElement($users);
+        $users->removePodcast($this);
+
+    }
+
+
 
 
 

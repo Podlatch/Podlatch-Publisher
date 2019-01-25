@@ -44,6 +44,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
+                    - { property: 'users', type_options: { by_reference: false } }
                     - title
                     - author
                     - ownerName
@@ -149,6 +150,7 @@ easy_admin:
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
         User:
             class: Podlatch\PublisherBackendBundle\Entity\User
+
             list:
                 fields:
                     - id
@@ -162,7 +164,7 @@ easy_admin:
                     - username
                     - email
                     - enabled
-                    - lastLogin
+                    - { property: 'podcasts', type_options: { by_reference: false } }
                     # if administrators are allowed to edit users' passwords and roles, add this:
                     - { property: 'plainPassword', type: 'text', type_options: { required: false } }
                     - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }

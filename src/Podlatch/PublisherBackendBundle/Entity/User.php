@@ -10,6 +10,7 @@ namespace Podlatch\PublisherBackendBundle\Entity;
 
 use FOS\UserBundle\Model\User as BaseUser;
 use Doctrine\ORM\Mapping as ORM;
+use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 
 /**
  * User
@@ -28,6 +29,18 @@ class User  extends BaseUser
      */
     protected $id;
 
+    /**
+     * Many Users have Many Podcasts.
+     * @ORM\ManyToMany(targetEntity="\Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="users")
+     * @ORM\JoinTable(name="users_podcasts")
+     */
+    private $podcasts;
+
+    public function __construct() {
+        parent::__construct();
+        $this->podcasts = new \Doctrine\Common\Collections\ArrayCollection();
+    }
+
 
     /**
      * Get id
@@ -38,5 +51,35 @@ class User  extends BaseUser
     {
         return $this->id;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getPodcasts()
+    {
+
+        return $this->podcasts;
+    }
+
+    public function addPodcast(PodcastShow $podcasts)
+    {
+
+        $this->podcasts[] = $podcasts;
+        if (!$podcasts->getUsers()->contains($this)) {
+            $podcasts->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removePodcast(PodcastShow $podcasts)
+    {
+        $this->podcasts->removeElement($podcasts);
+        $podcasts->removeUser( $this);
+
+    }
+
+
+
 }
 
