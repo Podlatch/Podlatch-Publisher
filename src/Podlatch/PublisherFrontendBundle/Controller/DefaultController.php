@@ -5,6 +5,7 @@ namespace Podlatch\PublisherFrontendBundle\Controller;
 use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends Controller
 {
@@ -82,19 +83,19 @@ class DefaultController extends Controller
              * @TODO get url here
              */
             $audioUrl = sprintf(
-                '%s://%s%s%s',
-                'https',
-                'url',
+                '%s%s%s',
+                $this->generateUrl('homepage',[],UrlGeneratorInterface::ABSOLUTE_URL),
                 $this -> getParameter('app.path.audio_assets'),
                 $episode -> getAudio()
             );
+            $audioUrl = urlencode($audioUrl);
 
             $item = $channel->appendChild($xml->createElement('item'));
             $item->appendChild($xml->createElement('title', $episode -> getTitle()));
             $item->appendChild($xml->createElement('link', $audioUrl));
             $item->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
             $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
-            $item->appendChild($xml->createElement('guid', $audioUrl));
+            $item->appendChild($xml->createElement('guid', $episode->getId()));
             $item->appendChild($xml->createElement('pubDate',
                 date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
             ));

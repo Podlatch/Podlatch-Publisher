@@ -23,6 +23,9 @@
                 <div id="podlatch-subscribe-botton-wrapper text-center">
                     <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
                 </div>
+                <div class="rss">
+                    <a class="button" href="{{ path('publisher_frontend_itunes_feed', {'podcastId': podcast.getId()}) }}">RSS</a>
+                </div>
             </div> <!-- end narrow column-->
             <div class="column is-two-quarter level" id="scrollable-container">
 

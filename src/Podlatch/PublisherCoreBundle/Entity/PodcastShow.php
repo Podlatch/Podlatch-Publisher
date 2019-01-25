@@ -59,6 +59,7 @@ class PodcastShow
 
     /**
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
+     * @ORM\OrderBy({"releasedAt" = "DESC"})
      */
     private $episodes;
 
