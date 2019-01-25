@@ -22,6 +22,7 @@
     },
     "require": {
         "php": ">=5.5.9",
+        "cocur/slugify": "^3.1",
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "easycorp/easyadmin-bundle": "~1.17",

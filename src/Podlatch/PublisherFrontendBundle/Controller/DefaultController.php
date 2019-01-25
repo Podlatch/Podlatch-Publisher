@@ -11,11 +11,16 @@ class DefaultController extends Controller
 {
     public function indexAction($podcastId)
     {
-        $podcastId;
 
         $podcast = $this -> getDoctrine() -> getRepository(
             PodcastShow::class
-        ) -> findOneBy(['id' => $podcastId]);
+        ) -> findOneBy(['slug' => $podcastId]);
+
+        if(!$podcast){
+            $podcast = $this -> getDoctrine() -> getRepository(
+                PodcastShow::class
+            ) -> findOneBy(['id' => $podcastId]);
+        }
 
         $audioBasePath = sprintf(
             '%s%s',
@@ -50,9 +55,16 @@ class DefaultController extends Controller
         /**
          * @var $podCast PodcastShow
          */
+
         $podCast = $this -> getDoctrine() -> getRepository(
             PodcastShow::class
-        ) -> findOneBy(['id' => $podcastId]);
+        ) -> findOneBy(['slug' => $podcastId]);
+
+        if(!$podCast){
+            $podCast = $this -> getDoctrine() -> getRepository(
+                PodcastShow::class
+            ) -> findOneBy(['id' => $podcastId]);
+        }
 
         $xml = new \DOMDocument();
         $root = $xml->appendChild($xml->createElement('rss'));
@@ -61,11 +73,46 @@ class DefaultController extends Controller
         $channel = $root->appendChild($xml->createElement('channel'));
 
         $channel->appendChild($xml->createElement('title', $podCast -> getTitle()));
+        $channel->appendChild($xml->createElement('description', $podCast -> getDescription()));
+
         /**
          * @TODO implement url
          */
         //$channel->appendChild($xml->createElement('link', $podCast -> getUrl()));
         $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher - https://podlat.ch'));
+
+        $channel->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
+        $channel->appendChild($xml->createElement('itunes:summary', $podCast -> getDescription()));
+
+        $categories = explode(':',$podCast->getCategory());
+        foreach ($categories as $category){
+            $element = $xml->createElement('itunes:category', '');
+            $element->setAttribute('text',$category);
+            $channel->appendChild($element);
+        }
+
+        if($podCast -> getImage()){
+            $pictureUrl = sprintf(
+                '%s%s%s',
+                $this->generateUrl('homepage',[],UrlGeneratorInterface::ABSOLUTE_URL),
+                $this -> getParameter('app.path.podcast_images'),
+                $podCast -> getImage()
+            );
+            $pictureUrl = urlencode($pictureUrl);
+
+            $element = $xml->createElement('itunes:image', '');
+            $element->setAttribute('href',$pictureUrl);
+            $channel->appendChild($element);
+        }
+
+
+        $channel->appendChild($xml->createElement('itunes:explicit', $podCast -> getisExplicit()?'Yes':'No'));
+
+
+        $item = $channel->appendChild($xml->createElement('itunes:owner'));
+        $item->appendChild($xml->createElement('itunes:name', $podCast -> getOwnerName()));
+        $item->appendChild($xml->createElement('itunes:email', $podCast -> getOwnerMail()));
+
         /**
          * @TODO implement language
          */
@@ -99,6 +146,20 @@ class DefaultController extends Controller
             $item->appendChild($xml->createElement('pubDate',
                 date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
             ));
+
+            if($episode -> getImage()){
+                $pictureUrl = sprintf(
+                    '%s%s%s',
+                    $this->generateUrl('homepage',[],UrlGeneratorInterface::ABSOLUTE_URL),
+                    $this -> getParameter('app.path.episode_images'),
+                    $episode -> getImage()
+                );
+                $pictureUrl = urlencode($pictureUrl);
+
+                $element = $xml->createElement('itunes:image', '');
+                $element->setAttribute('href',$pictureUrl);
+                $item->appendChild($element);
+            }
 
             if($episode -> getAudio()){
                 $fileInfo = finfo_open(FILEINFO_MIME_TYPE);

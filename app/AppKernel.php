@@ -22,6 +22,7 @@ class AppKernel extends Kernel
             new FOS\UserBundle\FOSUserBundle(),
             new Podlatch\PublisherCoreBundle\PublisherCoreBundle(),
             new Podlatch\PublisherFrontendBundle\PublisherFrontendBundle(),
+            new Cocur\Slugify\Bridge\Symfony\CocurSlugifyBundle(),
         ];
 
         if (in_array($this->getEnvironment(), ['dev', 'test'], true)) {

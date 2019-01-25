@@ -21,6 +21,7 @@
 namespace Podlatch\PublisherCoreBundle\Entity;
 
 
+use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository;
 use Vich\UploaderBundle\Entity\File;
@@ -56,6 +57,35 @@ class PodcastShow
      * @ORM\Column(type="string")
      */
     private $author;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $ownerName;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $ownerMail;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isExplicit;
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $copyright;
+
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
+    private $slug;
+
+    /**
+     * @ORM\Column(type="string")
+     */
+    private $category;
 
     /**
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
@@ -237,6 +267,7 @@ class PodcastShow
      */
     public function updateTimestamps()
     {
+        $this->setSlug((new Slugify())->slugify($this->getTitle()));
         $this->updatedAt = new \DateTime('now');
     }
 
@@ -244,5 +275,119 @@ class PodcastShow
     {
         return $this -> title;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSlug()
+    {
+
+        return $this->slug;
+    }
+
+    /**
+     * @param mixed $slug
+     */
+    public function setSlug($slug)
+    {
+
+        $this->slug = $slug;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCategory()
+    {
+
+        return $this->category;
+    }
+
+    /**
+     * @param mixed $category
+     */
+    public function setCategory($category)
+    {
+
+        $this->category = $category;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOwnerName()
+    {
+
+        return $this->ownerName;
+    }
+
+    /**
+     * @param mixed $ownerName
+     */
+    public function setOwnerName($ownerName)
+    {
+
+        $this->ownerName = $ownerName;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getOwnerMail()
+    {
+
+        return $this->ownerMail;
+    }
+
+    /**
+     * @param mixed $ownerMail
+     */
+    public function setOwnerMail($ownerMail)
+    {
+
+        $this->ownerMail = $ownerMail;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getisExplicit()
+    {
+
+        return $this->isExplicit;
+    }
+
+    /**
+     * @param mixed $isExplicit
+     */
+    public function setIsExplicit($isExplicit)
+    {
+
+        $this->isExplicit = $isExplicit;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getCopyright()
+    {
+
+        return $this->copyright;
+    }
+
+    /**
+     * @param mixed $copyright
+     */
+    public function setCopyright($copyright)
+    {
+
+        $this->copyright = $copyright;
+    }
+
+
+
+
+
+
 
 }
