@@ -26,19 +26,43 @@ use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 
 class AdminController extends BaseAdminController
 {
-    public function createNewUserEntity()
+    protected function createNewUserEntity()
     {
         return $this->get('fos_user.user_manager')->createUser();
     }
 
-    public function prePersistUserEntity($user)
+    protected function prePersistUserEntity($user)
     {
         $this->get('fos_user.user_manager')->updateUser($user, false);
     }
 
-    public function preUpdateUserEntity($user)
+    protected function preUpdateUserEntity($user)
     {
         $this->get('fos_user.user_manager')->updateUser($user, false);
+    }
+
+    protected function preUpdatePodcastEntity($entity)
+    {
+
+        /**
+         * @var $entity PodcastShow
+         */
+        $loggedInUser =  $this->get('security.token_storage')->getToken()->getUser();
+        $entity -> addUser($loggedInUser);
+
+        parent::persistEntity($entity);
+    }
+
+    protected function persistPodcastEntity($entity)
+    {
+
+        /**
+         * @var $entity PodcastShow
+         */
+        $loggedInUser =  $this->get('security.token_storage')->getToken()->getUser();
+        $entity -> addUser($loggedInUser);
+        parent::updateEntity($entity);
+
     }
 
     protected function createPodcastListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter)
@@ -50,6 +74,7 @@ class AdminController extends BaseAdminController
          * @var $queryBuilder QueryBuilder
          */
         $queryBuilder = parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
+        return $queryBuilder;
         $queryBuilder
             -> join('entity.users', 'user')
             ->andWhere('user.id = ?1')

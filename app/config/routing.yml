@@ -1,4 +1,11 @@
 
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+    prefix:   /
+
+publisher_frontend:
+    resource: "@PublisherFrontendBundle/Resources/config/routing.yml"
+    prefix:   /
 
 app:
     resource: '@AppBundle/Controller/'
@@ -8,13 +15,6 @@ easy_admin_bundle:
     resource: "@PublisherBackendBundle/Controller/AdminController.php"
     type:     annotation
     prefix:   /admin
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
-
-publisher_frontend:
-    resource: "@PublisherFrontendBundle/Resources/config/routing.yml"
-    prefix:   /
 
 podlatch_core:
     resource: "@PublisherCoreBundle/Resources/config/routing.yml"

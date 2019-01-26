@@ -113,7 +113,7 @@ class PodcastShow
     private $updatedAt;
 
     /**
-     * Many Groups have Many Users.
+     * Many Users have Many Podcasts.
      * @ORM\ManyToMany(targetEntity="Podlatch\PublisherBackendBundle\Entity\User", mappedBy="podcasts")
      */
     private $users;
@@ -419,7 +419,10 @@ class PodcastShow
     public function removeUser(User $users)
     {
         $this->users->removeElement($users);
-        $users->removePodcast($this);
+        if ($users->getPodcasts()->contains($this)) {
+            $users->removePodcast($this);
+        }
+
 
     }
 

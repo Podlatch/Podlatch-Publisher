@@ -30,15 +30,24 @@ class User  extends BaseUser
     protected $id;
 
     /**
-     * Many Users have Many Podcasts.
-     * @ORM\ManyToMany(targetEntity="\Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="users")
-     * @ORM\JoinTable(name="users_podcasts")
+     * @var \Doctrine\Common\Collections\Collection|PodcastShow[]
+     *
+     * @ORM\ManyToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="users")
+     * @ORM\JoinTable(
+     *  name="users_podcasts",
+     *  joinColumns={
+     *      @ORM\JoinColumn(name="user_id", referencedColumnName="id")
+     *  },
+     *  inverseJoinColumns={
+     *      @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id")
+     *  }
+     * )
      */
     private $podcasts;
 
     public function __construct() {
-        parent::__construct();
         $this->podcasts = new \Doctrine\Common\Collections\ArrayCollection();
+        parent::__construct();
     }
 
 
@@ -75,7 +84,10 @@ class User  extends BaseUser
     public function removePodcast(PodcastShow $podcasts)
     {
         $this->podcasts->removeElement($podcasts);
-        $podcasts->removeUser( $this);
+        if ($podcasts->getUsers()->contains($this)){
+            $podcasts->removeUser($this);
+        }
+
 
     }
 
