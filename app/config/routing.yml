@@ -1,3 +1,17 @@
+
+
+app:
+    resource: '@AppBundle/Controller/'
+    type: annotation
+
+easy_admin_bundle:
+    resource: "@PublisherBackendBundle/Controller/AdminController.php"
+    type:     annotation
+    prefix:   /admin
+
+fos_user:
+    resource: "@FOSUserBundle/Resources/config/routing/all.xml"
+
 publisher_frontend:
     resource: "@PublisherFrontendBundle/Resources/config/routing.yml"
     prefix:   /
@@ -8,15 +22,3 @@ podlatch_core:
 publisher_backend:
     resource: "@PublisherBackendBundle/Resources/config/routing.yml"
     prefix:   /backend
-
-app:
-    resource: '@AppBundle/Controller/'
-    type: annotation
-
-easy_admin_bundle:
-    resource: "@EasyAdminExtensionBundle/Controller/AdminController.php"
-    type:     annotation
-    prefix:   /admin
-
-fos_user:
-    resource: "@FOSUserBundle/Resources/config/routing/all.xml"

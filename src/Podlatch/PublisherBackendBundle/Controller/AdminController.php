@@ -19,7 +19,9 @@
  */
 
 namespace Podlatch\PublisherBackendBundle\Controller;
-use JavierEguiluz\Bundle\EasyAdminBundle\Controller\AdminController as BaseAdminController;
+use AlterPHP\EasyAdminExtensionBundle\Controller\AdminController as BaseAdminController;
+use Doctrine\ORM\QueryBuilder;
+use Podlatch\PublisherCoreBundle\Entity\PodcastShow;
 
 
 class AdminController extends BaseAdminController
@@ -37,6 +39,41 @@ class AdminController extends BaseAdminController
     public function preUpdateUserEntity($user)
     {
         $this->get('fos_user.user_manager')->updateUser($user, false);
+    }
+
+    protected function createPodcastListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter)
+    {
+
+        $loggedInUser =  $this->get('security.token_storage')->getToken()->getUser();
+        /**
+         * show only entities in list that are assigned to the logged in user
+         * @var $queryBuilder QueryBuilder
+         */
+        $queryBuilder = parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
+        $queryBuilder
+            -> join('entity.users', 'user')
+            ->andWhere('user.id = ?1')
+            ->setParameter(1, $loggedInUser->getId());
+
+        return $queryBuilder;
+    }
+
+    protected function createPodcastEpisodeListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter)
+    {
+
+        $loggedInUser =  $this->get('security.token_storage')->getToken()->getUser();
+        /**
+         * show only entities in list that are assigned to the logged in user
+         * @var $queryBuilder QueryBuilder
+         */
+        $queryBuilder = parent::createListQueryBuilder($entityClass, $sortDirection, $sortField, $dqlFilter);
+        $queryBuilder
+            -> join('entity.podcastShow', 'podcast')
+            -> join('podcast.users', 'user')
+            ->andWhere('user.id = ?1')
+            ->setParameter(1, $loggedInUser->getId());
+
+        return $queryBuilder;
     }
 
 }
