@@ -5,12 +5,23 @@
     <section class="hero is-primary">
         <div class="hero-body">
             <div class="container">
-                <h1 class="title">
-                    {{ podcast.getTitle() }}
-                </h1>
-                <h2 class="subtitle">
-                    {{ podcast.getAuthor() }}
-                </h2>
+
+                <div class="columns">
+                    <div class="column is-four-fifths">
+                        <h1 class="title">
+                            {{ podcast.getTitle() }}
+                        </h1>
+                        <h2 class="subtitle">
+                            {{ podcast.getAuthor() }}
+                        </h2>
+                    </div>
+                    <div class="column">
+                        <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
+
+                    </div>
+
+
+                </div> <!-- end narrow column-->
             </div>
         </div>
     </section>
@@ -20,12 +31,7 @@
         <div class="columns">
             <div class="column is-one-quarter ">
                 <div id="podlatch-player"></div>
-                <div id="podlatch-subscribe-botton-wrapper text-center">
-                    <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
-                </div>
-                <div class="rss">
-                    <a class="button" href="{{ path('publisher_frontend_itunes_feed', {'podcastId': podcast.getId()}) }}">RSS</a>
-                </div>
+
             </div> <!-- end narrow column-->
             <div class="column is-two-quarter level" id="scrollable-container">
 
@@ -108,12 +114,12 @@
             "title": "{{ podcast.getTitle() }}",
             "subtitle": "TODO",
             "description": "{{ podcast.getDescription() }}",
-            "cover": "{{ vich_uploader_asset(podcast, 'imageFile') |url_encode}}",
+            "cover": "{{ vich_uploader_asset(podcast, 'imageFile')}}",
             "feeds": [
                 {
                     "type": "audio",
                     "format": "mp3",
-                    "url": "{{ path('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}",
+                    "url": "{{ url('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}",
                     "variant": "high",
                     "directory-url-itunes": "TODO"
 
