@@ -15,7 +15,7 @@
   "author": "Benjamin Issleib",
   "license": "GPL-3.0",
   "dependencies": {
-    "@podlove/podlove-web-player": "^4.2.3",
+    "@podlove/podlove-web-player": "^4.2.4",
     "bulma": "^0.7.2",
     "bulma-timeline": "^3.0.0",
     "jquery": "^3.3.1",

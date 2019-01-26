@@ -44,7 +44,6 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
-                    - { property: 'users', type_options: { by_reference: false } }
                     - title
                     - author
                     - ownerName
@@ -129,6 +128,7 @@ easy_admin:
                     - { property: 'slug', type: 'text',type_options: { disabled: true } }
                     - { property: 'description', type: 'textarea' }
                     - { property: 'imageFile', type: 'vich_image' }
+                    - { property: 'users', type_options: { by_reference: false } }
 
         PodcastEpisode:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
