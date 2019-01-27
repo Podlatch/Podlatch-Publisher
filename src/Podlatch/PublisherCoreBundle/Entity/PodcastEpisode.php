@@ -42,9 +42,9 @@ class PodcastEpisode
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="string", length=255, nullable=true)
+     * @ORM\Column(name="subtitle", type="string", length=255, nullable=true)
      */
-    private $description;
+    private $subtitle;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -128,29 +128,7 @@ class PodcastEpisode
         return $this->title;
     }
 
-    /**
-     * Set description
-     *
-     * @param string $description
-     *
-     * @return PodcastEpisode
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
 
-        return $this;
-    }
-
-    /**
-     * Get description
-     *
-     * @return string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
 
 
     /**
@@ -366,7 +344,23 @@ class PodcastEpisode
     }
 
 
+    /**
+     * @return mixed
+     */
+    public function getSubtitle()
+    {
 
+        return $this->subtitle;
+    }
+
+    /**
+     * @param mixed $subtitle
+     */
+    public function setSubtitle($subtitle)
+    {
+
+        $this->subtitle = $subtitle;
+    }
 
 
 

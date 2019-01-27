@@ -50,7 +50,7 @@
                         <div class="timeline-item">
                             <a class="timeline-marker is-image is-32x32" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
                                     title: '{{ podcastEpisode.getTitle() }}',
-                                    subtitle: '{{ podcastEpisode.getDescription() }}',
+                                    subtitle: '{{ podcastEpisode.getSubtitle() }}',
                                     summary: '{{ podcastEpisode.getSummary() }}',
                                     publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
                                     poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile') |url_encode}}',
@@ -71,7 +71,7 @@
                                 {% set vars = {'podcastEpisode': podcastEpisode} %}
                                 <p class="heading">{{ podcastEpisode.getTitle() }}</p>
                                 <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</p>
-                                <p>{{ podcastEpisode.getDescription() }}</p>
+                                <p>{{ podcastEpisode.getSummary() }}</p>
                             </div>
                         </div>
                     {% endfor %}
@@ -93,8 +93,8 @@
     <script>
         podlovePlayer('#podlatch-player', {
             title: '{{ latestEpisode.getTitle() }}',
-            subtitle: 'TODO',
-            summary: '{{ latestEpisode.getDescription() }}',
+            subtitle: '{{ latestEpisode.getSubtitle() }}',
+            summary: '{{ latestEpisode.getSummary() }}',
             publicationDate: '{{ latestEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
             poster: '{{ vich_uploader_asset(latestEpisode, 'imageFile') |url_encode}}',
             duration: '{{ latestEpisode.getDuration(audioBasePath) }}',
@@ -115,7 +115,7 @@
     <script>
         window.podcastData = {
             "title": "{{ podcast.getTitle() }}",
-            "subtitle": "TODO",
+            "subtitle": "{{ podcast.getSubtitle() }}",
             "description": "{{ podcast.getDescription() }}",
             "cover": "{{ vich_uploader_asset(podcast, 'imageFile')}}",
             "feeds": [

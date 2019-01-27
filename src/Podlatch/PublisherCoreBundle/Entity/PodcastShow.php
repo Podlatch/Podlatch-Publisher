@@ -52,6 +52,11 @@ class PodcastShow
     /**
      * @ORM\Column(type="string")
      */
+
+    private $subtitle;
+    /**
+     * @ORM\Column(type="string")
+     */
     private $description;
 
     /**
@@ -425,6 +430,26 @@ class PodcastShow
 
 
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSubtitle()
+    {
+
+        return $this->subtitle;
+    }
+
+    /**
+     * @param mixed $subtitle
+     */
+    public function setSubtitle($subtitle)
+    {
+
+        $this->subtitle = $subtitle;
+    }
+
+
 
 
 

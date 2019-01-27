@@ -45,6 +45,7 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Basic information' }
                     - title
+                    - subtitle
                     - author
                     - ownerName
                     - ownerMail
@@ -136,15 +137,17 @@ easy_admin:
                 fields:
                     - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
                     - title
+                    - subtitle
                     - podcastShow
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow' } }
                     - title
+                    - subtitle
                     - summary
                     - releasedAt
-                    - { property: 'description', type: 'textarea' }
+                    - { property: 'summary', type: 'textarea' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Media' }
                     - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
