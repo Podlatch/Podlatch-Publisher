@@ -7,7 +7,8 @@
             <div class="container">
 
                 <div class="columns">
-                    <div class="column is-four-fifths">
+                        <div class="column is-four-fifths has-text-centered-touch">
+
                         <h1 class="title">
                             {{ podcast.getTitle() }}
                         </h1>
@@ -15,8 +16,8 @@
                             {{ podcast.getAuthor() }}
                         </h2>
                     </div>
-                    <div class="column">
-                        <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" data-size="big" data-json-data="podcastData"></script>
+                    <div class="column has-text-right-desktop has-text-centered-touch">
+                        <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-size="small" data-style="filled" data-json-data="podcastData"></script>
 
                     </div>
 
@@ -27,13 +28,13 @@
     </section>
 
     <main class="section">
-
+        <div class="container">
         <div class="columns">
             <div class="column is-one-quarter ">
                 <div id="podlatch-player"></div>
 
             </div> <!-- end narrow column-->
-            <div class="column is-two-quarter level" id="scrollable-container">
+            <div class="column is-two-quarter level scrollbox" id="scrollable-container">
 
                 <h2 class="subtitle is-2 level-item">About</h2>
                 <p class="level-item">
@@ -67,6 +68,7 @@
                                 <i class="fa fa-plus"></i>
                             </a>
                             <div class="timeline-content">
+                                {% set vars = {'podcastEpisode': podcastEpisode} %}
                                 <p class="heading">{{ podcastEpisode.getTitle() }}</p>
                                 <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</p>
                                 <p>{{ podcastEpisode.getDescription() }}</p>
@@ -80,6 +82,7 @@
             </div><!-- end left column-->
         </div> <!-- end columns-->
         </div> <!-- end columns-->
+        </div> <!-- end container-->
 
     </main>
 

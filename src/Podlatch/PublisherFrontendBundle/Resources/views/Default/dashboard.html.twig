@@ -18,6 +18,15 @@
                 {% for podcast in podcasts %}
                 <div class="column is-4">
                     <div class="card">
+
+                        {% if podcast.getImage() %}
+                        <div class="card-image">
+                            <figure class="image">
+                                <img src="{{ vich_uploader_asset(podcast, 'imageFile') |url_encode}}">
+                            </figure>
+                        </div>
+                        {% endif %}
+
                         <div class="card-content">
                             <p class="title">
                                 {{ podcast.getTitle() }}

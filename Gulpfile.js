@@ -13,6 +13,7 @@ gulp.task('sass', function () {
     ])
         .pipe(sass({sourceComments: 'map'}).on('error', sass.logError))
         .pipe(cssnano())
+        .pipe(concat('all.js'))
         .pipe(rename('master.css'))
         .pipe(gulp.dest('./web/css/'));
 });

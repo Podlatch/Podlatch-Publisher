@@ -346,10 +346,17 @@ class PodcastEpisode
 
     public function getDuration($basePath)
     {
-        $audioPath = $basePath . $this->getAudio();
-        $getID3 = new \getID3();
-        $fileInfo = $getID3->analyze($audioPath);
-        return $fileInfo['playtime_string'];
+        $returnValue = '';
+
+        if($this->getAudio()){
+            $audioPath = $basePath . $this->getAudio();
+            $getID3 = new \getID3();
+            $fileInfo = $getID3->analyze($audioPath);
+            $returnValue = $fileInfo['playtime_string'];
+        }
+        return $returnValue;
+
+
     }
 
     public function getFileSize($basePath)
