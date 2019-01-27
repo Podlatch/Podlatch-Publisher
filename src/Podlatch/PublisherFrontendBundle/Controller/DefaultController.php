@@ -83,7 +83,9 @@ class DefaultController extends Controller
         $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher - https://podlat.ch'));
 
         $channel->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
-        $channel->appendChild($xml->createElement('itunes:summary', $podCast -> getDescription()));
+        if($podCast -> getDescription()){
+            $channel->appendChild($xml->createElement('itunes:summary', $podCast -> getDescription()));
+        }
 
         $categories = explode(':',$podCast->getCategory());
         foreach ($categories as $category){
@@ -143,7 +145,10 @@ class DefaultController extends Controller
             $item->appendChild($xml->createElement('itunes:subtitle', $episode -> getSubtitle()));
             $item->appendChild($xml->createElement('link', $audioUrl));
             $item->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
-            $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
+            if($episode -> getSummary()){
+                $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
+
+            }
             $item->appendChild($xml->createElement('guid', $episode->getId()));
             $item->appendChild($xml->createElement('pubDate',
                 date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
