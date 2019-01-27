@@ -73,6 +73,7 @@ class DefaultController extends Controller
         $channel = $root->appendChild($xml->createElement('channel'));
 
         $channel->appendChild($xml->createElement('title', $podCast -> getTitle()));
+        $channel->appendChild($xml->createElement('itunes:subtitle', $podCast -> getSubtitle()));
         $channel->appendChild($xml->createElement('description', $podCast -> getDescription()));
 
         /**
@@ -139,6 +140,7 @@ class DefaultController extends Controller
 
             $item = $channel->appendChild($xml->createElement('item'));
             $item->appendChild($xml->createElement('title', $episode -> getTitle()));
+            $item->appendChild($xml->createElement('itunes:subtitle', $episode -> getSubtitle()));
             $item->appendChild($xml->createElement('link', $audioUrl));
             $item->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
             $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
