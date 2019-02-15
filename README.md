@@ -1,7 +1,8 @@
 # Podlatch Publisher
 
+CMS for Podcasts
 
-![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+![Podlatch Screenshots](https://raw.githubusercontent.com/Podlatch/Podlatch-Publisher/master/docs/podlatch.png)
 
 
 ##Install develop
