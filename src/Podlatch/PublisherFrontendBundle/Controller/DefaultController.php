@@ -77,6 +77,7 @@ class DefaultController extends Controller
         $channel->appendChild($xml->createElement('title', $podCast -> getTitle()));
         $channel->appendChild($xml->createElement('itunes:subtitle', $podCast -> getSubtitle()));
         $channel->appendChild($xml->createElement('description', $podCast -> getDescription()));
+        $channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
         /**
          * @TODO implement url
@@ -152,7 +153,7 @@ class DefaultController extends Controller
             }
             $item->appendChild($xml->createElement('guid', $episode->getId()));
             $item->appendChild($xml->createElement('pubDate',
-                date('D, d M Y H:i:s O', $episode ->getUpdatedAt() ->getTimestamp())
+                date('D, d M Y H:i:s O', $episode ->getReleasedAt() ->getTimestamp())
             ));
 
             if($episode -> getImage()){

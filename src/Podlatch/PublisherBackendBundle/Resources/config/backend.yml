@@ -77,6 +77,15 @@ easy_admin:
                         }
                       }}
                     - {
+                        property: language,
+                        type: choice,
+                        type_options: {
+                            choices: {
+                                'de_DE':'de_DE',
+                                'en_US':'en_US',
+                            }
+                        }}
+                    - {
                         property: category,
                         type: choice,
                         type_options: {

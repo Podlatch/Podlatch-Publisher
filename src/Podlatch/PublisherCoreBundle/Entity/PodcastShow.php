@@ -96,6 +96,11 @@ class PodcastShow
     /**
      * @ORM\Column(type="string")
      */
+    private $language;
+
+    /**
+     * @ORM\Column(type="string",nullable=true)
+     */
     private $itunesUrl;
 
     /**
@@ -471,6 +476,26 @@ class PodcastShow
 
         $this->itunesUrl = $itunesUrl;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLanguage()
+    {
+
+        return $this->language;
+    }
+
+    /**
+     * @param mixed $language
+     */
+    public function setLanguage($language)
+    {
+
+        $this->language = $language;
+    }
+
+
 
 
 
