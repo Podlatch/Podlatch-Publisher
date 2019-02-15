@@ -68,7 +68,9 @@ class DefaultController extends Controller
 
         $xml = new \DOMDocument();
         $root = $xml->appendChild($xml->createElement('rss'));
+
         $root-> setAttribute('xmlns:itunes', 'http://www.itunes.com/dtds/podcast-1.0.dtd');
+        $root->setAttribute('version',"2.0");
 
         $channel = $root->appendChild($xml->createElement('channel'));
 
@@ -182,7 +184,7 @@ class DefaultController extends Controller
         }
         $xml->formatOutput = true;
         $response = new Response($xml -> saveXML());
-        $response->headers->set('Content-Type', 'xml');
+        $response->headers->set('Content-Type', 'text/xml');
         return $response;
     }
 

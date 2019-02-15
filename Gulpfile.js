@@ -18,6 +18,13 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./web/css/'));
 });
 
+gulp.task('icons', function () {
+    gulp.src(
+        ['./src/Podlatch/PublisherFrontendBundle/Resources/public/icons/openionic/*.svg'])
+        .pipe(gulp.dest('./web/fonts/svg/'));
+
+});
+
 gulp.task('backendsass', function () {
     gulp.src([
         './src/Podlatch/PublisherBackendBundle/Resources/public/sass/*.scss',
