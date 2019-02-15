@@ -1,5 +1,9 @@
 # Podlatch Publisher
 
+
+![alt text](https://raw.githubusercontent.com/username/projectname/branch/path/to/img.png)
+
+
 ##Install develop
 
 Checkout this repo
