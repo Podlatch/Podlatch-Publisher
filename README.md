@@ -5,7 +5,7 @@ CMS for Podcasts
 ![Podlatch Screenshots](https://raw.githubusercontent.com/Podlatch/Podlatch-Publisher/master/docs/podlatch.png)
 
 
-##Install develop
+## Install develop
 
 Checkout this repo
 
@@ -35,7 +35,7 @@ add a virtual host with the `web` directory as document root!
 
 
 
-##Install from zip
+## Install from zip
 
 unzip the package and add it to your webspace
 ```
