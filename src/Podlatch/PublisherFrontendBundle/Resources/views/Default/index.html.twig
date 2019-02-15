@@ -124,7 +124,7 @@
                     "format": "mp3",
                     "url": "{{ url('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}",
                     "variant": "high",
-                    "directory-url-itunes": "TODO"
+                    "directory-url-itunes": "{{podcast.getItunesUrl()}}"
 
                 }
             ]

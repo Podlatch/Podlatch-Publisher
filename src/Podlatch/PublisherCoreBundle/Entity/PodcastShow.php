@@ -94,6 +94,11 @@ class PodcastShow
     private $category;
 
     /**
+     * @ORM\Column(type="string")
+     */
+    private $itunesUrl;
+
+    /**
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
      * @ORM\OrderBy({"releasedAt" = "DESC"})
      */
@@ -448,6 +453,26 @@ class PodcastShow
 
         $this->subtitle = $subtitle;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getItunesUrl()
+    {
+
+        return $this->itunesUrl;
+    }
+
+    /**
+     * @param mixed $itunesUrl
+     */
+    public function setItunesUrl($itunesUrl)
+    {
+
+        $this->itunesUrl = $itunesUrl;
+    }
+
+
 
 
 

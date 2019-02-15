@@ -4,16 +4,30 @@ vich_uploader:
         audio_assets:
             uri_prefix:         '%app.path.audio_assets%'
             upload_destination: '%kernel.root_dir%/../web/uploads/audio/'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'id'} # supposing that the object contains a "slug" attribute or a "getSlug" method
         episode_images:
             uri_prefix:         '%app.path.episode_images%'
             upload_destination: '%kernel.root_dir%/../web/uploads/images/podcasts/'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'id'} # supposing that the object contains a "slug" attribute or a "getSlug" method
         podcast_images:
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'slug'} # supposing that the object contains a "slug" attribute or a "getSlug" method
             uri_prefix:         '%app.path.podcast_images%'
             upload_destination: '%kernel.root_dir%/../web/uploads/images/episodes'
 
 easy_admin:
     site_name: Podlatch Publisher
     design:
+        assets:
+            css:
+                - 'css/backend.min.css'
+            js:
+                - 'js/backend.min.js'
         menu:
             - label: 'Podcast'
               icon: 'podcast'
@@ -128,6 +142,7 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-6', label: 'Meta' }
                     - { property: 'slug', type: 'text',type_options: { disabled: true } }
                     - { property: 'description', type: 'textarea' }
+                    - { property: 'itunesUrl', type: 'text' }
                     - { property: 'imageFile', type: 'vich_image' }
                     - { property: 'users', type_options: { by_reference: false } }
 

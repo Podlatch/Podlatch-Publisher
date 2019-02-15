@@ -13,9 +13,32 @@ gulp.task('sass', function () {
     ])
         .pipe(sass({sourceComments: 'map'}).on('error', sass.logError))
         .pipe(cssnano())
-        .pipe(concat('all.js'))
+        .pipe(concat('all.css'))
         .pipe(rename('master.css'))
         .pipe(gulp.dest('./web/css/'));
+});
+
+gulp.task('backendsass', function () {
+    gulp.src([
+        './src/Podlatch/PublisherBackendBundle/Resources/public/sass/*.scss',
+    ])
+        .pipe(sass({sourceComments: 'map'}).on('error', sass.logError))
+        .pipe(cssnano())
+        .pipe(concat('all.css'))
+        .pipe(rename('backend.min.css'))
+        .pipe(gulp.dest('./web/css/'));
+});
+
+gulp.task('backendjs', function() {
+    gulp.src([
+        './src/Podlatch/PublisherBackendBundle/Resources/public/js/tingle.min.js',
+        './src/Podlatch/PublisherBackendBundle/Resources/public/js/backend.js',
+    ])
+        .pipe(concat('app.js'))
+        .pipe(gulp.dest('./web/js'))
+        .pipe(rename('backend.min.js'))
+        .pipe(uglify())
+        .pipe(gulp.dest('./web/js'));
 });
 
 gulp.task('js', function() {

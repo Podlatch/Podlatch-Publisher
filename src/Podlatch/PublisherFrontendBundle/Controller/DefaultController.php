@@ -101,7 +101,7 @@ class DefaultController extends Controller
                 $this -> getParameter('app.path.podcast_images'),
                 $podCast -> getImage()
             );
-            $pictureUrl = urlencode($pictureUrl);
+            $pictureUrl = $pictureUrl;
 
             $element = $xml->createElement('itunes:image', '');
             $element->setAttribute('href',$pictureUrl);
@@ -138,7 +138,6 @@ class DefaultController extends Controller
                 $this -> getParameter('app.path.audio_assets'),
                 $episode -> getAudio()
             );
-            $audioUrl = urlencode($audioUrl);
 
             $item = $channel->appendChild($xml->createElement('item'));
             $item->appendChild($xml->createElement('title', $episode -> getTitle()));
@@ -161,7 +160,7 @@ class DefaultController extends Controller
                     $this -> getParameter('app.path.episode_images'),
                     $episode -> getImage()
                 );
-                $pictureUrl = urlencode($pictureUrl);
+                $pictureUrl = $pictureUrl;
 
                 $element = $xml->createElement('itunes:image', '');
                 $element->setAttribute('href',$pictureUrl);

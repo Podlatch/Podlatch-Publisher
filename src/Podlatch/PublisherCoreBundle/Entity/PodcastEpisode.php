@@ -330,7 +330,9 @@ class PodcastEpisode
             $audioPath = $basePath . $this->getAudio();
             $getID3 = new \getID3();
             $fileInfo = $getID3->analyze($audioPath);
-            $returnValue = $fileInfo['playtime_string'];
+            if (array_key_exists('playtime_string',$fileInfo)) {
+                $returnValue = $fileInfo['playtime_string'];
+            }
         }
         return $returnValue;
 
