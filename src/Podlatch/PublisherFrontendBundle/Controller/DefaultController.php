@@ -84,11 +84,14 @@ class DefaultController extends Controller
          */
         //$channel->appendChild($xml->createElement('link', $podCast -> getUrl()));
         $channel->appendChild($xml->createElement('generator', 'Podlatch Podcast Publisher - https://podlat.ch'));
+        $channel->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
 
         $channel->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
         if($podCast -> getDescription()){
             $channel->appendChild($xml->createElement('itunes:summary', $podCast -> getDescription()));
         }
+
+        $channel->appendChild($xml->createElement('itunes:type', $podCast -> getShowType()?:'episodic'));
 
         $categories = explode(':',$podCast->getCategory());
         foreach ($categories as $category){
@@ -142,9 +145,19 @@ class DefaultController extends Controller
                 $episode -> getAudio()
             );
 
+
+
             $item = $channel->appendChild($xml->createElement('item'));
+            $item->appendChild($xml->createElement('itunes:episodeType', $episode -> getEpisodeType()?:'full'));
+            $item->appendChild($xml->createElement('itunes:title', $episode -> getTitle()));
+
             $item->appendChild($xml->createElement('title', $episode -> getTitle()));
             $item->appendChild($xml->createElement('itunes:subtitle', $episode -> getSubtitle()));
+
+            $item->appendChild($xml->createElement('itunes:episode', $episode -> getTitle()));
+            $item->appendChild($xml->createElement('itunes:season', $episode -> getEpisodeSeason()));
+
+
             $item->appendChild($xml->createElement('link', $audioUrl));
             $item->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
             if($episode -> getSummary()){

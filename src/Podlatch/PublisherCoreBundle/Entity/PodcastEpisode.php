@@ -35,6 +35,27 @@ class PodcastEpisode
     /**
      * @var string
      *
+     * @ORM\Column(name="episodeNumber", type="integer",)
+     */
+    private $episodeNumber;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="episodeSeason", type="integer", options={"default" : 1})
+     */
+    private $episodeSeason;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="episodeType", type="string", length=255)
+     */
+    private $episodeType;
+
+    /**
+     * @var string
+     *
      * @ORM\Column(name="title", type="string", length=255,)
      */
     private $title;
@@ -363,6 +384,64 @@ class PodcastEpisode
 
         $this->subtitle = $subtitle;
     }
+
+    /**
+     * @return string
+     */
+    public function getEpisodeNumber()
+    {
+
+        return $this->episodeNumber;
+    }
+
+    /**
+     * @param string $episodeNumber
+     */
+    public function setEpisodeNumber($episodeNumber)
+    {
+
+        $this->episodeNumber = $episodeNumber;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEpisodeType()
+    {
+
+        return $this->episodeType;
+    }
+
+    /**
+     * @param string $episodeType
+     */
+    public function setEpisodeType($episodeType)
+    {
+
+        $this->episodeType = $episodeType;
+    }
+
+    /**
+     * @return string
+     */
+    public function getEpisodeSeason()
+    {
+
+        return $this->episodeSeason;
+    }
+
+    /**
+     * @param string $episodeSeason
+     */
+    public function setEpisodeSeason($episodeSeason)
+    {
+
+        $this->episodeSeason = $episodeSeason;
+    }
+
+
+
+
 
 
 

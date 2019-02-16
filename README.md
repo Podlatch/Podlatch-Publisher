@@ -61,3 +61,12 @@ add a virtual host with the `web` directory as document root!
 * go to https://YOUR.DOMAIN/admin/
 
 
+## Update
+
+unzip the new files
+
+migrate the database and clear caches
+```
+./bin/console doctrine:schema:update --force
+./bin/console cache:clear --env=prod
+```

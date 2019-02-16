@@ -86,6 +86,15 @@ easy_admin:
                             }
                         }}
                     - {
+                        property: showType,
+                        type: choice,
+                        type_options: {
+                            choices: {
+                                'episodic':'episodic',
+                                'serial':'serial',
+                            }
+                        }}
+                    - {
                         property: category,
                         type: choice,
                         type_options: {
@@ -160,6 +169,8 @@ easy_admin:
             list:
                 fields:
                     - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
+                    - episodeSeason
+                    - episodeNumber
                     - title
                     - subtitle
                     - podcastShow
@@ -167,8 +178,20 @@ easy_admin:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow', required: true  } }
+                    - episodeSeason
+                    - episodeNumber
                     - title
                     - subtitle
+                    - {
+                        property: episodeType,
+                        type: choice,
+                        type_options: {
+                            choices: {
+                                'full':'full',
+                                'trailer':'trailer',
+                                'bonus':'bonus'
+                            }
+                        }}
                     - summary
                     - releasedAt
                     - { property: 'summary', type: 'textarea' }

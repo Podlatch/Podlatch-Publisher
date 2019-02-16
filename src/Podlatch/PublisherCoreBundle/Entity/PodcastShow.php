@@ -84,6 +84,13 @@ class PodcastShow
     private $copyright;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(name="showType", type="string", length=255)
+     */
+    private $showType;
+
+    /**
      * @ORM\Column(type="string",nullable=true)
      */
     private $slug;
@@ -494,6 +501,26 @@ class PodcastShow
 
         $this->language = $language;
     }
+
+    /**
+     * @return string
+     */
+    public function getShowType()
+    {
+
+        return $this->showType;
+    }
+
+    /**
+     * @param string $showType
+     */
+    public function setShowType($showType)
+    {
+
+        $this->showType = $showType;
+    }
+
+
 
 
 
