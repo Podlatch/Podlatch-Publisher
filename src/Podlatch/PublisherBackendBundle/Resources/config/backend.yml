@@ -168,12 +168,12 @@ easy_admin:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
             list:
                 fields:
-                    - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
-                    - episodeSeason
-                    - episodeNumber
+                    - { property: 'podcastShow', label: 'Podcast'  }
+                    - { property: 'episodeSeason', label: 'Season'  }
+                    - { property: 'episodeNumber', label: 'Episode'  }
                     - title
-                    - subtitle
-                    - podcastShow
+                    - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
+
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }

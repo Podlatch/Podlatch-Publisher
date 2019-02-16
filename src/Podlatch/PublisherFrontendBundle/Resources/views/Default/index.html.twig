@@ -1,5 +1,9 @@
 {% extends "::base.html.twig" %}
 
+{% block meta %}
+    <link type="application/rss+xml" rel="alternate" title="{{ podcast.getTitle() }}" href="{{ url('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}"/>
+{% endblock %}
+
 {% block content %}
 
     <section class="hero is-primary">
