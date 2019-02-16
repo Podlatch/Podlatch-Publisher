@@ -8,7 +8,7 @@ CMS for Podcasts
 
 ## Install from zip
 
-* get [Latest Version](https://github.com/Podlatch/Podlatch-Publisher/releases/download/0.5/podlatch-0-5.zip)
+* get [Latest Version](https://github.com/Podlatch/Podlatch-Publisher/releases/download/0.5.1/podlatch-0-5-1.zip)
 * unzip the package and add it to your webspace
 ```
   unzip Podlatch-Publisher_beta.zip 
@@ -30,6 +30,8 @@ CMS for Podcasts
 php ./bin/console doctrine:schema:create
 php ./bin/console fos:user:create adminuser --super-admin
  ```
+ 
+ * go to https://YOUR.DOMAIN/admin/ (trailing slash is important)
 
 ## Install develop
 
@@ -58,7 +60,7 @@ php ./bin/console fos:user:create adminuser --super-admin
 add a virtual host with the `web` directory as document root!
 
 
-* go to https://YOUR.DOMAIN/admin/
+ * go to https://YOUR.DOMAIN/admin/ (trailing slash is important)
 
 
 ## Update
