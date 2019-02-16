@@ -60,7 +60,7 @@
                                     poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile')}}',
                                     duration: '{{ podcastEpisode.getDuration(audioBasePath) }}',
                                     audio: [{
-                                    url: '{{ vich_uploader_asset(podcastEpisode, 'audioFile')}}',
+                                    url: '{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}',
                                     mimeType: 'audio/mp3',
                                     size: {{ podcastEpisode.getFileSize(audioBasePath) }},
                                     title: 'Audio MP3'
@@ -69,10 +69,8 @@
                                     main: '#00D7B5'
                                     }
                                     }).then(function (store) {
-                                    store.dispatch({
-                                    type: 'UI_PLAY',
-                                    payload: {}
-                                    })})
+                                    store.dispatch(store.actions.play())
+                                    })
                                     ;">
                                 <img class="timeline-play-icon" src="{{ asset('fonts/svg/media-play.svg') }}" alt="icon name">
 
@@ -110,7 +108,7 @@
             poster: '{{ vich_uploader_asset(latestEpisode, 'imageFile')}}',
             duration: '{{ latestEpisode.getDuration(audioBasePath) }}',
             audio: [{
-                url: '{{ vich_uploader_asset(latestEpisode, 'audioFile')}}',
+                url: '{{ app.request.getUriForPath(vich_uploader_asset(latestEpisode, 'audioFile'))}}',
                 mimeType: 'audio/mp3',
                 size: {{ latestEpisode.getFileSize(audioBasePath) }},
                 title: 'Audio MP3'
@@ -118,8 +116,6 @@
             theme: {
                 main: '#00D7B5'
             }
-        }).then(function (store) {
-            store.dispatch(store.actions.play())
         });
     </script>
 
@@ -128,7 +124,7 @@
             "title": "{{ podcast.getTitle() }}",
             "subtitle": "{{ podcast.getSubtitle() }}",
             "description": "{{ podcast.getDescription() }}",
-            "cover": "{{ vich_uploader_asset(podcast, 'imageFile')}}",
+            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(podcast, 'imageFile'))}}",
             "feeds": [
                 {
                     "type": "audio",
