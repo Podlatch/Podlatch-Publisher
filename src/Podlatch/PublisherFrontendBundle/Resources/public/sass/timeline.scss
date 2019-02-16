@@ -10,11 +10,11 @@
   word-wrap: break-word;
 }
 
+.content{
+  word-break:break-all;
+}
+
 .timeline-marker{
   z-index: 9999;
 }
 
-.timeline-content{
-  max-width: 20rem;
-
-}
