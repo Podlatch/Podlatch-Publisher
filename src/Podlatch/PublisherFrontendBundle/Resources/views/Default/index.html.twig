@@ -69,8 +69,10 @@
                                     main: '#00D7B5'
                                     }
                                     }).then(function (store) {
-                                    store.dispatch(store.actions.play())
-                                    })
+                                    store.dispatch({
+                                    type: 'UI_PLAY',
+                                    payload: {}
+                                    })})
                                     ;">
                                 <img class="timeline-play-icon" src="{{ asset('fonts/svg/media-play.svg') }}" alt="icon name">
 
