@@ -5,3 +5,16 @@
   left: 55%;
   transform: translate(-50%, -50%);
 }
+
+.card{
+  word-wrap: break-word;
+}
+
+.timeline-marker{
+  z-index: 9999;
+}
+
+.timeline-content{
+  max-width: 20rem;
+
+}

@@ -11,7 +11,7 @@
             <div class="container">
 
                 <div class="columns">
-                        <div class="column is-four-fifths has-text-centered-touch">
+                    <div class="column is-four-fifths has-text-centered-touch">
 
                         <h1 class="title">
                             {{ podcast.getTitle() }}
@@ -32,62 +32,62 @@
     </section>
 
     <main class="section">
+        <div class="container">
         <div class="columns">
-            <div class="column is-one-quarter ">
-                <div id="podlatch-player"></div>
 
-            </div> <!-- end narrow column-->
-            <div class="column is-two-quarter level scrollbox" id="scrollable-container">
+                <div class="column is-one-quarter ">
+                    <div id="podlatch-player"></div>
 
-                <h2 class="subtitle is-2 level-item">About</h2>
-                <p class="level-item">
-                    {{ podcast.getDescription() }}
-                </p>
+                </div> <!-- end narrow column-->
+                <div class="column is-two-quarter level scrollbox" id="scrollable-container">
+                    <h2 class="subtitle is-2 level-item">About</h2>
+                    <p class="level-item">
+                        {{ podcast.getDescription() }}
+                    </p>
 
-                <h2 class="subtitle is-2 level-item">Episodes</h2>
-                <div class="timeline is-centered">
-                    <header class="timeline-header">
-                        <span class="tag is-medium is-primary">Start</span>
-                    </header>
-                    {% for podcastEpisode in podcast.getEpisodes() %}
-                        <div class="timeline-item">
-                            <div class="timeline-marker is-image is-32x32" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
-                                    title: '{{ podcastEpisode.getTitle() }}',
-                                    subtitle: '{{ podcastEpisode.getSubtitle() }}',
-                                    summary: '{{ podcastEpisode.getSummary() }}',
-                                    publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
-                                    poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile')}}',
-                                    duration: '{{ podcastEpisode.getDuration(audioBasePath) }}',
-                                    audio: [{
-                                    url: '{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}',
-                                    mimeType: 'audio/mp3',
-                                    size: {{ podcastEpisode.getFileSize(audioBasePath) }},
-                                    title: 'Audio MP3'
-                                    }],
-                                    theme: {
-                                    main: '#00D7B5'
-                                    }
-                                    }).then(function (store) {
-                                    store.dispatch({
-                                    type: 'UI_PLAY',
-                                    payload: {}
-                                    })})
-                                    ;">
-                                <img class="timeline-play-icon" src="{{ asset('fonts/svg/media-play.svg') }}" alt="icon name">
+                    <h2 class="subtitle is-2 level-item">Episodes</h2>
+                    <div class="timeline is-centered">
+                        <header class="timeline-header">
+                            <span class="tag is-medium is-primary">Start</span>
+                        </header>
+                        {% for podcastEpisode in podcast.getEpisodes() %}
+                            <div class="timeline-item">
+                                <div class="timeline-marker is-image is-32x32" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
+                                        title: '{{ podcastEpisode.getTitle() }}',
+                                        subtitle: '{{ podcastEpisode.getSubtitle() }}',
+                                        summary: '{{ podcastEpisode.getSummary() }}',
+                                        publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
+                                        poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile')}}',
+                                        duration: '{{ podcastEpisode.getDuration(audioBasePath) }}',
+                                        audio: [{
+                                        url: '{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}',
+                                        mimeType: 'audio/mp3',
+                                        size: {{ podcastEpisode.getFileSize(audioBasePath) }},
+                                        title: 'Audio MP3'
+                                        }],
+                                        theme: {
+                                        main: '#00D7B5'
+                                        }
+                                        }).then(function (store) {
+                                        store.dispatch({
+                                        type: 'UI_PLAY',
+                                        payload: {}
+                                        })})
+                                        ;">
+                                    <img class="timeline-play-icon" src="{{ asset('fonts/svg/media-play.svg') }}" alt="icon name">
 
+                                </div>
+
+                                <div class="timeline-content">
+                                    {% include '@PublisherFrontend/Default/partials/timeline-card.html.twig' with {'podcastEpisode': podcastEpisode} %}
+                                </div>
                             </div>
-
-                            <div class="timeline-content">
-                                {% set vars = {'podcastEpisode': podcastEpisode} %}
-                                <p class="heading">{{ podcastEpisode.getTitle() }}</p>
-                                <p class="timeline-content-date">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</p>
-                                <p>{{ podcastEpisode.getSummary() }}</p>
-                            </div>
+                        {% endfor %}
+                        <div class="timeline-header">
+                            <span class="tag is-medium is-primary">End</span>
                         </div>
-                    {% endfor %}
-                    <div class="timeline-header">
-                        <span class="tag is-medium is-primary">End</span>
                     </div>
+
                 </div> <!-- end timeline-->
             </div><!-- end left column-->
         </div> <!-- end columns-->
@@ -141,7 +141,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             const ps = new PerfectScrollbar('#scrollable-container');
-            }, false);
+        }, false);
 
     </script>
 
