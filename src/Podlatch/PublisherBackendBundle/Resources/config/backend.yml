@@ -166,7 +166,7 @@ easy_admin:
             form:
                 fields:
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
-                    - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow' } }
+                    - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow', required: true  } }
                     - title
                     - subtitle
                     - summary
@@ -175,6 +175,11 @@ easy_admin:
                     - { type: 'group', css_class: 'col-sm-4', label: 'Media' }
                     - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
+            new:
+                fields:
+                    - '-audioFile'
+                    - '-imageFile'
+
         User:
             class: Podlatch\PublisherBackendBundle\Entity\User
 
