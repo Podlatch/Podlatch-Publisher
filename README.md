@@ -8,7 +8,7 @@ CMS for Podcasts
 
 ## Install from zip
 
-* get [Latest Version](https://github.com/Podlatch/Podlatch-Publisher/releases/download/0.5.1/podlatch-0-5-1.zip)
+* get [Latest Version](https://github.com/Podlatch/Podlatch-Publisher/releases/download/0.6.0/podlatch-0-6-0.zip)
 * unzip the package and add it to your webspace
 ```
   unzip Podlatch-Publisher_beta.zip 

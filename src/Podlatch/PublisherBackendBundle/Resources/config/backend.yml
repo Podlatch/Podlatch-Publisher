@@ -44,7 +44,7 @@ easy_admin:
               icon: info-circle
               children:
                   #- { label: 'Help', route: 'help_index' }
-                  - { label: 'Docs', icon: book, url: 'http://example.com/external-docs' }
+                  - { label: 'Docs', icon: book, url: 'https://podlat.ch' }
                   - { label: '%app.version%' }
     entities:
         Podcast:
