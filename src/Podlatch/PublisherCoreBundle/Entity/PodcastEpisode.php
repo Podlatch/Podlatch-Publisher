@@ -8,6 +8,8 @@
  */
 namespace Podlatch\PublisherCoreBundle\Entity;
 
+
+use Symfony\Component\Validator\Constraints as Assert;
 use Doctrine\ORM\Mapping as ORM;
 use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
@@ -99,7 +101,8 @@ class PodcastEpisode
 
     /**
      * @ORM\ManyToOne(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="episodes")
-     * @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id", nullable=false)
+     * @Assert\Valid()
      */
     private $podcastShow;
 
@@ -113,6 +116,11 @@ class PodcastEpisode
      * @var \DateTime
      */
     private $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $published;
 
 
     /**
@@ -438,6 +446,25 @@ class PodcastEpisode
 
         $this->episodeSeason = $episodeSeason;
     }
+
+    /**
+     * @return bool
+     */
+    public function getPublished()
+    {
+
+        return (bool)$this->published;
+    }
+
+    /**
+     * @param mixed $published
+     */
+    public function setPublished($published)
+    {
+
+        $this->published = $published;
+    }
+
 
 
 

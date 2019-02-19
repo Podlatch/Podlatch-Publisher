@@ -51,6 +51,7 @@ easy_admin:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastShow
             list:
                 fields:
+                    - { property: 'visibleInWebsite',  type: 'toggle' }
                     - { property: 'image', type: 'image', base_path: '%app.path.podcast_images%' }
                     - title
                     - author
@@ -157,6 +158,7 @@ easy_admin:
                                 'TV & Film':'TV & Film',
                             }
                         }}
+                    - { property: 'visibleInWebsite', type: 'checkbox'}
                     - { type: 'group', css_class: 'col-sm-6', label: 'Meta' }
                     - { property: 'slug', type: 'text',type_options: { disabled: true } }
                     - { property: 'description', type: 'textarea' }
@@ -168,6 +170,7 @@ easy_admin:
             class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
             list:
                 fields:
+                    - { property: 'published',  type: 'toggle' }
                     - { property: 'podcastShow', label: 'Podcast'  }
                     - { property: 'episodeSeason', label: 'Season'  }
                     - { property: 'episodeNumber', label: 'Episode'  }
@@ -176,6 +179,7 @@ easy_admin:
 
             form:
                 fields:
+                    - { type: 'tab' , label: 'General' }
                     - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
                     - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'Podlatch\PublisherCoreBundle\Entity\PodcastShow', required: true  } }
                     - episodeSeason
@@ -193,15 +197,19 @@ easy_admin:
                             }
                         }}
                     - summary
+                    - published
                     - releasedAt
                     - { property: 'summary', type: 'textarea' }
                     - { type: 'group', css_class: 'col-sm-4', label: 'Media' }
                     - { property: 'audioFile', label: 'Audio', help: 'mp3 preferred', type: 'vich_file' }
                     - { property: 'imageFile', label: 'Image', type: 'vich_image', help: '600x600px' }
+                    - { type: 'tab' , label: 'Advanced' }
+
             new:
                 fields:
                     - '-audioFile'
                     - '-imageFile'
+                    - '-published'
 
         User:
             class: Podlatch\PublisherBackendBundle\Entity\User

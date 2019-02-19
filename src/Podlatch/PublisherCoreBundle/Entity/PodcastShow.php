@@ -25,7 +25,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 use Podlatch\PublisherBackendBundle\Entity\User;
 use Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository;
-use Vich\UploaderBundle\Entity\File;
+use Symfony\Component\Validator\Constraints\Valid;use Vich\UploaderBundle\Entity\File;
 use Vich\UploaderBundle\Mapping\Annotation as Vich;
 
 /**
@@ -110,6 +110,12 @@ class PodcastShow
      */
     private $itunesUrl;
 
+
+    /**
+     * @ORM\Column(type="boolean",nullable=true)
+     */
+    private $visibleInWebsite;
+
     /**
      * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
      * @ORM\OrderBy({"releasedAt" = "DESC"})
@@ -172,7 +178,15 @@ class PodcastShow
 
         return $this->episodes;
     }
-
+    /**
+     * @return PodcastEpisode[]
+     */
+    public function getPublishedEpisodes()
+    {
+        return $this->getEpisodes()->filter(function(PodcastEpisode $episode) {
+            return $episode->getPublished() == true AND $episode->getReleasedAt()->getTimestamp() <= time();
+        });
+    }
     /**
      * @param mixed $episodes
      */
@@ -519,6 +533,26 @@ class PodcastShow
 
         $this->showType = $showType;
     }
+
+    /**
+     * @return bool
+     */
+    public function getVisibleInWebsite()
+    {
+
+        return (bool)$this->visibleInWebsite;
+    }
+
+    /**
+     * @param mixed $visibleInWebsite
+     */
+    public function setVisibleInWebsite($visibleInWebsite)
+    {
+
+        $this->visibleInWebsite = $visibleInWebsite;
+    }
+
+
 
 
 

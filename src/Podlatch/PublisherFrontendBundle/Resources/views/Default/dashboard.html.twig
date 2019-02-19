@@ -15,7 +15,7 @@
     <main class="section">
 
             <div class="columns">
-                {% for podcast in podcasts %}
+                {% for podcast in podcasts if podcast.getVisibleInWebsite() ==  true %}
                 <div class="column is-4">
                     <div class="card">
 

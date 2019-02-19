@@ -50,7 +50,7 @@
                         <header class="timeline-header">
                             <span class="tag is-medium is-primary">Start</span>
                         </header>
-                        {% for podcastEpisode in podcast.getEpisodes() %}
+                        {% for podcastEpisode in podcast.getPublishedEpisodes() %}
                             <div class="timeline-item">
                                 <div class="timeline-marker is-image is-32x32" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
                                         title: '{{ podcastEpisode.getTitle() }}',
@@ -98,7 +98,8 @@
 
 
     <script type="text/javascript" src="{{ asset('/js/podlove-embed.js') }}"></script>
-    {% set latestEpisode = podcast.getEpisodes()|first %}
+    {% set latestEpisode = podcast.getPublishedEpisodes()|first %}
+    {% if latestEpisode %}
     <script>
         podlovePlayer('#podlatch-player', {
             title: '{{ latestEpisode.getTitle() }}',
@@ -118,7 +119,7 @@
             }
         });
     </script>
-
+{% endif %}
     <script>
         window.podcastData = {
             "title": "{{ podcast.getTitle() }}",

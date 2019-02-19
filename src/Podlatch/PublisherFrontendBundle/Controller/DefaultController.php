@@ -127,7 +127,7 @@ class DefaultController extends Controller
          */
         //$channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
-        foreach ($podCast -> getEpisodes() as $episode){
+        foreach ($podCast -> getPublishedEpisodes() as $episode){
 
             $audioPath = sprintf(
                 '%s%s%s',
