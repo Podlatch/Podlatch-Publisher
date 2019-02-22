@@ -72,3 +72,16 @@ migrate the database and clear caches
 ./bin/console doctrine:schema:update --force
 ./bin/console cache:clear --env=prod
 ```
+
+## Open Source Libraries Used
+
+* [Symfony MIT](https://github.com/symfony/symfony)
+* [EasyAdminBundle MIT](https://github.com/EasyCorp/EasyAdminBundle) 
+* [VichUploaderBundle](https://github.com/dustin10/VichUploaderBundle)
+* [getID3 GPLv3](https://github.com/JamesHeinrich/getID3)
+* [Podlove Web Player BSD-2-Clause](https://github.com/podlove/podlove-web-player)
+* [Podlove Subscribe Button MIT](https://github.com/podlove/podlove-subscribe-button)
+* [Bulma MIT](https://github.com/jgthms/bulma)
+* [Bulma Templates MIT](https://github.com/dansup/bulma-templates)
+* [Perfect Scrollbar MIT](https://github.com/utatti/perfect-scrollbar)
+* [jQuery MIT](https://github.com/jquery/jquery)
