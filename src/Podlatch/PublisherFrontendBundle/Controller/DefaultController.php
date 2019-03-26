@@ -76,7 +76,9 @@ class DefaultController extends Controller
 
         $channel->appendChild($xml->createElement('title', $podCast -> getTitle()));
         $channel->appendChild($xml->createElement('itunes:subtitle', $podCast -> getSubtitle()));
-        $channel->appendChild($xml->createElement('description', $podCast -> getDescription()));
+
+        $descriptionNode = $xml->createElement('description', '');
+        $channel->appendChild($descriptionNode)-> appendChild($xml->createCDATASection($podCast -> getDescription()));
         $channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
         /**
@@ -127,6 +129,7 @@ class DefaultController extends Controller
          */
         //$channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
+
         foreach ($podCast -> getPublishedEpisodes() as $episode){
 
             $audioPath = sprintf(
@@ -162,7 +165,8 @@ class DefaultController extends Controller
             $item->appendChild($xml->createElement('itunes:author', $podCast -> getAuthor()));
             if($episode -> getSummary()){
                 $item->appendChild($xml->createElement('itunes:summary', $episode -> getSummary()));
-
+                $descriptionNode=$xml->createElement('description','');
+                $item->appendChild($descriptionNode) ->  appendChild($xml->createCDATASection(nl2br($episode -> getSummary())));
             }
             $item->appendChild($xml->createElement('guid', $episode->getId()));
             $item->appendChild($xml->createElement('pubDate',
