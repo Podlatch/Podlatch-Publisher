@@ -1,0 +1,158 @@
+
+<!--
+  ~ Copyright (c) Benjamin Issleib 2019.
+  ~ This file is part of the Podlatch Podcast Publisher.
+  ~ Podlatch Podcast Publisher is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+  ~ Podlatch Podcast Publisher is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+  ~ You should have received a copy of the GNU General Public License along with the Podlatch Podcast Publisher. If not, see http://www.gnu.org/licenses/.
+  -->
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Podlatch Installer</title>
+    <link href="../css/master.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div id="notification" class="notification is-primary">
+</div>
+
+<div class="section">
+    <div class="notification has-text-centered">
+        <p class="title">Podlatch Installer</p>
+    </div>
+        <form id="installform">
+            <div class="columns">
+
+            <div class="column">
+                <h2 class="subtitle">Database</h2>
+                <div class="field">
+                    <label class="label">Host</label>
+                    <div class="control">
+                        <input class="input" type="text" name="dbhost" placeholder="127.0.0.1">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input class="input" type="text" name="dbname" placeholder="MySQL-Database">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">User</label>
+                    <div class="control">
+                        <input class="input" type="text" name="dbuser" placeholder="MySQL-Username">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" name="dbpassword" placeholder="MySQL-Password">
+                    </div>
+                </div>
+
+                <div class="control">
+                    <button type="button" id="checkconnection" class="button is-primary">Check Connection</button>
+                </div>
+            </div>
+            <div class="column">
+                <h2 class="subtitle">Podlatch Admin</h2>
+                <div class="field">
+                    <label class="label">Email</label>
+                    <div class="control">
+                        <input class="input" type="email" name="podlatchEmail" placeholder="admin@podlat.ch">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">User</label>
+                    <div class="control">
+                        <input class="input" type="text" name="podlatchUser" placeholder="adminuser">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input class="input" type="password" name="podlatchPassword" placeholder="safe password">
+                    </div>
+                </div>
+                <div class="control">
+                    <button type="button" id="install" class="button is-primary">Submit</button>
+                </div>
+            </div>
+            </div>
+
+
+        </form>
+
+    <script>
+        document.getElementById("checkconnection").addEventListener("click", check_connection);
+        document.getElementById("install").addEventListener("click", install);
+
+        function check_connection() {
+            var form = document.forms["installform"];
+            var formData = new FormData(form);
+
+
+            fetch('index.php?action=check-database',
+                {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(function(response) {
+                    var test = response.body.messages;
+                    document.getElementById('notification').innerHTML = response.body.messages;
+                    return response.json();
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        }
+
+        function install() {
+            var form = document.forms["installform"];
+            var formData = new FormData(form);
+
+
+            fetch('index.php?action=create-schema',
+                {
+                    method: 'post',
+                    headers: {
+                        'Accept': 'application/json',
+                    },
+                    body: formData
+                })
+                .then(function(response) {
+                    fetch('index.php?action=finish')
+                        .then(function (response) {
+                            if (response.redirected) {
+                                window.location.replace(response.url)
+                            }
+                        })
+                })
+                .catch(function(error) {
+                    console.error(error);
+                });
+        }
+
+
+
+
+    </script>
+
+
+</div>
+
+
+</body>
+
+</html>
