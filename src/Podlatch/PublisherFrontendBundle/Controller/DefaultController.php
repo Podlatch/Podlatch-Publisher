@@ -78,7 +78,7 @@ class DefaultController extends Controller
         $channel->appendChild($xml->createElement('itunes:subtitle', $podCast -> getSubtitle()));
 
         $descriptionNode = $xml->createElement('description', '');
-        $channel->appendChild($descriptionNode)-> appendChild($xml->createCDATASection($podCast -> getDescription()));
+        $channel->appendChild($descriptionNode)-> appendChild($xml->createCDATASection(nl2br($podCast -> getDescription())));
         $channel->appendChild($xml->createElement('language', $podCast -> getLanguage()));
 
         /**
