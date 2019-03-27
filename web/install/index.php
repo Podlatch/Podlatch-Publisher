@@ -11,6 +11,14 @@ $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals(
 $setup = new Setup($request);
 $emitter = new Zend\HttpHandlerRunner\Emitter\SapiEmitter();
 
+if(!$setup ->isFirstRun()){
+    $response = new \Zend\Diactoros\Response\HtmlResponse(
+        '<h1>403 - Already installed</h1><a href="/admin/">Login</a>',
+        403
+    );
+    $emitter -> emit($response);
+    exit();
+}
 $response = $response = new \Zend\Diactoros\Response\HtmlResponse(file_get_contents('index.htm'),200);
 
 
@@ -29,6 +37,7 @@ if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()
 
 if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'finish'){
     $meh = $request -> getUri()->getScheme().'://'.$request->getUri()->getHost();
+    $setup -> writeSymfonyParameters();
 
     if($setup ->protectInstallationDirectory()){
         $response = new \Zend\Diactoros\Response\RedirectResponse('/admin/');
@@ -56,6 +65,7 @@ $emitter -> emit($response);
 class Setup {
 
     private $dbHost;
+    private $dbPort;
     private $dbName;
     private $dbUser;
     private $dbPassword;
@@ -73,8 +83,8 @@ class Setup {
 
     public function __construct(\Zend\Diactoros\ServerRequest $request)
     {
-
         $this->dbHost = $request->getParsedBody()['dbhost'];
+        $this->dbPort = $request->getParsedBody()['dbport']?:3306;
         $this->dbName = $request->getParsedBody()['dbname'];
         $this->dbUser = $request->getParsedBody()['dbuser'];
         $this->dbPassword = $request->getParsedBody()['dbpassword'];
@@ -127,6 +137,29 @@ class Setup {
         return true;
     }
 
+    public function writeSymfonyParameters()
+    {
+
+
+        error_reporting(E_ALL);
+        $yamlTemplate = \Symfony\Component\Yaml\Yaml::parseFile(__DIR__.'/../../app/config/parameters.yml.dist');
+
+
+        $parameters = $yamlTemplate['parameters'];
+
+        $parameters['database_host'] = $this->dbHost;
+        $parameters['database_port'] = $this->dbPort;
+        $parameters['database_name'] = $this->dbName;
+        $parameters['database_user'] = $this->dbUser;
+        $parameters['database_password'] = $this->dbPassword;
+        $parameters['mailer_user'] = $this->podlatchEmail;
+        $parameters['secret'] = uniqid(mt_rand(), true);
+
+        $productionYaml = \Symfony\Component\Yaml\Yaml::dump(['parameters'=>$parameters]);
+        file_put_contents(__DIR__.'/../../app/config/parameters.yml2', $productionYaml);
+
+    }
+
     /**
      * @return array
      */
@@ -134,6 +167,13 @@ class Setup {
     {
 
         return $this->errorMessages;
+    }
+
+
+    public function isFirstRun()
+    {
+        $isFirstRun = !file_exists(__DIR__.'/../../app/config/parameters.yml');
+        return $isFirstRun;
     }
 
 
