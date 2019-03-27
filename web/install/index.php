@@ -1,4 +1,12 @@
 <?php
+/**
+ * Copyright (c) Benjamin Issleib 2019.
+ * This file is part of the Podlatch Podcast Publisher.
+ * Podlatch Podcast Publisher is free software: you can redistribute it and/or modify it under the terms of the GNU General Public License as published by the Free Software Foundation, either version 3 of the License, or (at your option) any later version.
+ * Podlatch Podcast Publisher is distributed in the hope that it will be useful, but WITHOUT ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU General Public License for more details.
+ * You should have received a copy of the GNU General Public License along with the Podlatch Podcast Publisher. If not, see http://www.gnu.org/licenses/.
+ */
+
 require __DIR__.'/../../vendor/autoload.php';
 error_reporting(0);
 $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals(
@@ -19,7 +27,7 @@ if(!$setup ->isFirstRun()){
     $emitter -> emit($response);
     exit();
 }
-$response = $response = new \Zend\Diactoros\Response\HtmlResponse(file_get_contents('index.htm'),200);
+$response = $response = new \Zend\Diactoros\Response\HtmlResponse(file_get_contents(__DIR__ . '/../../app/Resources/install/index.htm'),200);
 
 
 if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'check-database'){
@@ -120,7 +128,7 @@ class Setup {
     }
 
     public function createDatabaseSchema(){
-        $sql = file_get_contents('install.sql');
+        $sql = file_get_contents(__DIR__ . '/../../app/Resources/install/install.sql');
         try{
             $this->getPdo()->exec($sql);
         } catch (Exception $e){
@@ -156,7 +164,7 @@ class Setup {
         $parameters['secret'] = uniqid(mt_rand(), true);
 
         $productionYaml = \Symfony\Component\Yaml\Yaml::dump(['parameters'=>$parameters]);
-        file_put_contents(__DIR__.'/../../app/config/parameters.yml2', $productionYaml);
+        file_put_contents(__DIR__.'/../../app/config/parameters.yml', $productionYaml);
 
     }
 
