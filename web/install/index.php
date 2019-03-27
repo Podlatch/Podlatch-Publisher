@@ -19,6 +19,12 @@ $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals(
 $setup = new Setup($request);
 $emitter = new Zend\HttpHandlerRunner\Emitter\SapiEmitter();
 
+if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'finish'){
+    $response = new \Zend\Diactoros\Response\RedirectResponse('/admin/');
+    $emitter -> emit($response);
+    exit();
+}
+
 if(!$setup ->isFirstRun()){
     $response = new \Zend\Diactoros\Response\HtmlResponse(
         '<h1>403 - Already installed</h1><a href="/admin/">Login</a>',
@@ -43,32 +49,23 @@ if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()
     $emitter -> emit($response);
 }
 
-if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'finish'){
-    $meh = $request -> getUri()->getScheme().'://'.$request->getUri()->getHost();
-    $setup -> writeSymfonyParameters();
-
-    if($setup ->protectInstallationDirectory()){
-        $response = new \Zend\Diactoros\Response\RedirectResponse('/admin/');
-    } else {
-        $response = new \Zend\Diactoros\Response\JsonResponse([],500);
-    }
-}
-
 if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'create-schema'){
-    if($setup ->createDatabaseSchema()){
-        if($setup ->createAdminUser()){
-            $setup ->protectInstallationDirectory();
-            $response = new \Zend\Diactoros\Response\JsonResponse([],200);
-        } else {
-            $response = new \Zend\Diactoros\Response\JsonResponse([],500);
-        }
-    } else {
+    try{
+        $setup -> writeSymfonyParameters();
+        $setup ->createDatabaseSchema();
+        $setup ->createAdminUser();
+        $response = new \Zend\Diactoros\Response\JsonResponse([],200);
+
+    } catch (Exception $e){
         $response = new \Zend\Diactoros\Response\JsonResponse([],500);
     }
-
 }
 
 $emitter -> emit($response);
+
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
+use Symfony\Component\Console\Output\BufferedOutput;
 
 class Setup {
 
@@ -91,14 +88,14 @@ class Setup {
 
     public function __construct(\Zend\Diactoros\ServerRequest $request)
     {
-        $this->dbHost = $request->getParsedBody()['dbhost'];
+        $this->dbHost = $request->getParsedBody()['dbhost']?:'127.0.0.1';
         $this->dbPort = $request->getParsedBody()['dbport']?:3306;
-        $this->dbName = $request->getParsedBody()['dbname'];
-        $this->dbUser = $request->getParsedBody()['dbuser'];
-        $this->dbPassword = $request->getParsedBody()['dbpassword'];
-        $this->podlatchUser = $request->getParsedBody()['podlatchUser'];
-        $this->podlatchPassword = $request->getParsedBody()['podlatchPassword'];
-        $this->podlatchEmail = $request->getParsedBody()['podlatchEmail'];
+        $this->dbName = $request->getParsedBody()['dbname']?:null;
+        $this->dbUser = $request->getParsedBody()['dbuser']?:null;
+        $this->dbPassword = $request->getParsedBody()['dbpassword']?:null;
+        $this->podlatchUser = $request->getParsedBody()['podlatchUser']?:null;
+        $this->podlatchPassword = $request->getParsedBody()['podlatchPassword']?:null;
+        $this->podlatchEmail = $request->getParsedBody()['podlatchEmail']?:null;
 
     }
 
@@ -138,11 +135,25 @@ class Setup {
     }
 
     public function createAdminUser(){
-        return true;
-    }
+        $kernel = new AppKernel('prod', false);
+        $application = new Application($kernel);
 
-    public function protectInstallationDirectory(){
-        return true;
+        $input = new ArrayInput([
+            'command' => 'fos:user:create',
+            // (optional) define the value of command arguments
+            'username' => $this->podlatchUser,
+            'email' => $this->podlatchEmail,
+            'password' => $this->podlatchPassword,
+            // (optional) pass options to the command
+            '--super-admin' => true,
+        ]);
+        $output = new BufferedOutput();
+        error_reporting(E_ALL);
+        $application->run($input, $output);
+
+        $meh = $output;
+
+
     }
 
     public function writeSymfonyParameters()

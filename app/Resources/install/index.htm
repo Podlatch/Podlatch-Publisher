@@ -21,18 +21,38 @@
 
 <body>
 
-<div id="notification" class="notification is-primary">
-</div>
+
 
 <div class="section">
     <div class="notification has-text-centered">
         <p class="title">Podlatch Installer</p>
     </div>
+    <div id="notification" class="" style="display: none">
+    </div>
         <form id="installform">
             <div class="columns">
 
-            <div class="column">
+            <div id="databasefields" class="column" style="display: block">
                 <h2 class="subtitle">Database</h2>
+                <div class="field">
+                    <label class="label">Name</label>
+                    <div class="control">
+                        <input required class="input" type="text" name="dbname" placeholder="MySQL-Database">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">User</label>
+                    <div class="control">
+                        <input required class="input" type="text" name="dbuser" placeholder="MySQL-Username">
+                    </div>
+                </div>
+                <div class="field">
+                    <label class="label">Password</label>
+                    <div class="control">
+                        <input required class="input" type="password" name="dbpassword" placeholder="MySQL-Password">
+                    </div>
+                </div>
+
                 <div class="field">
                     <label class="label">Host</label>
                     <div class="control">
@@ -45,30 +65,12 @@
                         <input class="input" type="text" name="dbport" placeholder="3306">
                     </div>
                 </div>
-                <div class="field">
-                    <label class="label">Name</label>
-                    <div class="control">
-                        <input class="input" type="text" name="dbname" placeholder="MySQL-Database">
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">User</label>
-                    <div class="control">
-                        <input class="input" type="text" name="dbuser" placeholder="MySQL-Username">
-                    </div>
-                </div>
-                <div class="field">
-                    <label class="label">Password</label>
-                    <div class="control">
-                        <input class="input" type="password" name="dbpassword" placeholder="MySQL-Password">
-                    </div>
-                </div>
 
                 <div class="control">
                     <button type="button" id="checkconnection" class="button is-primary">Check Connection</button>
                 </div>
             </div>
-            <div class="column">
+            <div id="adminfields" class="column" style="display: none">
                 <h2 class="subtitle">Podlatch Admin</h2>
                 <div class="field">
                     <label class="label">Email</label>
@@ -101,6 +103,14 @@
         document.getElementById("checkconnection").addEventListener("click", check_connection);
         document.getElementById("install").addEventListener("click", install);
 
+        function status(response) {
+            if (response.status >= 200 && response.status < 300) {
+                return Promise.resolve(response)
+            } else {
+                return Promise.reject(new Error(response.statusText))
+            }
+        }
+
         function check_connection() {
             var form = document.forms["installform"];
             var formData = new FormData(form);
@@ -114,13 +124,42 @@
                     },
                     body: formData
                 })
+                .then(status)
                 .then(function(response) {
-                    var test = response.body.messages;
-                    document.getElementById('notification').innerHTML = response.body.messages;
+
+                    adminfields = document.getElementById('adminfields');
+                    if (adminfields.style.display === "none") {
+                        adminfields.style.display = "block";
+                    }
+                    databasefields = document.getElementById('databasefields');
+
+                    if (databasefields.style.display === "block") {
+                        databasefields.style.display = "none";
+                    }
+
+                    notification = document.getElementById('notification');
+                    if (notification.style.display === "none") {
+                        notification.style.display = "block";
+                    }
+
+                    notification.className = '';
+                    notification.classList.add('is-primary');
+                    notification.classList.add('notification');
+
+                    notification.innerHTML = 'Success';
+
                     return response.json();
                 })
                 .catch(function(error) {
-                    console.error(error);
+                    notification = document.getElementById('notification');
+                    if (notification.style.display === "none") {
+                        notification.style.display = "block";
+                    }
+                    notification.className = '';
+                    notification.classList.add('is-danger');
+                    notification.classList.add('notification');
+
+                    notification.innerHTML = 'Connection failed';
                 });
         }
 
@@ -128,6 +167,7 @@
             var form = document.forms["installform"];
             var formData = new FormData(form);
 
+            document.getElementById("install").classList.add('is-loading');
 
             fetch('index.php?action=create-schema',
                 {
@@ -137,6 +177,7 @@
                     },
                     body: formData
                 })
+                .then(status)
                 .then(function(response) {
                     fetch('index.php?action=finish')
                         .then(function (response) {
@@ -146,13 +187,19 @@
                         })
                 })
                 .catch(function(error) {
+                    document.getElementById("install").classList.remove('is-loading');
+                    notification = document.getElementById('notification');
+                    if (notification.style.display === "none") {
+                        notification.style.display = "block";
+                    }
+                    notification.className = '';
+                    notification.classList.add('is-danger');
+                    notification.classList.add('notification');
+
+                    notification.innerHTML = 'Installation failed';
                     console.error(error);
                 });
         }
-
-
-
-
     </script>
 
 
