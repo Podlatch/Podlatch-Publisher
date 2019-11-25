@@ -18,7 +18,7 @@
     "@podlove/podlove-web-player": "^4.2.4",
     "bulma": "^0.7.2",
     "bulma-timeline": "^3.0.0",
-    "jquery": "^3.3.1",
+    "jquery": "^3.4.0",
     "perfect-scrollbar": "^1.4.0",
     "requirejs": "^2.3.6"
   },
