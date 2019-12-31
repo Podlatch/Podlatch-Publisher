@@ -72,7 +72,7 @@ easy_admin:
                         choices: {
                             'CC-BY-SA':'CC-BY-SA',
                             'CC-BY-SA-NC':'CC-BY-SA-NC',
-                            'CC BY ND': 'CC BY ND',
+                            'CC-BY-ND': 'CC-BY-ND',
                             'CC-BY':'CC-BY',
                             'CC-SA':'CC-SA',
                             'All Rights Reserved':'All Rights Reserved',
