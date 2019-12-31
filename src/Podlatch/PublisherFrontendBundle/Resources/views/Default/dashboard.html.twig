@@ -14,9 +14,13 @@
 
     <main class="section">
 
+        {% set index = 0 %}
+        {% for podcast in podcasts if podcast.getVisibleInWebsite() ==  true %}
+
+            {% if index % 2 == 0 %}
             <div class="columns">
-                {% for podcast in podcasts if podcast.getVisibleInWebsite() ==  true %}
-                <div class="column is-4">
+            {% endif %}
+                <div class="column is-6-desktop">
                     <div class="card">
 
                         {% if podcast.getImage() %}
@@ -40,8 +44,12 @@
                         </footer>
                     </div>
                 </div>
-                {% endfor %}
-            </div> <!-- end columns-->
+            {% set index=index+1 %}
+                {% if index % 2 ==0 or index == podcasts|length %}
+                    </div> <!-- end columns-->
+                    {% endif %}
+
+        {% endfor %}
 
     </main>
 
