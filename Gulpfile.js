@@ -38,6 +38,7 @@ gulp.task('backendsass', function () {
 
 gulp.task('backendjs', function() {
     gulp.src([
+        './node_modules/darkmode-js/lib/darkmode-js.min.js',
         './src/Podlatch/PublisherBackendBundle/Resources/public/js/tingle.min.js',
         './src/Podlatch/PublisherBackendBundle/Resources/public/js/backend.js',
     ])

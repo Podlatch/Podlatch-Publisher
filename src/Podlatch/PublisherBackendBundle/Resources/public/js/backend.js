@@ -45,6 +45,12 @@ $(function() {
                 document.close();
             }
         });
-
     });
+
+
+    var darkmode = new Darkmode({
+        label: '🌓',
+        bottom: '100px'
+    });
+    darkmode.showWidget();
 });
