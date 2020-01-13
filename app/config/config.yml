@@ -16,7 +16,7 @@ parameters:
     app.path.audio_assets: /uploads/audio/
     app.path.episode_images: /uploads/images/podcasts/
     app.path.podcast_images: /uploads/images/episodes/
-    app.version: 0.8.0
+    app.version: 0.8.2
 
 framework:
     #esi: ~
