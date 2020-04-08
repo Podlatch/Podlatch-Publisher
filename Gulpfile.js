@@ -7,7 +7,9 @@ var sass = require('gulp-sass');
 
 gulp.task('sass', gulp.series(function () {
     return gulp.src([
-        './node_modules/bulma/scss/*.sass',
+        './node_modules/spectre.css/src/spectre.scss',
+        './node_modules/spectre.css/src/spectre-exp.scss',
+        './node_modules/spectre.css/src/spectre-icons.scss',
         './app/Resources/public/sass/*.scss',
         './src/Podlatch/**/Resources/public/sass/*.scss',
     ])
@@ -65,10 +67,10 @@ gulp.task('js', gulp.series(function() {
 
 gulp.task('podlove', gulp.series(function() {
     gulp.src([
-        './node_modules/@podlove/podlove-web-player/dist/style.css'
+        './node_modules/@podlove/web-player/5.0.1-beta.5/player/styles.css'
     ])
         .pipe(cssnano())
-        .pipe(gulp.dest('./web/'));
+        .pipe(gulp.dest('./web/5.0.1-beta.5/player/'));
 
     gulp.src([
         './node_modules/perfect-scrollbar/css/perfect-scrollbar.css',
@@ -78,20 +80,16 @@ gulp.task('podlove', gulp.series(function() {
 
 
     gulp.src([
-        './node_modules/@podlove/podlove-web-player/dist/embed.js'
+        './node_modules/@podlove/web-player/embed.js'
     ])
         .pipe(concat('podlove-embed.js'))
         .pipe(gulp.dest('./web/js'));
 
-    gulp.src([
-        './node_modules/@podlove/podlove-web-player/dist/style.js'
-    ])
-        .pipe(gulp.dest('./web/'));
 
     gulp.src([
-        './node_modules/@podlove/podlove-web-player/dist/vendor.js'
+        './node_modules/@podlove/web-player/5.0.1-beta.5/player/*.js'
     ])
-        .pipe(gulp.dest('./web/'));
+        .pipe(gulp.dest('./web/5.0.1-beta.5/player/'));
 
     gulp.src([
         './node_modules/@podlove/podlove-web-player/dist/fonts/*'
@@ -99,7 +97,17 @@ gulp.task('podlove', gulp.series(function() {
         .pipe(gulp.dest('./web/fonts'));
 
     gulp.src([
-        './node_modules/@podlove/podlove-web-player/dist/window.js'
+        './node_modules/@podlove/web-player/variant-xl.js'
+    ])
+        .pipe(gulp.dest('./web/'));
+
+    gulp.src([
+        './node_modules/@podlove/web-player/variant-l.js'
+    ])
+        .pipe(gulp.dest('./web/'));
+
+    gulp.src([
+        './node_modules/@podlove/web-player/variant-m.js'
     ])
         .pipe(gulp.dest('./web/'));
 

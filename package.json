@@ -15,13 +15,14 @@
   "author": "Benjamin Issleib",
   "license": "GPL-3.0",
   "dependencies": {
-    "@podlove/podlove-web-player": "^4.2.4",
+    "@podlove/web-player": "^5.0.1-beta.5",
     "bulma": "^0.7.2",
     "bulma-timeline": "^3.0.0",
     "darkmode-js": "^1.5.4",
     "jquery": "^3.4.0",
     "perfect-scrollbar": "^1.4.0",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "spectre.css": "^0.5.8"
   },
   "devDependencies": {
     "gulp": "^4.0.2",

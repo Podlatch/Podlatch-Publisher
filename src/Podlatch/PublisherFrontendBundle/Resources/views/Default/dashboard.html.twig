@@ -2,55 +2,58 @@
 
 {% block content %}
 
-    <section class="hero is-primary">
-        <div class="hero-body">
-            <div class="container">
-                <h1 class="title">
-                    Podlatch
-                </h1>
-            </div>
-        </div>
-    </section>
 
-    <main class="section">
 
-        {% set index = 0 %}
-        {% for podcast in podcasts if podcast.getVisibleInWebsite() ==  true %}
-
-            {% if index % 2 == 0 %}
-            <div class="columns">
-            {% endif %}
-                <div class="column is-6-desktop">
-                    <div class="card">
-
-                        {% if podcast.getImage() %}
-                        <div class="card-image">
-                            <figure class="image">
-                                <img src="{{ vich_uploader_asset(podcast, 'imageFile')}}">
-                            </figure>
+        <div class="columns">
+            <div class="column">
+                <div class="hero bg-gray">
+                    <div class="hero-body">
+                        <div class="content">
+                        <h1>Podcasts</h1>
                         </div>
-                        {% endif %}
-
-                        <div class="card-content">
-                            <p class="title">
-                                {{ podcast.getTitle() }}
-                            </p>
-                            <div class="content">
-                                {{ podcast.getDescription() |nl2br }}
-                            </div>
-                        </div>
-                        <footer class="card-footer">
-                            <a href="{{ path('publisher_frontend_podcast_overview',{'podcastId': podcast.getSlug()}) }}" class="card-footer-item">Details</a>
-                        </footer>
                     </div>
                 </div>
-            {% set index=index+1 %}
+            </div>
+        </div>
+    <div class="content">
+        <div class="container">
+
+            {% set index = 0 %}
+            {% for podcast in podcasts if podcast.getVisibleInWebsite() ==  true %}
+
+                {% if index % 2 == 0 %}
+                    <div class="columns">
+                {% endif %}
+                <div class="column col-lg-12 col-6">
+                    <div class="card">
+                        {% if podcast.getImage() %}
+                            <div class="card-image">
+                                <img src="{{ vich_uploader_asset(podcast, 'imageFile')}}" class="img-responsive">
+                            </div>
+                        {% endif %}
+                        <div class="card-header">
+                            <div class="card-title h5">{{ podcast.getTitle() }}</div>
+                        </div>
+                        <div class="card-body">
+                            {{ podcast.getDescription() |nl2br }}
+                        </div>
+                        <div class="card-footer">
+                            <a href="{{ path('publisher_frontend_podcast_overview',{'podcastId': podcast.getSlug()}) }}" class="btn btn-primary">Details</a>
+                        </div>
+                    </div>
+                </div>
+                {% set index=index+1 %}
                 {% if index % 2 ==0 or index == podcasts|length %}
                     </div> <!-- end columns-->
-                    {% endif %}
+                {% endif %}
 
-        {% endfor %}
+            {% endfor %}
 
-    </main>
+        </div>
+
+    </div>
+
+
+
 
 {% endblock content%}
