@@ -57,6 +57,7 @@
                         </div>
                         <div class="tile-content">
                             <p class="tile-title"><h3>{{ podcastEpisode.getTitle() }}</h3></p>
+                            <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</small>
                             <p class="tile-subtitle"> {{ podcastEpisode.getSummary() |nl2br }}</p>
                         </div>
                         <div class="tile-action">
