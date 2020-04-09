@@ -27,7 +27,7 @@
                 </div>
             </div>
 
-    <div class="content">
+    <div class="content mt-4">
         <div class="columns">
             <div class="column col-12">
                 <div class="" id="podlatch-player"></div>
@@ -41,7 +41,7 @@
 
         <div class="timeline">
             {% for podcastEpisode in podcast.getPublishedEpisodes() %}
-            <div class="timeline-item" id="{{podcastEpisode.getId()}}">
+            <div class="timeline-item mt-2" id="{{podcastEpisode.getId()}}">
                 <div class="timeline-left">
                     <a class="timeline-icon icon-lg tooltip" href="#{{podcastEpisode.getId()}}" data-tooltip="Link">
                         <i class="icon icon-link"></i>
