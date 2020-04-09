@@ -92,6 +92,11 @@ gulp.task('podlove', gulp.series(function() {
         .pipe(gulp.dest('./web/5.0.1-beta.5/player/'));
 
     gulp.src([
+        './node_modules/@podlove/web-player/5.0.1-beta.5/button/*.js'
+    ])
+        .pipe(gulp.dest('./web/5.0.1-beta.5/button/'));
+
+    gulp.src([
         './node_modules/@podlove/podlove-web-player/dist/fonts/*'
     ])
         .pipe(gulp.dest('./web/fonts'));
