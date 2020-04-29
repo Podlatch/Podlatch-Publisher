@@ -19,7 +19,7 @@
     "bulma": "^0.7.2",
     "bulma-timeline": "^3.0.0",
     "darkmode-js": "^1.5.4",
-    "jquery": "^3.4.0",
+    "jquery": "^3.5.0",
     "perfect-scrollbar": "^1.4.0",
     "requirejs": "^2.3.6",
     "spectre.css": "^0.5.8"
