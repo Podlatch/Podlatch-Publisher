@@ -212,7 +212,7 @@ class DefaultController extends Controller
 		}
 		$xml->formatOutput = true;
 		$response = new Response($xml->saveXML());
-		$response->headers->set('Content-Type', 'text/xml');
+		$response->headers->set('Content-Type', 'application/rss+xml');
 		return $response;
 	}
 

@@ -20,16 +20,19 @@
                                 </h2>
                             </div>
                             <div class="column col-lg-12 col-3">
-                                <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-size="big" data-style="filled" data-json-data="podcastData"></script>
+                                <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-color="#5755d9" data-size="big" data-style="frameless" data-json-data="podcastData"></script>
                             </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-    <div class="content">
-
+    <div class="content mt-4">
+        <div class="columns">
+            <div class="column col-12">
                 <div class="" id="podlatch-player"></div>
-
+            </div>
+        </div>
 
 
         {{ podcast.getDescription() |nl2br }}
@@ -38,7 +41,7 @@
 
         <div class="timeline">
             {% for podcastEpisode in podcast.getPublishedEpisodes() %}
-            <div class="timeline-item" id="{{podcastEpisode.getId()}}">
+            <div class="timeline-item mt-2" id="{{podcastEpisode.getId()}}">
                 <div class="timeline-left">
                     <a class="timeline-icon icon-lg tooltip" href="#{{podcastEpisode.getId()}}" data-tooltip="Link">
                         <i class="icon icon-link"></i>
@@ -54,16 +57,21 @@
                         </div>
                         <div class="tile-content">
                             <p class="tile-title"><h3>{{ podcastEpisode.getTitle() }}</h3></p>
-                            <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d-m-Y') }}</small>
+                            <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</small>
                             <p class="tile-subtitle"> {{ podcastEpisode.getSummary() |nl2br }}</p>
                         </div>
                         <div class="tile-action">
+                            {% set foo = vich_uploader_asset(podcastEpisode, 'imageFile') %}
+                            {% if foo == '' %}
+                                {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
+                            {% endif %}
+
                             <button class="btn btn-primary" onclick="$('#podlatch-player').html(''); podlovePlayer('#podlatch-player', {
                                     title: '{{ podcastEpisode.getTitle() }}',
                                     subtitle: '{{ podcastEpisode.getSubtitle() }}',
                                     summary: '{{ podcastEpisode.getSummary()|json_encode }}',
                                     publicationDate: '{{ podcastEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
-                                    poster: '{{ vich_uploader_asset(podcastEpisode, 'imageFile')}}',
+                                    poster: '{{ foo }}',
                                     duration: '{{ podcastEpisode.getDuration(audioBasePath) }}',
                                     audio: [{
                                     url: '{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}',
@@ -96,13 +104,19 @@
     <script type="text/javascript" src="{{ asset('/js/podlove-embed.js') }}"></script>
     {% set latestEpisode = podcast.getPublishedEpisodes()|first %}
     {% if latestEpisode %}
+
+        {% set foo = vich_uploader_asset(latestEpisode, 'imageFile') %}
+        {% if foo == '' %}
+            {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
+        {% endif %}
+
     <script>
         podlovePlayer('#podlatch-player', {
             title: '{{ latestEpisode.getTitle() }}',
             subtitle: '{{ latestEpisode.getSubtitle() }}',
             summary: '{{ latestEpisode.getSummary()|json_encode }}',
             publicationDate: '{{ latestEpisode.getReleasedAt()|date('d-m-YTH:i:s')}}',
-            poster: '{{ vich_uploader_asset(latestEpisode, 'imageFile')}}',
+            poster: '{{ foo }}',
             duration: '{{ latestEpisode.getDuration(audioBasePath) }}',
             audio: [{
                 url: '{{ app.request.getUriForPath(vich_uploader_asset(latestEpisode, 'audioFile'))}}',
@@ -110,6 +124,15 @@
                 size: {{ latestEpisode.getFileSize(audioBasePath) }},
                 title: 'Audio MP3'
             }],
+            visibleComponents: [
+                'tabFiles',
+                'tabAudio',
+                'showTitle',
+                'episodeTitle',
+                'subtitle',
+                'progressbar',
+                'controlSteppers',
+            ],
             theme: {
                 main: '#ffffff'
             }
