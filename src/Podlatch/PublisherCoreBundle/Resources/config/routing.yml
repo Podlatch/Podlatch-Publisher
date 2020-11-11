@@ -1,3 +1,0 @@
-podlatch_core_homepage:
-    path:     /
-    defaults: { _controller: PublisherCoreBundle:Default:index }
