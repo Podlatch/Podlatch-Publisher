@@ -175,7 +175,7 @@ class Setup {
         $parameters['secret'] = uniqid(mt_rand(), true);
 
         $productionYaml = \Symfony\Component\Yaml\Yaml::dump(['parameters'=>$parameters]);
-        file_put_contents(__DIR__.'/../../app/config/parameters.yml', $productionYaml);
+        file_put_contents(__DIR__ . '/../../app/config/parameters.yml', $productionYaml);
 
     }
 
@@ -191,7 +191,7 @@ class Setup {
 
     public function isFirstRun()
     {
-        $isFirstRun = !file_exists(__DIR__.'/../../app/config/parameters.yml');
+        $isFirstRun = !file_exists(__DIR__ . '/../../app/config/parameters.yml');
         return $isFirstRun;
     }
 

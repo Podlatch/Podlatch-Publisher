@@ -16,7 +16,7 @@ use App\Entity\PodcastShow;
  * User
  *
  * @ORM\Table(name="fos_user")
- * @ORM\Entity(repositoryClass="Podlatch\PublisherBackendBundle\Repository\UserRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
 class User  extends BaseUser
 {
@@ -32,7 +32,7 @@ class User  extends BaseUser
     /**
      * @var \Doctrine\Common\Collections\Collection|PodcastShow[]
      *
-     * @ORM\ManyToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="App\Entity\PodcastShow", inversedBy="users")
      * @ORM\JoinTable(
      *  name="users_podcasts",
      *  joinColumns={
@@ -87,11 +87,7 @@ class User  extends BaseUser
         if ($podcasts->getUsers()->contains($this)){
             $podcasts->removeUser($this);
         }
-
-
     }
-
-
 
 }
 

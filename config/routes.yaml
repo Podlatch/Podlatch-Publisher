@@ -5,39 +5,24 @@ fos_user:
   resource: "@FOSUserBundle/Resources/config/routing/all.xml"
   prefix:   /
 
-publisher_frontend:
-  resource: "@PublisherFrontendBundle/Resources/config/routing.yml"
-  prefix:   /
-
-app:
-  resource: '@AppBundle/Controller/'
-  type: annotation
-
 easy_admin_bundle:
-  resource: "@PublisherBackendBundle/Controller/AdminController.php"
+  resource: "../src/Controller/"
   type:     annotation
   prefix:   /admin
 
-podlatch_core:
-  resource: "@PublisherCoreBundle/Resources/config/routing.yml"
-
-publisher_backend:
-  resource: "@PublisherBackendBundle/Resources/config/routing.yml"
-  prefix:   /backend
-
 publisher_frontend_homepage:
   path:     /
-  controller: App\Controller\DefaultController::dashboard
+  controller: App\Controller\DefaultController::dashboardAction
 
 publisher_frontend_podcast_overview:
   path:     /{podcastId}
-  controller: App\Controller\DefaultController::index
+  controller: App\Controller\DefaultController::indexAction
 
 publisher_frontend_podcast_episode_detail:
   path:     /{podcastId}/{episodeId}
-  controller: App\Controller\DefaultController::index
+  controller: App\Controller\DefaultController::indexAction
 
 publisher_frontend_itunes_feed:
   path:     /feed/mp3/{podcastId}.xml
-  controller: App\Controller\DefaultController::feed
+  controller: App\Controller\DefaultController::feedAction
 

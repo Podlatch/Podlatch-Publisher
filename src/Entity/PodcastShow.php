@@ -31,7 +31,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\HasLifecycleCallbacks
  * @Vich\Uploadable
- * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastShowRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PodcastShowRepository")
  * @ORM\Table(name="podcast_show")
  */
 class PodcastShow
@@ -117,7 +117,7 @@ class PodcastShow
     private $visibleInWebsite;
 
     /**
-     * @ORM\OneToMany(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastEpisode", mappedBy="podcastShow")
+     * @ORM\OneToMany(targetEntity="App\Entity\PodcastEpisode", mappedBy="podcastShow")
      * @ORM\OrderBy({"releasedAt" = "DESC"})
      */
     private $episodes;
@@ -142,7 +142,7 @@ class PodcastShow
 
     /**
      * Many Users have Many Podcasts.
-     * @ORM\ManyToMany(targetEntity="Podlatch\PublisherBackendBundle\Entity\User", mappedBy="podcasts")
+     * @ORM\ManyToMany(targetEntity="App\Entity\User", mappedBy="podcasts")
      */
     private $users;
 

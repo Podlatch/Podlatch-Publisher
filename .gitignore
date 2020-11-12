@@ -1,5 +1,5 @@
 /.web-server-pid
-/app/config/parameters.yml
+/config/packages/parameters.yml
 /build/
 /phpunit.xml
 /var/*
@@ -44,3 +44,7 @@ web/font
 .phpunit.result.cache
 /phpunit.xml
 ###< symfony/phpunit-bridge ###
+
+###> symfony/web-server-bundle ###
+/.web-server-pid
+###< symfony/web-server-bundle ###

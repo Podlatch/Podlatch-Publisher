@@ -71,100 +71,92 @@ easy_admin:
           - ownerName
           - ownerMail
           - isExplicit
-          - {
-            property: copyright,
+          - property: copyright,
             type: choice,
-            type_options: {
+            type_options:
               choices: {
-                'CC-BY-SA':'CC-BY-SA',
-                'CC-BY-SA-NC':'CC-BY-SA-NC',
+                'CC-BY-SA': 'CC-BY-SA',
+                'CC-BY-SA-NC': 'CC-BY-SA-NC',
                 'CC-BY-ND': 'CC-BY-ND',
-                'CC-BY':'CC-BY',
-                'CC-SA':'CC-SA',
-                'All Rights Reserved':'All Rights Reserved',
+                'CC-BY': 'CC-BY',
+                'CC-SA': 'CC-SA',
+                'All-Rights-Reserved': 'All_Rights_Reserved'
               }
-            }}
-          - {
-            property: language,
+          - property: language,
             type: choice,
-            type_options: {
+            type_options:
               choices: {
-                'de_DE':'de_DE',
-                'en_US':'en_US',
+                'de_DE': 'de_DE',
+                'en_US': 'en_US',
               }
-            }}
-          - {
-            property: showType,
+          - property: showType,
             type: choice,
-            type_options: {
+            type_options:
               choices: {
-                'episodic':'episodic',
-                'serial':'serial',
+                'episodic': 'episodic',
+                'serial': 'serial'
               }
-            }}
-          - {
-            property: category,
+          - property: category,
             type: choice,
-            type_options: {
+            type_options:
               choices: {
-                'Arts:Design':'Arts:Design',
-                'Arts:Fashion & Beauty':'Arts:Fashion & Beauty',
-                'Arts:Food':'Arts:Food',
-                'Arts:Literature':'Arts:Literature',
-                'Arts:Performing Arts':'Arts:Performing Arts',
-                'Arts:Visual Arts':'Arts:Visual Arts',
-                'Business:Business News':'Business:Business News',
-                'Business:Careers':'Business:Careers',
-                'Business:Investing':'Business:Investing',
-                'Business:Management & Marketing':'Business:Management & Marketing',
-                'Comedy':'Comedy',
-                'Education:Educational Technology':'Education:Educational Technology',
-                'Education:Higher Education':'Education:Higher Education',
-                'Education:K-12':'Education:K-12',
-                'Education:Language Courses':'Education:Language Courses',
-                'Education:Training':'Education:Training',
-                'Games & Hobbies:Automotive':'Games & Hobbies:Automotive',
-                'Games & Hobbies:Aviation':'Games & Hobbies:Aviation',
-                'Games & Hobbies:Hobbies':'Games & Hobbies:Hobbies',
-                'Games & Hobbies:Other Games':'Games & Hobbies:Other Games',
-                'Games & Hobbies:Video Games':'Games & Hobbies:Video Games',
-                'Government & Organizations:Local':'Government & Organizations:Local',
-                'Government & Organizations:National':'Government & Organizations:National',
-                'Government & Organizations:Non-Profit':'Government & Organizations:Non-Profit',
-                'Government & Organizations:Regional':'Government & Organizations:Regional',
-                'Health:Alternative Health':'Health:Alternative Health',
-                'Health:Fitness & Nutrition':'Health:Fitness & Nutrition',
-                'Health:Self-Help':'Health:Self-Help',
-                'Health:Sexuality':'Health:Sexuality',
-                'Health:Kids & Family':'Health:Kids & Family',
-                'Music':'Music',
-                'Kids & Family':'Kids & Family',
-                'News & Politics':'News & Politics',
-                'Religion & Spirituality:Buddhism':'Religion & Spirituality:Buddhism',
-                'Religion & Spirituality:Christianity':'Religion & Spirituality:Christianity',
-                'Religion & Spirituality:Hinduism':'Religion & Spirituality:Hinduism',
-                'Religion & Spirituality:Islam':'Religion & Spirituality:Islam',
-                'Religion & Spirituality:Judaism':'Religion & Spirituality:Judaism',
-                'Religion & Spirituality:Other':'Religion & Spirituality:Other',
-                'Religion & Spirituality:Spirituality':'Religion & Spirituality:Spirituality',
-                'Science & Medicine:Medicine':'Science & Medicine:Medicine',
-                'Science & Medicine:Natural Sciences':'Science & Medicine:Natural Sciences',
-                'Science & Medicine:Social Sciences':'Science & Medicine:Social Sciences',
-                'Society & Culture:History':'Society & Culture:History',
-                'Society & Culture:Personal Journals':'Society & Culture:Personal Journals',
-                'Society & Culture:Philosophy':'Society & Culture:Philosophy',
-                'Society & Culture:Places & Travel':'Society & Culture:Places & Travel',
-                'Sports & Recreation:Amateur':'Sports & Recreation:Amateur',
-                'Sports & Recreation:College & High School':'Sports & Recreation:College & High School',
-                'Sports & Recreation:Outdoor':'Sports & Recreation:Outdoor',
-                'Sports & Recreation:Professional':'Sports & Recreation:Professional',
-                'Technology:Gadgets':'Technology:Gadgets',
-                'Technology:Podcasting':'Technology:Podcasting',
-                'Technology:Software How-To':'Technology:Software How-To',
-                'Technology:Tech News':'Technology:Tech News',
-                'TV & Film':'TV & Film',
+                'Arts:Design': 'Arts:Design',
+                'Arts:Fashion & Beauty': 'Arts:Fashion & Beauty',
+                'Arts:Food': 'Arts:Food',
+                'Arts:Literature': 'Arts:Literature',
+                'Arts:Performing Arts': 'Arts:Performing Arts',
+                'Arts:Visual Arts': 'Arts:Visual Arts',
+                'Business:Business News': 'Business:Business News',
+                'Business:Careers': 'Business:Careers',
+                'Business:Investing': 'Business:Investing',
+                'Business:Management & Marketing': 'Business:Management & Marketing',
+                'Comedy': 'Comedy',
+                'Education:Educational Technology': 'Education:Educational Technology',
+                'Education:Higher Education': 'Education:Higher Education',
+                'Education:K-12': 'Education:K-12',
+                'Education:Language Courses': 'Education:Language Courses',
+                'Education:Training': 'Education:Training',
+                'Games & Hobbies:Automotive': 'Games & Hobbies:Automotive',
+                'Games & Hobbies:Aviation': 'Games & Hobbies:Aviation',
+                'Games & Hobbies:Hobbies': 'Games & Hobbies:Hobbies',
+                'Games & Hobbies:Other Games': 'Games & Hobbies:Other Games',
+                'Games & Hobbies:Video Games': 'Games & Hobbies:Video Games',
+                'Government & Organizations:Local': 'Government & Organizations:Local',
+                'Government & Organizations:National': 'Government & Organizations:National',
+                'Government & Organizations:Non-Profit': 'Government & Organizations:Non-Profit',
+                'Government & Organizations:Regional': 'Government & Organizations:Regional',
+                'Health:Alternative Health': 'Health:Alternative Health',
+                'Health:Fitness & Nutrition': 'Health:Fitness & Nutrition',
+                'Health:Self-Help': 'Health:Self-Help',
+                'Health:Sexuality': 'Health:Sexuality',
+                'Health:Kids & Family': 'Health:Kids & Family',
+                'Music': 'Music',
+                'Kids & Family': 'Kids & Family',
+                'News & Politics': 'News & Politics',
+                'Religion & Spirituality:Buddhism': 'Religion & Spirituality:Buddhism',
+                'Religion & Spirituality:Christianity': 'Religion & Spirituality:Christianity',
+                'Religion & Spirituality:Hinduism': 'Religion & Spirituality:Hinduism',
+                'Religion & Spirituality:Islam': 'Religion & Spirituality:Islam',
+                'Religion & Spirituality:Judaism': 'Religion & Spirituality:Judaism',
+                'Religion & Spirituality:Other': 'Religion & Spirituality:Other',
+                'Religion & Spirituality:Spirituality': 'Religion & Spirituality:Spirituality',
+                'Science & Medicine:Medicine': 'Science & Medicine:Medicine',
+                'Science & Medicine:Natural Sciences': 'Science & Medicine:Natural Sciences',
+                'Science & Medicine:Social Sciences': 'Science & Medicine:Social Sciences',
+                'Society & Culture:History': 'Society & Culture:History',
+                'Society & Culture:Personal Journals': 'Society & Culture:Personal Journals',
+                'Society & Culture:Philosophy': 'Society & Culture:Philosophy',
+                'Society & Culture:Places & Travel': 'Society & Culture:Places & Travel',
+                'Sports & Recreation:Amateur': 'Sports & Recreation:Amateur',
+                'Sports & Recreation:College & High School': 'Sports & Recreation:College & High School',
+                'Sports & Recreation:Outdoor': 'Sports & Recreation:Outdoor',
+                'Sports & Recreation:Professional': 'Sports & Recreation:Professional',
+                'Technology:Gadgets': 'Technology:Gadgets',
+                'Technology:Podcasting': 'Technology:Podcasting',
+                'Technology:Software How-To': 'Technology:Software How-To',
+                'Technology:Tech News': 'Technology:Tech News',
+                'TV & Film': 'TV & Film',
               }
-            }}
           - { property: 'visibleInWebsite', type: 'checkbox'}
           - { type: 'group', css_class: 'col-sm-6', label: 'Meta' }
           - { property: 'slug', type: 'text',type_options: { disabled: true } }
@@ -172,7 +164,6 @@ easy_admin:
           - { property: 'itunesUrl', type: 'text' }
           - { property: 'imageFile', type: 'vich_image' }
           - { property: 'users', type_options: { by_reference: false } }
-
     PodcastEpisode:
       class: Podlatch\PublisherCoreBundle\Entity\PodcastEpisode
       list:
@@ -183,7 +174,6 @@ easy_admin:
           - { property: 'episodeNumber', label: 'Episode'  }
           - title
           - { property: 'image', type: 'image', base_path: '%app.path.episode_images%' }
-
       form:
         fields:
           - { type: 'tab' , label: 'General' }
@@ -193,16 +183,14 @@ easy_admin:
           - episodeNumber
           - title
           - subtitle
-          - {
-            property: episodeType,
+          - property: episodeType,
             type: choice,
-            type_options: {
+            type_options:
               choices: {
                 'full':'full',
                 'trailer':'trailer',
                 'bonus':'bonus'
               }
-            }}
           - summary
           - published
           - releasedAt

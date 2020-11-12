@@ -18,7 +18,7 @@ use Vich\UploaderBundle\Mapping\Annotation as Vich;
  * PodcastEpisode
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="podcast_episode")
- * @ORM\Entity(repositoryClass="Podlatch\PublisherCoreBundle\Repository\PodcastEpisodeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\PodcastEpisodeRepository")
  * @Vich\Uploadable
  */
 class PodcastEpisode
@@ -100,7 +100,7 @@ class PodcastEpisode
 
 
     /**
-     * @ORM\ManyToOne(targetEntity="Podlatch\PublisherCoreBundle\Entity\PodcastShow", inversedBy="episodes")
+     * @ORM\ManyToOne(targetEntity="App\Entity\PodcastShow", inversedBy="episodes")
      * @ORM\JoinColumn(name="podcast_show_id", referencedColumnName="id", nullable=false)
      * @Assert\Valid()
      */
