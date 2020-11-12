@@ -1,5 +1,5 @@
 {
-    "name": "kampfq/podlatch",
+    "name": "podlatch/podlatch-publisher",
     "license": "GPL-3.0",
     "type": "project",
     "autoload-dev": {
