@@ -4,11 +4,15 @@
 //timeline
 //@import '../../../../node_modules/bulma-timeline/src/sass/index';
 @import "../../node_modules/spectre.css/src/spectre";
+@import "../../node_modules/spectre.css/src/spectre-exp";
+
 
 @import "components/fonts";
 @import "components/login";
 @import "components/scrollbox-shadow";
 @import "components/timeline";
+
+@import "../../node_modules/plyr/dist/plyr.css";
 
 .sticky{
   position: -webkit-sticky;
