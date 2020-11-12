@@ -74,6 +74,7 @@
         "sort-packages": true
     },
     "extra": {
+        "symfony-web-dir": "public",
         "symfony-bin-dir": "bin",
         "symfony-var-dir": "var",
         "symfony-tests-dir": "tests",

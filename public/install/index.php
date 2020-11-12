@@ -7,7 +7,7 @@
  * You should have received a copy of the GNU General Public License along with the Podlatch Podcast Publisher. If not, see http://www.gnu.org/licenses/.
  */
 
-require __DIR__.'/../../vendor/autoload.php';
+require __DIR__ . '/../../vendor/autoload.php';
 error_reporting(0);
 $request = \Zend\Diactoros\ServerRequestFactory::fromGlobals(
     $_SERVER,
@@ -125,7 +125,7 @@ class Setup {
     }
 
     public function createDatabaseSchema(){
-        $sql = file_get_contents(__DIR__ . '/../../app/Resources/install/install.sql');
+        $sql = file_get_contents(__DIR__ . '/../../templates/install/install.sql');
         try{
             $this->getPdo()->exec($sql);
         } catch (Exception $e){
@@ -161,7 +161,7 @@ class Setup {
 
 
         error_reporting(E_ALL);
-        $yamlTemplate = \Symfony\Component\Yaml\Yaml::parseFile(__DIR__.'/../../app/config/parameters.yml.dist');
+        $yamlTemplate = \Symfony\Component\Yaml\Yaml::parseFile(__DIR__ . '/../../config/packages/parameters.yml.dist');
 
 
         $parameters = $yamlTemplate['parameters'];
@@ -175,7 +175,7 @@ class Setup {
         $parameters['secret'] = uniqid(mt_rand(), true);
 
         $productionYaml = \Symfony\Component\Yaml\Yaml::dump(['parameters'=>$parameters]);
-        file_put_contents(__DIR__ . '/../../app/config/parameters.yml', $productionYaml);
+        file_put_contents(__DIR__ . '/../../config/packages/parameters.yml', $productionYaml);
 
     }
 
@@ -191,7 +191,7 @@ class Setup {
 
     public function isFirstRun()
     {
-        $isFirstRun = !file_exists(__DIR__ . '/../../app/config/parameters.yml');
+        $isFirstRun = !file_exists(__DIR__ . '/../../config/packages/parameters.yml');
         return $isFirstRun;
     }
 

@@ -23,7 +23,7 @@ web/vendor.js
 web/window.js
 web/fonts
 web/subscribe-button
-web/uploads
+public/uploads
 web/js
 web/css
 web/js

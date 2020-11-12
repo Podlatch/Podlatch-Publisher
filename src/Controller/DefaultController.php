@@ -24,12 +24,12 @@ class DefaultController extends Controller
 
 		$audioBasePath = sprintf(
 			'%s%s',
-			$this->getParameter('kernel.root_dir') . '/../web',
+            $this->get('kernel')->getProjectDir() . '/public',
 			$this->getParameter('app.path.audio_assets')
 		);
 
 		return $this->render(
-			'PublisherFrontendBundle:Default:index.html.twig',
+			'index.html.twig',
 			[
 				'audioBasePath' => $audioBasePath,
 				'podcast' => $podcast
@@ -43,7 +43,7 @@ class DefaultController extends Controller
 			PodcastShow::class
 		)->findAll();
 		return $this->render(
-			'PublisherFrontendBundle:Default:dashboard.html.twig',
+			'dashboard.html.twig',
 			[
 				'podcasts' => $podcasts
 			]

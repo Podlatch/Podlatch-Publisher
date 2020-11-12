@@ -1,7 +1,21 @@
 vich_uploader:
     db_driver: orm
-
-    #mappings:
-    #    products:
-    #        uri_prefix: /images/products
-    #        upload_destination: '%kernel.project_dir%/public/images/products'
+    mappings:
+        audio_assets:
+            uri_prefix:         '%app.path.audio_assets%'
+            upload_destination: '%kernel.project_dir%/public/uploads/audio/'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'id'} # supposing that the object contains a "slug" attribute or a "getSlug" method
+        episode_images:
+            uri_prefix:         '%app.path.episode_images%'
+            upload_destination: '%kernel.project_dir%/public/uploads/images/podcasts/'
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'id'} # supposing that the object contains a "slug" attribute or a "getSlug" method
+        podcast_images:
+            namer:
+                service: Vich\UploaderBundle\Naming\PropertyNamer
+                options: { property: 'slug'} # supposing that the object contains a "slug" attribute or a "getSlug" method
+            uri_prefix:         '%app.path.podcast_images%'
+            upload_destination: '%kernel.project_dir%/public/uploads/images/episodes'
