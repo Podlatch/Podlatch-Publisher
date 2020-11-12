@@ -33,6 +33,7 @@
         "symfony/translation": "^4.4",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "^4.4",
+        "symfony/webpack-encore-bundle": "^1.8",
         "vich/uploader-bundle": "^1.6",
         "zendframework/zend-diactoros": "^2.1",
         "zendframework/zend-httphandlerrunner": "^1.1"

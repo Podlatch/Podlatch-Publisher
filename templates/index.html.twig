@@ -5,13 +5,11 @@
 {% endblock %}
 
 {% block content %}
-
             <div class="hero bg-gray">
                 <div class="hero-body">
                     <div class="content">
                         <div class="columns">
                             <div class="column col-lg-12 col-9">
-
                                 <h1 class="title">
                                     {{ podcast.getTitle() }}
                                 </h1>
@@ -23,6 +21,16 @@
                                 <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-color="#5755d9" data-size="big" data-style="frameless" data-json-data="podcastData"></script>
                             </div>
                         </div>
+
+                        <div class="navbar">
+                            <section class="navbar-section">
+                                <a href="{{ path('publisher_frontend_podcast_overview',{'podcastId': podcast.getSlug()}) }}" class="btn btn-link">Home</a>
+                                {% for page in podcast.getPages() if page.isEnabled() ==  true %}
+                                    <a href="{{ path('orbitale_cms_page', {"slugs": page.tree}) }}" class="btn btn-link">{{ page.title }}</a>
+                                {% endfor %}
+                            </section>
+                        </div>
+
                     </div>
                 </div>
             </div>
@@ -36,6 +44,7 @@
 
 
         {{ podcast.getDescription() |nl2br }}
+        <div class="divider"></div>
 
                 <h2 class="subtitle is-2 level-item">Episodes</h2>
 

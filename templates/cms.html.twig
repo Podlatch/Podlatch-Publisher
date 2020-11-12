@@ -1,0 +1,63 @@
+{% extends "base.html.twig" %}
+
+{% block meta %}
+{% endblock %}
+
+{% block content %}
+
+
+    <div class="hero bg-gray">
+        <div class="hero-body">
+            <div class="content">
+                <div class="columns">
+                    <div class="column col-lg-12 col-9">
+                        <h1 class="title">
+                            {{ page.getPodcastShow().getTitle() }}
+                        </h1>
+                        <h2 class="subtitle">
+                            {{ page.getPodcastShow().getSubtitle() }}
+                        </h2>
+                    </div>
+                    <div class="column col-lg-12 col-3">
+                        <script class="podlove-subscribe-button" src="/../../subscribe-button/javascripts/app.js" data-language="de" {% if page.getPodcastShow().getImage() %} data-format="cover"  {% endif %} data-color="#5755d9" data-size="big" data-style="frameless" data-json-data="podcastData"></script>
+                    </div>
+                </div>
+
+                <div class="navbar">
+                    <section class="navbar-section">
+                        <a href="{{ path('publisher_frontend_podcast_overview',{'podcastId': page.getPodcastShow().getSlug()}) }}" class="btn btn-link">Home</a>
+                        {% for page in page.getPodcastShow().getPages() if page.isEnabled() ==  true %}
+                            <a href="{{ path('orbitale_cms_page', {"slugs": page.tree}) }}" class="btn btn-link">{{ page.title }}</a>
+                        {% endfor %}
+                    </section>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.podcastData = {
+            "title": "{{ page.getPodcastShow().getTitle() }}",
+            "subtitle": "{{ page.getPodcastShow().getSubtitle() }}",
+            "description": "{{ page.getPodcastShow().getDescription()|json_encode }}",
+            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(page.getPodcastShow(), 'imageFile'))}}",
+            "feeds": [
+                {
+                    "type": "audio",
+                    "format": "mp3",
+                    "url": "{{ url('publisher_frontend_itunes_feed',{'podcastId': page.getPodcastShow().getId()})  }}",
+                    "variant": "high",
+                    "directory-url-itunes": "{{page.getPodcastShow().getItunesUrl()}}"
+
+                }
+            ]
+        }
+    </script>
+<div class="content mt-4">
+
+    {% block orbitale_cms_page_content %}
+        {% block orbitale_cms_pages_list %}{% endblock %}
+    {% endblock %}
+</div>
+{% endblock content%}

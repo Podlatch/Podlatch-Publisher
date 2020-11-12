@@ -4,3 +4,5 @@ orbitale_cms:
 # Define your layout here if you need a custom layout for your CMS
 #    layouts:
 #         main: { resource: base.html.twig }
+    layouts:
+        main: { resource: cms.html.twig } # The Twig path to your layout

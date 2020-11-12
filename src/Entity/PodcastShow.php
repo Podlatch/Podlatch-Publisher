@@ -123,6 +123,11 @@ class PodcastShow
     private $episodes;
 
     /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Page", mappedBy="podcastShow")
+     */
+    private $pages;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      * @var string
      */
@@ -194,6 +199,18 @@ class PodcastShow
     {
 
         $this->episodes = $episodes;
+    }
+
+    public function getPages()
+    {
+
+        return $this->pages;
+    }
+
+    public function setPages($pages)
+    {
+
+        $this->pages = $pages;
     }
 
     /**

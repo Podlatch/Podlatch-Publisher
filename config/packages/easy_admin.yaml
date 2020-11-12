@@ -24,6 +24,10 @@ easy_admin:
         icon: cogs
         children:
           - { entity: 'User', icon: 'user'}
+      - label: 'CMS'
+        icon: book
+        children:
+          - { entity: 'Pages', icon: 'book' }
       - label: 'About'
         icon: info-circle
         children:
@@ -115,3 +119,13 @@ easy_admin:
           # if administrators are allowed to edit users' passwords and roles, add this:
           - { property: 'plainPassword', type: 'text', type_options: { required: false } }
           - { property: 'roles', type: 'choice', type_options: { multiple: true, choices: { 'ROLE_USER': 'ROLE_USER', 'ROLE_ADMIN': 'ROLE_ADMIN' } } }
+    Pages:
+      label: admin.cms.pages
+      class: App\Entity\Page
+      show:
+        fields: [ id, parent, title, slug, tree, content, metaDescription, metaTitle, category, host, locale, homepage, enabled ]
+      list:
+        fields: [ { property: enabled, type: toggle },id, podcastShow, title, slug ]
+      form:
+        fields: [ title, slug, content, metaDescription, metaTitle, metaKeywords, css, js, { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\PodcastShow', required: true  } }, enabled ]
+
