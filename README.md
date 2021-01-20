@@ -20,11 +20,12 @@ Checkout this repo
 install dependencies and fill out required information when promted
 ```
 composer install
-npm install
+yarn install
 ```
 
 run build scripts
 ```
+php ./bin/console assets:install
 yarn encore dev
 ```
 init database and create user
