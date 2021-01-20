@@ -24,7 +24,7 @@ easy_admin:
         icon: cogs
         children:
           - { entity: 'User', icon: 'user'}
-      - label: 'CMS'
+      - label: 'Pages'
         icon: book
         children:
           - { entity: 'Pages', icon: 'book' }
