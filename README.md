@@ -19,26 +19,20 @@ Checkout this repo
 
 install dependencies and fill out required information when promted
 ```
-cp ./app/config/parameters.yml.dist ./app/config/parameters.yml
 composer install
 npm install
 ```
 
 run build scripts
 ```
-gulp sass
-gulp icons
-gulp backendsass
-gulp backendjs
-gulp js
-gulp podlove
+yarn encore dev
 ```
 init database and create user
 ```
 php ./bin/console doctrine:schema:create
 php ./bin/console fos:user:create adminuser --super-admin
 ```
-add a virtual host with the `web` directory as document root!
+add a virtual host with the `public` directory as document root!
 
 
  * go to https://YOUR.DOMAIN/admin/ (trailing slash is important)

@@ -33,7 +33,7 @@ if(!$setup ->isFirstRun()){
     $emitter -> emit($response);
     exit();
 }
-$response = $response = new \Zend\Diactoros\Response\HtmlResponse(file_get_contents(__DIR__ . '/../../app/Resources/install/index.htm'),200);
+$response = $response = new \Zend\Diactoros\Response\HtmlResponse(file_get_contents(__DIR__ . '/../../templates/install/index.htm'),200);
 
 
 if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()['action'] === 'check-database'){
@@ -63,6 +63,7 @@ if(isset($request -> getQueryParams()['action']) && $request -> getQueryParams()
 
 $emitter -> emit($response);
 
+use App\Kernel;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\BufferedOutput;
@@ -135,7 +136,8 @@ class Setup {
     }
 
     public function createAdminUser(){
-        $kernel = new AppKernel('prod', false);
+		require dirname(__DIR__).'../../config/bootstrap.php';
+		$kernel = new Kernel('prod', false);
         $application = new Application($kernel);
 
         $input = new ArrayInput([
@@ -158,24 +160,11 @@ class Setup {
 
     public function writeSymfonyParameters()
     {
-
-
-        error_reporting(E_ALL);
-        $yamlTemplate = \Symfony\Component\Yaml\Yaml::parseFile(__DIR__ . '/../../config/packages/parameters.yml.dist');
-
-
-        $parameters = $yamlTemplate['parameters'];
-
-        $parameters['database_host'] = $this->dbHost;
-        $parameters['database_port'] = $this->dbPort;
-        $parameters['database_name'] = $this->dbName;
-        $parameters['database_user'] = $this->dbUser;
-        $parameters['database_password'] = $this->dbPassword;
-        $parameters['mailer_user'] = $this->podlatchEmail;
-        $parameters['secret'] = uniqid(mt_rand(), true);
-
-        $productionYaml = \Symfony\Component\Yaml\Yaml::dump(['parameters'=>$parameters]);
-        file_put_contents(__DIR__ . '/../../config/packages/parameters.yml', $productionYaml);
+        $env="APP_ENV=prod\n
+APP_SECRET=".uniqid(mt_rand(), true)."\n
+ DATABASE_URL=mysql://".$this->dbUser.":".$this->dbPassword."@".$this->dbHost.":".$this->dbPort."/".$this->dbName."?serverVersion=5.7
+";
+        file_put_contents(__DIR__ . '/../../.env.local', $env);
 
     }
 
@@ -191,7 +180,7 @@ class Setup {
 
     public function isFirstRun()
     {
-        $isFirstRun = !file_exists(__DIR__ . '/../../config/packages/parameters.yml');
+        $isFirstRun = !file_exists(__DIR__ . '/../../.env.local');
         return $isFirstRun;
     }
 
