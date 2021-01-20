@@ -136,6 +136,15 @@
     "jms/metadata": {
         "version": "2.3.0"
     },
+    "laminas/laminas-code": {
+        "version": "4.0.0"
+    },
+    "laminas/laminas-eventmanager": {
+        "version": "3.3.0"
+    },
+    "laminas/laminas-zendframework-bridge": {
+        "version": "1.1.1"
+    },
     "monolog/monolog": {
         "version": "2.1.1"
     },
@@ -223,6 +232,9 @@
     "symfony/cache": {
         "version": "v4.4.16"
     },
+    "symfony/cache-contracts": {
+        "version": "v2.2.0"
+    },
     "symfony/config": {
         "version": "v4.4.16"
     },
@@ -262,6 +274,9 @@
     },
     "symfony/event-dispatcher": {
         "version": "v4.4.16"
+    },
+    "symfony/event-dispatcher-contracts": {
+        "version": "v1.1.9"
     },
     "symfony/expression-language": {
         "version": "v5.1.8"
@@ -422,6 +437,9 @@
     "symfony/property-info": {
         "version": "v5.1.8"
     },
+    "symfony/proxy-manager-bridge": {
+        "version": "v4.4.18"
+    },
     "symfony/routing": {
         "version": "4.2",
         "recipe": {
@@ -481,6 +499,9 @@
             "config/packages/translation.yaml",
             "translations/.gitignore"
         ]
+    },
+    "symfony/translation-contracts": {
+        "version": "v2.3.0"
     },
     "symfony/twig-bridge": {
         "version": "v4.4.16"
@@ -583,6 +604,9 @@
         "files": [
             "config/packages/vich_uploader.yaml"
         ]
+    },
+    "webimpress/safe-writer": {
+        "version": "2.1.0"
     },
     "zendframework/zend-code": {
         "version": "3.4.1"
