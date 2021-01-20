@@ -77,20 +77,27 @@
                             </div>
                         </div>
                         <div class="tile-content">
-                            <div class="columns">
-                                <div class="column col-lg-12 col-3">
+                            <div class="tile">
+                                <div class="tile-content">
+                                    <div class="columns">
+                                        <div class="column col-lg-12 col-3">
 
-                                    {% set foo = vich_uploader_asset(podcastEpisode, 'imageFile') %}
-                                    {% if foo == '' %}
-                                        {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
-                                    {% endif %}
-                                    <img src="{{ foo }}" class="img-responsive rounded play-episode c-hand" data-audio="{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}">
+                                            {% set foo = vich_uploader_asset(podcastEpisode, 'imageFile') %}
+                                            {% if foo == '' %}
+                                                {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
+                                            {% endif %}
+                                            <img src="{{ foo }}" class="img-responsive rounded play-episode c-hand" data-audio="{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}">
 
+                                        </div>
+                                        <div class="column col-lg-12 col-9">
+                                            <p class="tile-title"><h3>{{ podcastEpisode.getTitle() }}</h3></p>
+                                            <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</small>
+                                            <p class="tile-subtitle"> {{ podcastEpisode.getSummary() |nl2br }}</p>                                </div>
+                                    </div>
                                 </div>
-                                <div class="column col-lg-12 col-9">
-                                    <p class="tile-title"><h3>{{ podcastEpisode.getTitle() }}</h3></p>
-                                    <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</small>
-                                    <p class="tile-subtitle"> {{ podcastEpisode.getSummary() |nl2br }}</p>                                </div>
+                                <div class="tile-action">
+                                    <div class="btn play-episode" data-audio="{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}">Play</div>
+                                </div>
                             </div>
                         </div>
 
@@ -101,12 +108,16 @@
         </div>
     </div>
 
+    {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
+
     <script>
         window.podcastData = {
             "title": "{{ podcast.getTitle() }}",
             "subtitle": "{{ podcast.getSubtitle() }}",
             "description": "{{ podcast.getDescription()|json_encode }}",
+            {% if foo != '' %}
             "cover": "{{ app.request.getUriForPath(vich_uploader_asset(podcast, 'imageFile'))}}",
+            {% endif %}
             "feeds": [
                 {
                     "type": "audio",

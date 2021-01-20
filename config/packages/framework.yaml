@@ -25,6 +25,7 @@ parameters:
     app.path.episode_images: /uploads/images/podcasts/
     app.path.podcast_images: /uploads/images/episodes/
     app.version: 0.8.2
+    mailer_user: mail@example.com
 
 fos_user:
     db_driver: orm # other valid values are 'mongodb' and 'couchdb'
