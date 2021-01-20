@@ -10,7 +10,7 @@ CMS for Podcasts
 
 * get [Latest Version](https://github.com/Podlatch/Podlatch-Publisher/releases/download/0.8.2/podlatch.zip)
 * unzip the package and add it to your webspace
-* configure `web` directory as document root!
+* configure `public` directory as document root!
  * go to https://YOUR.DOMAIN/install/index.php and install the software
 
 ## Install develop
