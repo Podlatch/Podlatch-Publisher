@@ -1,7 +1,4 @@
 1. Unter app/config/parameters.yml das Secret kopieren und lokal speichern
-
-
-
 2. Folgende Ordner löschen:
 * app
 * bin
@@ -18,6 +15,8 @@
 5. den Ordner web löschen
 
 6. Installer erneut aufrufen und durchlaufen lassen
+
+7. Jetzt die Datei .env.local öffnen und das secret durch den Wert aus Schritt 1 austauschen
 
 
 SQL Statements zum manuellen ausführen
