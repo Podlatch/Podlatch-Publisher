@@ -12,6 +12,9 @@ easy_admin:
         - 'css/backend.min.css'
       js:
         - 'js/backend.min.js'
+    form_theme:
+      - '@EasyAdmin/form/bootstrap_4.html.twig'
+      - '@FOSCKEditor/Form/ckeditor_widget.html.twig'
     menu:
       - label: 'Podcast'
         icon: 'podcast'
@@ -127,5 +130,5 @@ easy_admin:
       list:
         fields: [ { property: enabled, type: toggle },id, podcastShow, title, slug ]
       form:
-        fields: [ title, slug, content, metaDescription, metaTitle, metaKeywords, css, js, { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\PodcastShow', required: true  } }, enabled ]
+        fields: [ title, slug, { property: 'content', type: 'fos_ckeditor'}, metaDescription, metaTitle, metaKeywords, css, js, { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\PodcastShow', required: true  } }, enabled ]
 

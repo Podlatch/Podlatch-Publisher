@@ -36,12 +36,17 @@
         </div>
     </div>
 
+    {% set foo = vich_uploader_asset(page.getPodcastShow(), 'imageFile') %}
+
+
     <script>
         window.podcastData = {
             "title": "{{ page.getPodcastShow().getTitle() }}",
             "subtitle": "{{ page.getPodcastShow().getSubtitle() }}",
             "description": "{{ page.getPodcastShow().getDescription()|json_encode }}",
-            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(page.getPodcastShow(), 'imageFile'))}}",
+            {% if foo != '' %}
+            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(podcast, 'imageFile'))}}",
+            {% endif %}
             "feeds": [
                 {
                     "type": "audio",

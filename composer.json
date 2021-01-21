@@ -15,8 +15,8 @@
         "doctrine/doctrine-bundle": "^1.6",
         "doctrine/orm": "^2.5",
         "easycorp/easyadmin-bundle": "^2.0",
+        "friendsofsymfony/ckeditor-bundle": "^2.3",
         "friendsofsymfony/user-bundle": "~2.0",
-        "incenteev/composer-parameter-handler": "^2.0",
         "james-heinrich/getid3": "^1.9",
         "orbitale/cms-bundle": "^3.1",
         "ramsey/uuid-doctrine": "^1.5",
@@ -29,15 +29,16 @@
         "symfony/monolog-bundle": "^3.6",
         "symfony/orm-pack": "^2.0",
         "symfony/polyfill-apcu": "^1.0",
+        "symfony/polyfill-mbstring": "^1.13",
         "symfony/security-bundle": "^4.4",
         "symfony/translation": "^4.4",
         "symfony/twig-pack": "^1.0",
         "symfony/validator": "^4.4",
         "symfony/webpack-encore-bundle": "^1.8",
+        "symfony/yaml": "^5.2",
         "vich/uploader-bundle": "^1.6",
         "zendframework/zend-diactoros": "^2.1",
-        "zendframework/zend-httphandlerrunner": "^1.1",
-        "symfony/polyfill-mbstring": "^1.13"
+        "zendframework/zend-httphandlerrunner": "^1.1"
     },
     "require-dev": {
         "doctrine/doctrine-fixtures-bundle": "^3.3",
@@ -53,22 +54,15 @@
         "symfony/symfony": "*"
     },
     "scripts": {
-        "symfony-scripts": [
-            "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::buildBootstrap",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::clearCache",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installAssets",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
-            "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget"
-        ],
         "post-install-cmd": [
-            "@symfony-scripts"
+            "@auto-scripts"
         ],
         "post-update-cmd": [
-            "@symfony-scripts"
+            "@auto-scripts"
         ],
         "auto-scripts": {
             "cache:clear": "symfony-cmd",
+            "ckeditor:install --clear=drop": "symfony-cmd",
             "assets:install %PUBLIC_DIR%": "symfony-cmd"
         }
     },
@@ -81,9 +75,6 @@
         "symfony-var-dir": "var",
         "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
-        "incenteev-parameters": {
-            "file": "config/packages/parameters.yml"
-        },
         "branch-alias": null
     }
 }
