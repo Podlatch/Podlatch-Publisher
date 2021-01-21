@@ -104,7 +104,7 @@ class DefaultController extends Controller
 		if ($podCast->getImage()) {
 			$pictureUrl = sprintf(
 				'%s%s%s',
-				$this->generateUrl('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+				$this->generateUrl('publisher_frontend_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
 				$this->getParameter('app.path.podcast_images'),
 				$podCast->getImage()
 			);
@@ -152,7 +152,7 @@ class DefaultController extends Controller
 			 */
 			$audioUrl = sprintf(
 				'%s%s%s',
-				$this->generateUrl('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+				$this->generateUrl('publisher_frontend_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
 				$this->getParameter('app.path.audio_assets'),
 				$episode->getAudio()
 			);
@@ -184,7 +184,7 @@ class DefaultController extends Controller
 			if ($episode->getImage()) {
 				$pictureUrl = sprintf(
 					'%s%s%s',
-					$this->generateUrl('homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
+					$this->generateUrl('publisher_frontend_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL),
 					$this->getParameter('app.path.episode_images'),
 					$episode->getImage()
 				);
