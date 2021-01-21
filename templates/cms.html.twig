@@ -45,7 +45,7 @@
             "subtitle": "{{ page.getPodcastShow().getSubtitle() }}",
             "description": "{{ page.getPodcastShow().getDescription()|json_encode }}",
             {% if foo != '' %}
-            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(podcast, 'imageFile'))}}",
+            "cover": "{{ app.request.getUriForPath(vich_uploader_asset(page.getPodcastShow(), 'imageFile'))}}",
             {% endif %}
             "feeds": [
                 {
