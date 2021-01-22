@@ -1,14 +1,5 @@
 {% extends "base.html.twig" %}
 
-    {% set latestEpisode = podcast.getPublishedEpisodes()|first %}
-    {% if latestEpisode %}
-
-        {% set foo = vich_uploader_asset(latestEpisode, 'imageFile') %}
-        {% if foo == '' %}
-            {% set foo = vich_uploader_asset(podcast, 'imageFile') %}
-        {% endif %}
-    {% endif %}
-
 
 {% block meta %}
     <link type="application/rss+xml" rel="alternate" title="{{ podcast.getTitle() }}" href="{{ url('publisher_frontend_itunes_feed',{'podcastId': podcast.getId()})  }}"/>
@@ -28,7 +19,7 @@
                                 </h2>
                             </div>
                             <div class="column col-lg-12 col-3">
-                                <script class="podlove-subscribe-button" src="./subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-color="#5755d9" data-size="big" data-style="frameless" data-json-data="podcastData"></script>
+                                <script class="podlove-subscribe-button" src="../subscribe-button/javascripts/app.js" data-language="de" {% if podcast.getImage() %} data-format="cover"  {% endif %} data-color="#5755d9" data-size="big" data-style="frameless" data-json-data="podcastData"></script>
                             </div>
                         </div>
 
@@ -49,7 +40,7 @@
         <div class="columns sticky">
             <div class="column col-12">
                 <audio id="player" controls>
-                    <source src="{{ app.request.getUriForPath(vich_uploader_asset(latestEpisode, 'audioFile'))}}" type="audio/mp3" />
+                    <source src="{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}" type="audio/mp3" />
                 </audio>
             </div>
         </div>
@@ -61,7 +52,6 @@
                 <h2 class="subtitle is-2 level-item">Episodes</h2>
 
         <div class="timeline">
-            {% for podcastEpisode in podcast.getPublishedEpisodes() %}
             <div class="timeline-item mt-2" id="{{podcastEpisode.getId()}}">
                 <div class="timeline-left">
                     <a class="timeline-icon icon-lg tooltip" href="#{{podcastEpisode.getId()}}" data-tooltip="Link">
@@ -90,17 +80,10 @@
 
                                         </div>
                                         <div class="column col-lg-12 col-9">
-                                            <p class="tile-title">
-                                            <h3>
-                                                <a href="{{ path('publisher_frontend_podcast_episode_detail',{'podcastId': podcast.getSlug(),'episodeId': podcastEpisode.getId()}) }}">{{ podcastEpisode.getTitle() }}</a>
-                                            </h3>
-                                            </p>
+                                            <p class="tile-title"><h3>{{ podcastEpisode.getTitle() }}</h3></p>
                                             <small class="tile-subtitle text-gray">{{ podcastEpisode.getReleasedAt()|date('d.m.Y') }}</small>
                                             <p class="tile-subtitle"> {{ podcastEpisode.getSummary() |nl2br }}</p>                                </div>
                                     </div>
-                                </div>
-                                <div class="tile-action">
-                                    <div class="btn play-episode" data-audio="{{ app.request.getUriForPath(vich_uploader_asset(podcastEpisode, 'audioFile'))}}">Play</div>
                                 </div>
                             </div>
                         </div>
@@ -108,7 +91,6 @@
                     </div>
                 </div>
             </div>
-            {% endfor %}
         </div>
     </div>
 

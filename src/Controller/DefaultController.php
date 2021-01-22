@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\PodcastEpisode;
 use App\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -9,6 +10,15 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
 class DefaultController extends Controller
 {
+	protected function getAudioBasePath()
+	{
+		return sprintf(
+			'%s%s',
+			$this->get('kernel')->getProjectDir() . '/public',
+			$this->getParameter('app.path.audio_assets')
+		);
+	}
+
 	public function indexAction($podcastId)
 	{
 
@@ -22,19 +32,40 @@ class DefaultController extends Controller
 			)->findOneBy(['id' => $podcastId]);
 		}
 
-		$audioBasePath = sprintf(
-			'%s%s',
-            $this->get('kernel')->getProjectDir() . '/public',
-			$this->getParameter('app.path.audio_assets')
-		);
-
 		return $this->render(
 			'index.html.twig',
 			[
-				'audioBasePath' => $audioBasePath,
+				'audioBasePath' => $this -> getAudioBasePath(),
 				'podcast' => $podcast
 			]
 		);
+	}
+
+	public function episodeAction($podcastId,$episodeId)
+	{
+		$podcast = $this->getDoctrine()->getRepository(
+			PodcastShow::class
+		)->findOneBy(['slug' => $podcastId]);
+
+		if (!$podcast) {
+			$podcast = $this->getDoctrine()->getRepository(
+				PodcastShow::class
+			)->findOneBy(['id' => $podcastId]);
+		}
+
+		$episode = $this->getDoctrine()->getRepository(
+			PodcastEpisode::class
+		)->findOneBy(['id' => $episodeId]);
+
+		return $this->render(
+			'episode.html.twig',
+			[
+				'audioBasePath' => $this -> getAudioBasePath(),
+				'podcast' => $podcast,
+				'podcastEpisode' => $episode
+			]
+		);
+
 	}
 
 	public function dashboardAction()
