@@ -21,6 +21,7 @@
         "orbitale/cms-bundle": "^3.1",
         "ramsey/uuid-doctrine": "^1.5",
         "sensio/framework-extra-bundle": "^5.6",
+        "symfony/apache-pack": "^1.0",
         "symfony/asset": "^4.4",
         "symfony/console": "4.4",
         "symfony/flex": "^1.10",
