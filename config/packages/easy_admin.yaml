@@ -83,7 +83,7 @@ easy_admin:
         fields:
           - { type: 'tab' , label: 'General' }
           - { type: 'group', css_class: 'col-sm-8', label: 'Basic information' }
-          - { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\PodcastShow', required: true  } }
+          - { property: 'podcastShow', label: 'Podcast',type: 'App\Form\Type\UuidEntityType', type_options: { class: 'App\Entity\PodcastShow', required: true  } }
           - episodeSeason
           - episodeNumber
           - title
@@ -130,5 +130,5 @@ easy_admin:
       list:
         fields: [ { property: enabled, type: toggle },id, podcastShow, title, slug ]
       form:
-        fields: [ title, slug, { property: 'content', type: 'fos_ckeditor'}, metaDescription, metaTitle, metaKeywords, css, js, { property: 'podcastShow', label: 'Podcast',type: 'easyadmin_autocomplete', type_options: { class: 'App\Entity\PodcastShow', required: true  } }, enabled ]
+        fields: [ title, slug, { property: 'content', type: 'fos_ckeditor'}, metaDescription, metaTitle, metaKeywords, css, js, { property: 'podcastShow', label: 'Podcast',type: 'App\Form\Type\UuidEntityType' , type_options: { class: 'App\Entity\PodcastShow', required: true  } }, enabled ]
 

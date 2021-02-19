@@ -4,7 +4,11 @@ CMS for Podcasts
 
 ![Podlatch Screenshots](https://raw.githubusercontent.com/Podlatch/Podlatch-Publisher/master/docs/podlatch.png)
 
-##
+## Contribute
+
+Contributions are welcome :)
+
+There are a lot of low hanging fruits in the issues list here on github.
 
 ## Install from zip
 

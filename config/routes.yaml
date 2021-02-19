@@ -20,7 +20,7 @@ publisher_frontend_podcast_overview:
 
 publisher_frontend_podcast_episode_detail:
   path:     /{podcastId}/{episodeId}
-  controller: App\Controller\DefaultController::indexAction
+  controller: App\Controller\DefaultController::episodeAction
 
 publisher_frontend_itunes_feed:
   path:     /feed/mp3/{podcastId}.xml
