@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\PodcastEpisode;
 use App\Entity\PodcastShow;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 
@@ -174,7 +175,7 @@ class DefaultController extends Controller
 
 			$audioPath = sprintf(
 				'%s%s%s',
-				$this->getParameter('kernel.root_dir') . '/../web',
+				$this->getParameter('kernel.root_dir') . '/../public',
 				$this->getParameter('app.path.audio_assets'),
 				$episode->getAudio()
 			);
